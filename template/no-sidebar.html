@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>${stringWidth(article.title,36,"...")}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="<@URL src='resource/assets/css/main.css'/>" />
+		<noscript><link rel="stylesheet"  href="<@URL src='resource/assets/css/noscript.css'/>" /></noscript>
+			<@tag type="page" name="内容页"/>
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<#include 'head.html' />
+
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> ${article.title}</a></h2>
+								<p>
+									${dateFormat(article.publishDate,'yyyy年MM月dd日 HH:mm:ss')}
+								</p>
+							</header>
+						
+							<p>
+								 <@content/>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+			  <#include 'foot.html' />
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="<@URL src='resource/assets/js/jquery.min.js'/>"></script>
+			<script src="<@URL src='resource/assets/js/jquery.dropotron.min.js'/>"></script>
+			<script src="<@URL src='resource/assets/js/jquery.scrolly.min.js'/>"></script>
+			<script src="<@URL src='resource/assets/js/jquery.scrollex.min.js'/>"></script>
+			<script src="<@URL src='resource/assets/js/jquery.browser.min.js'/>"></script>
+			<script src="<@URL src='resource/assets/js/breakpoints.min.js'/>"></script>
+			<script src="<@URL src='resource/assets/js/util.js'/>"></script>
+			<script src="<@URL src='resource/assets/js/main.js'/>"></script>
+
+	</body>
+</html>

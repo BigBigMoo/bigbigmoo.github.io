@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Spring IOC 知识点总结</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817385534401738603d94d0004";
+	var global_articleId = "4028ba81738553440173862796c30026";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header" > 
+		<!-- Nav -->
+		<nav id="nav">
+							<ul>
+								<li><a href="https://bigbigmoo.github.io">主页</a></li>
+								<li>
+									<a href="#">菜单</a>
+									<ul>
+										<li><a href="#">子菜单1</a></li>
+										<li><a href="#">子菜单2</a></li>
+										<li><a href="#">子菜单3</a></li>
+										<li>
+											<a href="#">子菜单4 &hellip;</a>
+											<ul>
+												<li><a href="#">子菜单4.1</a></li>
+												<li><a href="#">子菜单4.2</a></li>
+												<li><a href="#">子菜单4.3</a></li>
+												<li><a href="#">子菜单4.4</a></li>
+											</ul>
+										</li>
+										<li><a href="#">子菜单5</a></li>
+									</ul>
+								</li>
+								<li><a href="left-sidebar.html">左侧边栏</a></li>
+								<li><a href="right-sidebar.html">又侧边栏</a></li>
+								<li><a href="no-sidebar.html">没有边栏</a></li>
+							</ul>
+		</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> Spring IOC 知识点总结</a></h2>
+								<p>
+									2020年07月25日 21:25:22
+								</p>
+							</header>
+						
+							<p>
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;-en-clipboard:true;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">在这之前，我们先记住一句话。好莱坞原则：</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Don&rsquo;t call me, we will call you.</span> <span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">即&ldquo;不用打电话过来，我们会打给你&rdquo;。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">控制反转（Inversion of Control，简称IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫&ldquo;依赖查找&rdquo;（Dependency Lookup）。通过控制反转，对象在被创建的时候，由一个调控系统内所有对象的外界实体，将其所依赖的对象的引用传递(注入)给它。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">两种实现：依赖查找（DL）和依赖注入（DI）。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">IOC 和 DI 、DL 的关系：</span></span></div>
+
+<div style="margin: 1em 0px 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; text-align: center;">&nbsp;</div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: disc;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">DI（Dependency Injection） 是 Spring 使用的方式，容器负责组件的装配。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">DL（Dependency Lookup）已经被抛弃。</span></span></div>
+	</li>
+</ul>
+
+<h2 style="text-align: left; margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">IOC容器的原理</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">IOC容器其实就是一个大工厂，它用来管理我们所有的对象以及依赖关系。</span></span></div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">原理就是通过Java的</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">反射技术</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">来实现的！通过反射我们可以获取类的所有信息(成员变量、类名等等等)！</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">再通过配置文件(xml)或者注解来</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">描述</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">类与类之间的关系</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">我们就可以通过这些配置信息和反射技术来</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">构建</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">出对应的对象和依赖关系了！</span></span></div>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">我们</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">简单</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">来看看实际Spring IOC容器是怎么实现对象的创建和依赖的：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 1em 0px 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; text-align: center;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;"><a href="file://C:\Users\dell\AppData\Local\Temp\enhtmlclip\2fb3998e525a45219166fde1907dd1b7"><img src="file:///C:/Users/dell/AppData/Local/Temp/enhtmlclip/YX0126a4d5.png" /></a></span></span></div>
+</div>
+
+<ol style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">根据Bean配置信息在容器内部创建Bean定义注册表</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">根据注册表加载、实例化bean、建立Bean与Bean之间的依赖关系</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">将这些准备就绪的Bean放到Map缓存池中，等待应用程序调用</span></span></div>
+	</li>
+</ol>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Spring容器(Bean工厂)可简单分成两种</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">：</span></span></div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">BeanFactory</span></span></div>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">这是最基础、面向Spring的</span></span></div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">ApplicationContext</span></span></div>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">ApplicationContext是BeanFactory的子类</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">没有特殊要求的情况下，应该使用ApplicationContext完成。因为BeanFactory能完成的事情，ApplicationContext都能完成，并且提供了更多接近现在开发的功能。</span></span></div>
+
+<h2 style="text-align: left; margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">对IOC的理解</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">首先，IOC控制反转</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">谁控制谁，控制什么，什么是反转（有反转就应该有正转了）</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">谁控制谁，控制什么</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">：</span></span></div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">在之前，没有IOC时，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">而现在，是由IOC专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">谁控制谁？当然是IOC容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象还包括比如文件等）。</span></span></div>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">所谓反转</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">：</span></span></div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">有反转就应该有正转，传统应用程序是由我们自己在对象中主动控制去直接获取依赖对象，也就是正转；</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">而所谓的反转，其实是反转的控制权，由 Spring 来控制对象的生命周期，那么对象的控制就完全脱离了我们的控制，控制权交给了Spring 。这个反转是指：我们由对象的控制者变成了 IOC 的被动控制者。</span></span></div>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">其次，说到IOC就会想到DI 依赖注入(IOC 是通过DI来实现的),那么：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">谁依赖谁，为什么需要依赖；谁注入谁，注入了什么</span></span></div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">谁依赖谁</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">：A对象 依赖于 IOC 容器。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">为什么需要依赖</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">：A对象需要 IOC 容器提供对象需要的数据、B对象 等外部资源，没有这些资源不能完成业务处理。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">谁注入谁</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">：IOC 容器注入 A对象。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">注入了什么</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">：IOC 容器将 A对象 需要的数据、B对象等外部资源</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">按需</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">注入给对象。</span></span></div>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">好处：</span> <span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">降低了开发的成本，提高了代码复用率、软件的灵活性。</span></span></div>
+
+<h2 style="text-align: left; margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">总结</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">IOC：不是什么技术，而是一种设计思想。在 Spring 开发中，由 IOC 容器控制对象的创建、初始化、销毁等。这也就实现了对象控制权的反转，由</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">我们对对象的控制</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">转变成了</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Spring IOC 对对象的控制</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">。</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">DI：是 IOC 的具体实现。程序把依赖交给容器，容器帮你管理依赖。</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>Nisl turpis nascetur interdum?</h3>
+					</header>
+					<p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
+					<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>
