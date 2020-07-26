@@ -5,135 +5,140 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
+
 	<head>
 		<title></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet"  href="<@URL src='resource/assets/css/main.css'/>" />
+		<link rel="stylesheet" href="<@URL src='resource/assets/css/main.css'/>" />
 		<noscript><link rel="stylesheet"  href="<@URL src='resource/assets/css/noscript.css'/>" /></noscript>
-			<@tag type="column" name="二级频道-左菜单" />
+		<@tag type="column" name="二级频道-左菜单" />
 	</head>
+
 	<body class="left-sidebar is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
-				<#include 'head.html' />
+			<#include 'head.html' />
 
 			<!-- Main -->
-				<div class="wrapper style1">
+			<div class="wrapper style1">
 
-					<div class="container">
-						<div class="row gtr-200">
-							<div class="col-4 col-12-mobile" id="sidebar">
-								<hr class="first" />
-								<!--左侧文章1-->
-								<section>
-									<header>
+				<div class="container">
+					<div class="row gtr-200">
+						<div class="col-4 col-12-mobile" id="sidebar">
+							<hr class="first" />
+							<!--左侧文章1-->
+							<section>
+								<header>
 
-										<h3><a href="#">${channel.name}</a></h3>
-										
-									</header>
-									<p>
-										入冬了，打开衣柜一看，我该逛街了，打开钱包一看，我还年轻，不冷。
-									</p>
-									<!--<footer>
+									<h3><a href="#">${channel.name}</a></h3>
+
+								</header>
+								<p>
+									入冬了，打开衣柜一看，我该逛街了，打开钱包一看，我还年轻，不冷。
+								</p>
+								<!--<footer>
 										<a href="#" class="button">Learn More</a>
 									</footer>-->
-								</section>
-								<hr />
-								<!--文章列表2-->
-								<section>
-									<header>
-										<h3><a href="#">文章列表</a></h3>
-									</header>
-									<!--<p>
+							</section>
+							<hr />
+							<!--文章列表2-->
+							<section>
+								<header>
+									<h3><a href="#">文章列表</a></h3>
+								</header>
+								<!--<p>
 										Tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
 									</p>-->
-									<div class="row gtr-50">
-									
-										<@flipPage pageSize='5' src=channel>
-											<@articles channelCode='${channel.code}' level='null' orderStrs='topNo,ASC,publishDate,DESC'>
+								<div class="row gtr-50">
+
+									<@flipPage pageSize='6' src=channel>
+										<@articles channelCode='${channel.code}' level='null' orderStrs='topNo,ASC,publishDate,DESC'>
 											<@forEach>
-												<div class="col-4">
-													<a href="<@URL src=article ></@URL>" class="image fit"><img src="<@URL src='${article.thumbnailsPath!}'/>" alt="" /></a>
-												</div>
+												
 												<div class="col-8">
 													<h4><a href="<@URL src=article ></@URL>" class="image fit">${stringWidth(article.title,12,"...")}</a></h4>
 													<p>
-													${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}
+														${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}
 													</p>
 												</div>
+												<div class="col-4">
+													<a href="<@URL src=article ></@URL>" class="image fit"><img src="<@URL src='${article.thumbnailsPath!}'/>" alt="" /></a>
+												</div>
 											</@forEach>
-											</@articles>
-											<footer>
-													共${page.total}条记录 第${page.number}/${page.count}页 每页${page.size}条
-													<br/>
-							<a href="javascript:goPage(1)">首&nbsp&nbsp页</a>
-			                 <#if page.number==1>上一页<#else>
-								<a href="javascript:goPage(${page.number-1})">上一页</a>
-							</#if>
-			                <#if page.number == page.count>下一页<#else>
-								<a href="javascript:goPage(${page.number+1})">下一页</a>
-							</#if>
-			                <a href="javascript:goPage(${page.count})">末&nbsp&nbsp&nbsp页</a>
-			                <br/>
-			             <label for="">选择跳转至</label>
-			                <input id='goPage' type="text"  style="width: 45px;height:20px;text-align: center;border-radius: 10%;">
-			                <label for="">页</label>
-										
-							<a href="#" onclick="go()" >确&nbsp&nbsp&nbsp定</a>
-										
-									</footer>
-										</@flipPage >
-										
-									</div>
-									
-								</section>
-							</div>
-							<!--右侧1-->
-							<div class="col-8 col-12-mobile imp-mobile" id="content">
-								<article id="main">
-									
-											<@articles channelCode='${channel.code}'  count='1' level='null' orderStrs='topNo,ASC,publishDate,DESC'>
-											<@forEach>
-									<header>
-										<h2><a href="<@URL src=article ></@URL>" class="image fit">${stringWidth(article.title,12,"...")}</a></h2>
-										<p style="text-align:right;">
-											${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}
-										</p>
-									</header>
-									<!--<a href="<@URL src=article ></@URL>" class="image fit"><img src="<@URL src='${article.thumbnailsPath!}'/>" alt="" /></a>-->
-									<p>
-										<@content/>
-									</p>
-									
-											</@forEach>
-											</@articles>
-										
-								</article>
-							</div>
-							
+										</@articles>
+										<footer>
+											共${page.total}条记录 第${page.number}/${page.count}页 每页${page.size}条
+											<br/>
+											<a href="javascript:goPage(1)">首&nbsp&nbsp页</a>
+											<#if page.number==1>上一页
+												<#else>
+													<a href="javascript:goPage(${page.number-1})">上一页</a>
+											</#if>
+											<#if page.number==page.count>下一页
+												<#else>
+													<a href="javascript:goPage(${page.number+1})">下一页</a>
+											</#if>
+											<a href="javascript:goPage(${page.count})">末&nbsp&nbsp&nbsp页</a>
+											<br/>
+											<label for="">第</label>
+											<input id='goPage' type="text" style="width: 36%;height:20px;text-align: center;border-radius: 10%;">
+											<label for="">页</label>
+
+											<a href="#" onclick="go()">确&nbsp&nbsp&nbsp定</a>
+
+										</footer>
+									</@flipPage>
+
+								</div>
+
+							</section>
 						</div>
-						
+						<!--右侧1-->
+						<div class="col-8 col-12-mobile imp-mobile" id="content">
+							<article id="main">
+
+								<@articles channelCode='${channel.code}' count='1' level='null' orderStrs='topNo,ASC,publishDate,DESC'>
+									<@forEach>
+										<header>
+											<h2><a href="<@URL src=article ></@URL>" class="image fit">${stringWidth(article.title,50,"...")}</a></h2>
+											<p style="text-align:right;">
+												${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}
+											</p>
+										</header>
+										<!--<a href="<@URL src=article ></@URL>" class="image fit"><img src="<@URL src='${article.thumbnailsPath!}'/>" alt="" /></a>-->
+										<p>
+											<@content/>
+										</p>
+
+									</@forEach>
+								</@articles>
+
+							</article>
+						</div>
+
 					</div>
 
 				</div>
 
+			</div>
+
 			<!-- Footer  -->
-				 <#include 'foot.html' />
-				
+			<#include 'foot.html' />
 
 		</div>
 
 		<!-- Scripts -->
-			<script src="<@URL src='resource/assets/js/jquery.min.js'/>"></script>
-			<script src="<@URL src='resource/assets/js/jquery.dropotron.min.js'/>"></script>
-			<script src="<@URL src='resource/assets/js/jquery.scrolly.min.js'/>"></script>
-			<script src="<@URL src='resource/assets/js/jquery.scrollex.min.js'/>"></script>
-			<script src="<@URL src='resource/assets/js/jquery.browser.min.js'/>"></script>
-			<script src="<@URL src='resource/assets/js/breakpoints.min.js'/>"></script>
-			<script src="<@URL src='resource/assets/js/util.js'/>"></script>
-			<script src="<@URL src='resource/assets/js/main.js'/>"></script>
+		<script src="<@URL src='resource/assets/js/jquery.min.js'/>"></script>
+		<script src="<@URL src='resource/assets/js/jquery.dropotron.min.js'/>"></script>
+		<script src="<@URL src='resource/assets/js/jquery.scrolly.min.js'/>"></script>
+		<script src="<@URL src='resource/assets/js/jquery.scrollex.min.js'/>"></script>
+		<script src="<@URL src='resource/assets/js/jquery.browser.min.js'/>"></script>
+		<script src="<@URL src='resource/assets/js/breakpoints.min.js'/>"></script>
+		<script src="<@URL src='resource/assets/js/util.js'/>"></script>
+		<script src="<@URL src='resource/assets/js/main.js'/>"></script>
 
 	</body>
+
 </html>

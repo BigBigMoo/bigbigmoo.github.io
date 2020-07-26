@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>索引的不足之处</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891e30c50005";
+	var global_articleId = "4028ba817388fc8b01738b283a1e01b7";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io/index.html">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1595768535110">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1595768535110">spring</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1595768535125">前端学习</a>
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/sjkxg/index.html?tm=1595768535141">数据库相关</a>
+			</li>
+			<li>
+			
+				<a href="/bigmoo/mb1/zjj/index.html?tm=1595768535141">中间件</a>
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/ywzs/index.html?tm=1595768535163">运维知识</a>
+			</li>
+		
+			<li>
+				
+				<a href="/bigmoo/mb1/mstj/index.html?tm=1595768535179">面试题集</a>
+			</li>
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> 索引的不足之处</a></h2>
+								<p>
+									2020年07月26日 20:45:18
+								</p>
+							</header>
+						
+							<p>
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;-en-clipboard:true;"><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">上面都在说使用索引的好处，但过多的使用索引将会造成滥用。因此索引也会有它的缺点：</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">◆虽然索引大大提高了查询速度，同时却会降低更新表的速度，如对表进行INSERT、UPDATE和DELETE。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">◆建立索引会占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果你在一个大表上创建了多种组合索引，索引文件的会膨胀很快。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">索引只是提高效率的一个因素，如果你的MySQL有大数据量的表，就需要花时间研究建立最优秀的索引，或优化查询语句。</span></span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>回到本题</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891def440004";
+	var global_articleId = "4028ba817388fc8b01738b2b1bb201c2";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io/index.html">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1595768534160">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1595768534160">spring</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1595768534176">前端学习</a>
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/sjkxg/index.html?tm=1595768534192">数据库相关</a>
+			</li>
+			<li>
+			
+				<a href="/bigmoo/mb1/zjj/index.html?tm=1595768534192">中间件</a>
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/ywzs/index.html?tm=1595768534207">运维知识</a>
+			</li>
+		
+			<li>
+				
+				<a href="/bigmoo/mb1/mstj/index.html?tm=1595768534223">面试题集</a>
+			</li>
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> 回到本题</a></h2>
+								<p>
+									2020年07月26日 20:48:33
+								</p>
+							</header>
+						
+							<p>
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;-en-clipboard:true;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">这两道题可以说是及其相似的了，只是一道从头部开始组起，这道从头部开始组起的，也是 leetcode 的第 25 题。而面试的时候，经常会进行变形，例如这道字节跳动的题，它变成从</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">尾部</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">开始组起，可能你一时之间就不知道该怎么弄了。当然，可能有人一下子就反应出来，把他秒杀了。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">其实这道题很好做滴，你只需要先把单链表进行一次</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">逆序</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">，逆序之后就能转化为</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">从头部开始组起</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">了，然后按照我上面的解法，处理完之后，把结果</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">再次逆序</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">即搞定。两次逆序相当于没逆序。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">例如对于链表（其中 K = 3）</span></span></div>
+
+<div style="margin: 1em 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 1em 0px 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; text-align: center;">&nbsp;</div>
+</div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

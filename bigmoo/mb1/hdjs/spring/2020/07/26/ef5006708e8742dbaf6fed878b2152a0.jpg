@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>SpringMVC运行原理</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b01738a0242b00028";
+	var global_articleId = "4028ba817388fc8b01738af8c1a30138";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io/index.html">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1595766649236">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1595766649236">spring</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1595766649252">前端学习</a>
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/sjkxg/index.html?tm=1595766649268">数据库相关</a>
+			</li>
+			<li>
+			
+				<a href="/bigmoo/mb1/zjj/index.html?tm=1595766649268">中间件</a>
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/ywzs/index.html?tm=1595766649283">运维知识</a>
+			</li>
+		
+			<li>
+				
+				<a href="/bigmoo/mb1/mstj/index.html?tm=1595766649305">面试题集</a>
+			</li>
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> SpringMVC运行原理</a></h2>
+								<p>
+									2020年07月26日 19:52:54
+								</p>
+							</header>
+						
+							<p>
+<p><!--StartFragment--></p>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;-en-clipboard:true;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">如图所示：</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><img alt="" src="/bigmoo/upload/image/2020/07/26/ef5006708e8742dbaf6fed878b2152a0.jpg" style="width: 204px; height: 204px;" /></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 14px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">流程说明：</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 14px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">（1）客户端（浏览器）发送请求，直接请求到DispatcherServlet。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><font color="#FF0000" size="3" style="box-sizing:border-box;"><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">（2）</span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 14px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">DispatcherServlet</span></span><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">根据请求信息调用HandlerMapping，解析请求对应的Handler。</span></font></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 14px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">（3）解析到对应的Handler后，开始由HandlerAdapter适配器处理。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 14px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">（4）HandlerAdapter会根据Handler来调用真正的处理器开处理请求，并处理相应的业务逻辑。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 14px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">（5）处理器处理完业务后，会返回一个ModelAndView对象，Model是返回的数据对象，View是个逻辑上的View。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 14px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">（6）ViewResolver会根据逻辑View查找实际的View。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 14px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">（7）DispaterServlet把返回的Model传给View。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 14px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">（8）通过View返回给请求者（浏览器）</span></span></span></div>
+
+<p><!--EndFragment--></p>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>Nisl turpis nascetur interdum?</h3>
+					</header>
+					<p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
+					<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

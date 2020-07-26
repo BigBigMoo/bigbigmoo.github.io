@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>经典问题之乐观锁和悲观锁及使用场景</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b01738a0242b00028";
+	var global_articleId = "4028ba817388fc8b01738b31e0ee01e6";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io/index.html">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1595768539522">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1595768539538">spring</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1595768539553">前端学习</a>
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/sjkxg/index.html?tm=1595768539576">数据库相关</a>
+			</li>
+			<li>
+			
+				<a href="/bigmoo/mb1/zjj/index.html?tm=1595768539591">中间件</a>
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/ywzs/index.html?tm=1595768539607">运维知识</a>
+			</li>
+		
+			<li>
+				
+				<a href="/bigmoo/mb1/mstj/index.html?tm=1595768539607">面试题集</a>
+			</li>
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> 经典问题之乐观锁和悲观锁及使用场景</a></h2>
+								<p>
+									2020年07月26日 20:55:20
+								</p>
+							</header>
+						
+							<p>
+<h2 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;-en-clipboard:true;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: bold; line-height: 35px;">悲观锁</span></span></h2>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">悲观锁（Pessimistic Lock），顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">悲观锁：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">Java synchronized 就属于悲观锁的一种实现，每次线程要修改数据时都先获得锁，保证同一时刻只有一个线程能操作数据，其他线程则会被block。</span></span></div>
+
+<h2 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: bold; line-height: 35px;">乐观锁</span></span></h2>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">乐观锁（Optimistic Lock），顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在提交更新的时候会判断一下在此期间别人有没有去更新这个数据。乐观锁适用于读多写少的应用场景，这样可以提高吞吐量。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">乐观锁：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">乐观锁一般来说有以下2种方式：&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1. 使用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 &ldquo;version&rdquo; 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2. 使用时间戳（timestamp）。乐观锁定的第二种实现方式和第一种差不多，同样是在需要乐观锁控制的table中增加一个字段，名称无所谓，字段类型使用时间戳（timestamp）, 和上面的version类似，也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比，如果一致则OK，否则就是版本冲突。</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">Java JUC中的atomic包就是乐观锁的一种实现，AtomicInteger 通过CAS（Compare And Set）操作实现线程安全的自增。</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

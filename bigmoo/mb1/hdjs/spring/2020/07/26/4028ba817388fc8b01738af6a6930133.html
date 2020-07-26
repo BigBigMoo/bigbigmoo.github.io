@@ -1,0 +1,520 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>springboot之启动原理解析及源码阅读</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b01738a0242b00028";
+	var global_articleId = "4028ba817388fc8b01738af6a6930133";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io/index.html">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1595768539854">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1595768539854">spring</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1595768539876">前端学习</a>
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/sjkxg/index.html?tm=1595768539892">数据库相关</a>
+			</li>
+			<li>
+			
+				<a href="/bigmoo/mb1/zjj/index.html?tm=1595768539892">中间件</a>
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/ywzs/index.html?tm=1595768539908">运维知识</a>
+			</li>
+		
+			<li>
+				
+				<a href="/bigmoo/mb1/mstj/index.html?tm=1595768539923">面试题集</a>
+			</li>
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> springboot之启动原理解析及源码阅读</a></h2>
+								<p>
+									2020年07月26日 19:50:14
+								</p>
+							</header>
+						
+							<p>
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;-en-clipboard:true;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">我们开发任何一个Spring Boot项目，都会用到如下的启动类</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@SpringBootApplication</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public class Application {</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public static void main(String[] args) {</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">SpringApplication.run(Application.class, args);</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">从上面代码可以看出，Annotation定义（@SpringBootApplication）和类定义（SpringApplication.run）最为耀眼，所以要揭开SpringBoot的神秘面纱，我们要从这两位开始就可以了。</span></span></div>
+
+<h2 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; font-weight: bold; line-height: 35px;">SpringBootApplication背后的秘密</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Target(ElementType.TYPE) // 注解的适用范围，其中TYPE用于描述类、接口（包括包注解类型）或enum声明</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Retention(RetentionPolicy.RUNTIME) // 注解的生命周期，保留到class文件中（三个生命周期）</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Documented // 表明这个注解应该被javadoc记录</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Inherited // 子类可以继承该注解</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@SpringBootConfiguration // 继承了Configuration，表示当前是注解类</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@EnableAutoConfiguration // 开启springboot的注解功能，springboot的四大神器之一，其借助@import的帮助</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@ComponentScan(excludeFilters = { // 扫描路径设置（具体使用待确认）</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public @interface SpringBootApplication {</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">...</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">虽然定义使用了多个Annotation进行了原信息标注，但实际上重要的只有三个Annotation：</span></span></div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">@Configuration（@SpringBootConfiguration点开查看发现里面还是应用了@Configuration）</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">@EnableAutoConfiguration</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">@ComponentScan</span></span></div>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">所以，如果我们使用如下的SpringBoot启动类，整个SpringBoot应用依然可以与之前的启动类功能对等：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Configuration</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@EnableAutoConfiguration</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@ComponentScan</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public class Application {</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public static void main(String[] args) {</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">SpringApplication.run(Application.class, args);</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">每次写这3个比较累，所以写一个@SpringBootApplication方便点。接下来分别介绍这3个Annotation。</span></span></div>
+
+<h2 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; font-weight: bold; line-height: 35px;">@Configuration</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">这里的@Configuration对我们来说不陌生，它就是JavaConfig形式的Spring Ioc容器的配置类使用的那个@Configuration，SpringBoot社区推荐使用基于JavaConfig的配置形式，所以，这里的启动类标注了@Configuration之后，本身其实也是一个IoC容器的配置类。</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">举几个简单例子回顾下，XML跟config配置方式的区别：</span></span></div>
+</div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li>
+	<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: circle;">
+		<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+		<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">表达形式层面</span></span></div>
+
+		<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">基于XML配置的方式是这样：</span></span></div>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;beans xmlns=&quot;</span><a dir="ltr" href="http://www.springframework.org/schema/beans" style="font-family: Inconsolata; line-height: 1.71429em;">http://www.springframework.org/schema/beans</a><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&quot;</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">xmlns:xsi=&quot;</span><a dir="ltr" href="http://www.w3.org/2001/XMLSchema-instance" style="font-family: Inconsolata; line-height: 1.71429em;">http://www.w3.org/2001/XMLSchema-instance</a><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&quot;</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">xsi:schemaLocation=&quot;</span><a dir="ltr" href="http://www.springframework.org/schema/beans" style="font-family: Inconsolata; line-height: 1.71429em;">http://www.springframework.org/schema/beans</a> <a dir="ltr" href="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" style="font-family: Inconsolata; line-height: 1.71429em;">http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</a><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&quot;</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">default-lazy-init=&quot;true&quot;&gt;</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;!--bean定义--&gt;</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;/beans&gt;</span></span></div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">而基于JavaConfig的配置方式是这样：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Configuration</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public class MockConfiguration{</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">//bean定义</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">任何一个标注了@Configuration的Java类定义都是一个JavaConfig配置类。</span></span></div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li>
+	<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: circle;">
+		<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+		<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">注册bean定义层面</span></span></div>
+
+		<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">基于XML的配置形式是这样：</span></span></div>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;bean id=&quot;mockService&quot; class=&quot;..MockServiceImpl&quot;&gt;</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">...</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;/bean&gt;</span></span></div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">而基于JavaConfig的配置形式是这样的：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Configuration</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public class MockConfiguration{</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Bean</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public MockService mockService(){</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">return new MockServiceImpl();</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">任何一个标注了@Bean的方法，其返回值将作为一个bean定义注册到Spring的IoC容器，方法名将默认成该bean定义的id。</span></span></div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li>
+	<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: circle;">
+		<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+		<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">表达依赖注入关系层面</span></span></div>
+
+		<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">为了表达bean与bean之间的依赖关系，在XML形式中一般是这样：</span></span></div>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;bean id=&quot;mockService&quot; class=&quot;..MockServiceImpl&quot;&gt;</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;propery name =&quot;dependencyService&quot; ref=&quot;dependencyService&quot; /&gt;</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;/bean&gt;</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;bean id=&quot;dependencyService&quot; class=&quot;DependencyServiceImpl&quot;&gt;&lt;/bean&gt;</span></span></div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">而基于JavaConfig的配置形式是这样的：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Configuration</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public class MockConfiguration{</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Bean</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public MockService mockService(){</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">return new MockServiceImpl(dependencyService());</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Bean</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public DependencyService dependencyService(){</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">return new DependencyServiceImpl();</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">如果一个bean的定义依赖其他bean,则直接调用对应的JavaConfig类中依赖bean的创建方法就可以了。</span></span></div>
+
+<h2 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; font-weight: bold; line-height: 35px;">@ComponentScan</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">@ComponentScan这个注解在Spring中很重要，它对应XML配置中的元素，@ComponentScan的功能其实就是自动扫描并加载符合条件的组件（比如@Component和@Repository等）或者bean定义，最终将这些bean定义加载到IoC容器中。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">我们可以通过basePackages等属性来细粒度的定制@ComponentScan自动扫描的范围，如果不指定，则默认Spring框架实现会从声明@ComponentScan所在类的package进行扫描。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div>&nbsp;</div>
+
+<table style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; border-collapse: collapse; border-spacing: 0px; font-size: 1em;">
+	<colgroup>
+		<col style="width: 130px;" />
+		<col style="width: 130px;" />
+	</colgroup>
+	<tbody style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+		<tr style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+			<td style="margin: 0px; border: 0px; font-size: inherit; padding: 0.25em 0.25em 0.25em 0.4em; vertical-align: top;">
+			<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">1</span></span></div>
+			</td>
+			<td style="margin: 0px; border: 0px; font-size: inherit; padding: 0.25em 0.25em 0.25em 0.4em; vertical-align: top;">
+			<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+			<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">注：所以SpringBoot的启动类最好是放在root package下，因为默认不指定basePackages。</span></span></div>
+			</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div>&nbsp;</div>
+</div>
+</div>
+</div>
+
+<h2 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; font-weight: bold; line-height: 35px;">@EnableAutoConfiguration</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">个人感觉@EnableAutoConfiguration这个Annotation最为重要，所以放在最后来解读，大家是否还记得Spring框架提供的各种名字为@Enable开头的Annotation定义？比如@EnableScheduling、@EnableCaching、@EnableMBeanExport等，@EnableAutoConfiguration的理念和做事方式其实一脉相承，简单概括一下就是，借助@Import的支持，收集和注册特定场景相关的bean定义。</span></span></div>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">@EnableScheduling是通过@Import将Spring调度框架相关的bean定义都加载到IoC容器。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">@EnableMBeanExport是通过@Import将JMX相关的bean定义加载到IoC容器。</span></span></div>
+	</li>
+</ul>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">而@EnableAutoConfiguration也是借助@Import的帮助，将所有符合自动配置条件的bean定义加载到IoC容器，仅此而已！</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">@EnableAutoConfiguration作为一个复合Annotation,其自身定义关键信息如下：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@SuppressWarnings(&quot;deprecation&quot;)</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Target(ElementType.TYPE)</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Retention(RetentionPolicy.RUNTIME)</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Documented</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Inherited</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@AutoConfigurationPackage</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">@Import(EnableAutoConfigurationImportSelector.class)</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">public @interface EnableAutoConfiguration {</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">...</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">}</span></span></div>
+</div>
+</div>
+
+<h4 style="margin: 30px 0px 1.5em; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 20px;"><span><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; font-weight: bold; line-height: 1.5em;">两个比较重要的注解：</span></span></h4>
+
+<ul style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: 10px 0px 1.5em 1.5em; list-style: disc;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">@AutoConfigurationPackage：自动配置包</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">@Import: 导入自动配置的组件</span></span></div>
+	</li>
+</ul>
+
+<h4 style="margin: 30px 0px 1.5em; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 20px;"><span><span style="font-size: 20px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; font-weight: bold; line-height: 1.5em;">AutoConfigurationPackage注解：</span></span></h4>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">1 static class Registrar implements ImportBeanDefinitionRegistrar, DeterminableImports {</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">2</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">3 @Override</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">4 public void registerBeanDefinitions(AnnotationMetadata metadata,</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">5 BeanDefinitionRegistry registry) {</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">6 register(registry, new PackageImport(metadata).getPackageName());</span></span></div>
+
+<div><span><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">7 }</span></span></div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">它其实是注册了一个Bean的定义。</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>
