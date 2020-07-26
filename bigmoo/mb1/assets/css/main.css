@@ -2176,13 +2176,13 @@ input, select, textarea {
 
 	#header {
 		position: relative;
-		background-image: url("../../images/pic01.jpg");
+		background-image: url("../../images/header.jpg");
 		background-size: cover;
 		background-position: center center;
 		background-attachment: fixed;
 		color: #fff;
 		text-align: center;
-		padding: 1em 0 2em 0;
+		padding: 7.5em 0 2em 0;
 		cursor: default;
 	}
 
@@ -2193,13 +2193,13 @@ input, select, textarea {
 			height: 100%;
 		}
 
-/*		#header .inner {
+		#header .inner {
 			position: relative;
 			z-index: 1;
 			margin: 0;
 			display: inline-block;
 			vertical-align: middle;
-		}*/
+		}
 
 		#header header {
 			display: inline-block;
@@ -2247,8 +2247,8 @@ input, select, textarea {
 		}
 
 	body.homepage #header {
-		/*height: 100vh;
-		min-height: 40em;*/
+		height: 100vh;
+		min-height: 40em;
 	}
 
 		body.homepage #header h1 {
@@ -2294,7 +2294,6 @@ input, select, textarea {
 
 		#nav > ul {
 			line-height: 0px;
-			/*菜单线*/
 			position: relative;
 			display: inline-block;
 			margin: 0;
