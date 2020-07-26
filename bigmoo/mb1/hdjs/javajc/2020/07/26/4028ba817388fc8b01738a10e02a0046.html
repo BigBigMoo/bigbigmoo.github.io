@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title></title>
+		<title>如何保证同步</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
@@ -15,13 +15,13 @@
 <script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
 <script>
 	var global_siteId = "4028ba817385534401738555e7d30000";
-	var global_channelId = "4028ba817388fc8b0173891def440004";
-	var global_articleId = "";
+	var global_channelId = "4028ba817388fc8b01738a0202c20027";
+	var global_articleId = "4028ba817388fc8b01738a10e02a0046";
 </script>
 <script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
 
 	</head>
-	<body class="left-sidebar is-preload">
+	<body class="no-sidebar is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
@@ -38,11 +38,11 @@
 				<ul>
 					<li>
 						
-						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1595759846208">java基础</a>
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1595759847781">java基础</a>
 					</li>
 					<li>
 						
-						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1595759846208">spring</a>
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1595759847781">spring</a>
 					</li>
 						
 				</ul>	
@@ -59,24 +59,24 @@
 			</li>
 			<li>
 				
-				<a href="/bigmoo/mb1/qdxx/index.html?tm=1595759846224">前端学习</a>
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1595759847797">前端学习</a>
 			</li>
 			<li>
 				
-				<a href="/bigmoo/mb1/sjkxg/index.html?tm=1595759846246">数据库相关</a>
+				<a href="/bigmoo/mb1/sjkxg/index.html?tm=1595759847812">数据库相关</a>
 			</li>
 			<li>
 			
-				<a href="/bigmoo/mb1/zjj/index.html?tm=1595759846246">中间件</a>
+				<a href="/bigmoo/mb1/zjj/index.html?tm=1595759847812">中间件</a>
 			</li>
 			<li>
 				
-				<a href="/bigmoo/mb1/ywzs/index.html?tm=1595759846262">运维知识</a>
+				<a href="/bigmoo/mb1/ywzs/index.html?tm=1595759847828">运维知识</a>
 			</li>
 		
 			<li>
 				
-				<a href="/bigmoo/mb1/mstj/index.html?tm=1595759846277">面试题集</a>
+				<a href="/bigmoo/mb1/mstj/index.html?tm=1595759847850">面试题集</a>
 			</li>
 		</ul>
 	</nav>
@@ -86,97 +86,29 @@
 				<div class="wrapper style1">
 
 					<div class="container">
-						<div class="row gtr-200">
-							<div class="col-4 col-12-mobile" id="sidebar">
-								<hr class="first" />
-								<!--左侧文章1-->
-								<section>
-									<header>
-
-										<h3><a href="#">数据库相关</a></h3>
-										
-									</header>
-									<p>
-										入冬了，打开衣柜一看，我该逛街了，打开钱包一看，我还年轻，不冷。
-									</p>
-									<!--<footer>
-										<a href="#" class="button">Learn More</a>
-									</footer>-->
-								</section>
-								<hr />
-								<!--文章列表2-->
-								<section>
-									<header>
-										<h3><a href="#">文章列表</a></h3>
-									</header>
-									<!--<p>
-										Tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-									</p>-->
-									<div class="row gtr-50">
-									
-											<footer>
-													共0条记录 第1/1页 每页5条
-													<br/>
-							<a href="javascript:goPage(1)">首&nbsp&nbsp页</a>
-			                 上一页			                下一页			                <a href="javascript:goPage(1)">末&nbsp&nbsp&nbsp页</a>
-			                <br/>
-			             <label for="">选择跳转至</label>
-			                <input id='goPage' type="text"  style="width: 45px;height:20px;text-align: center;border-radius: 10%;">
-			                <label for="">页</label>
-										
-							<a href="#" onclick="go()" >确&nbsp&nbsp&nbsp定</a>
-										
-									</footer>
-	<div id="contentListDiv" >
-	</div>
-<script type="text/javascript">
-	function goPage(pageNum) {
-		var num = parseInt(pageNum);
-		if(isNaN(num)){
-			alert("非法数字");
-			return;
-		}
-		var pageCount = 1;
-		if(num>pageCount&&pageCount!=0){
-			alert("输入页数，不能大于最大页数");
-			return;
-		}else if(num<1){
-			alert("输入页数，不能小于1");
-			return;
-		}
-		var urlPath = "/bigmoo/mb1/sjkxg/index.html?tm=1595759846277";
-			if(num!=1){
-				urlPath = urlPath.substring(0,urlPath.lastIndexOf("."))+"_"+(num-1)+urlPath.substring(urlPath.lastIndexOf("."));
-			}
-	        window.location.href=urlPath;
-    }
-    
-    function go(){
-		var gopage = document.getElementById("goPage").value;
-		goPage(gopage);
-		document.getElementById("goPage").value=gopage;
-	}
-</script>
-										
-									</div>
-									
-								</section>
-							</div>
-							<!--右侧1-->
-							<div class="col-8 col-12-mobile imp-mobile" id="content">
-								<article id="main">
-									
-										
-								</article>
-							</div>
-							
-						</div>
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> 如何保证同步</a></h2>
+								<p>
+									2020年07月26日 15:40:11
+								</p>
+							</header>
 						
+							<p>
+<div style="-en-clipboard:true;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-weight: 400; line-height: 26px;">一段synchronized的代码被一个线程执行之前，他要先拿到执行这段代码的权限，在 java里边就是拿到某个同步对象的锁（一个对象只有一把锁）； 如果这个时候同步对象的锁被其他线程拿走了，他（这个线程）就只能等了（线程阻塞在锁池 等待队列中）。 取到锁后，他就开始执行同步代码(被synchronized修饰的代码）；线程执行完同步代码后马上就把锁还给同步对象，其他在锁池中 等待的某个线程就可以拿到锁执行同步代码了。这样就保证了同步代码在统一时刻只有一个线程在执行。</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-weight: 400; line-height: 26px;">同步机制实现方式包括但不限于：</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-weight: 400; line-height: 26px;">①ThreadLocal ② synchronized( ) ③ wait() 与 notify() ④ volatile</span></span></div>
+							</p>
+							
+						</article>
+
 					</div>
 
 				</div>
 
-			<!-- Footer  -->
+			<!-- Footer -->
 <div id="footer">
 	<div class="container">
 		
@@ -226,11 +158,10 @@
 		</div>
 	</div>
 </div>
-				
 
 		</div>
 
-		<!-- Scripts -->
+			<!-- Scripts -->
 			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
 			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>

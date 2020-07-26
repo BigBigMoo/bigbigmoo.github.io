@@ -34,67 +34,82 @@
 										
 									</header>
 									<p>
-										Dolor sed fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-										porttitor phasellus tempus cubilia ultrices tempor sagittis  tellus ante diam nec penatibus dolor cras
-										magna tempus feugiat veroeros.
+										入冬了，打开衣柜一看，我该逛街了，打开钱包一看，我还年轻，不冷。
 									</p>
-									<footer>
+									<!--<footer>
 										<a href="#" class="button">Learn More</a>
-									</footer>
+									</footer>-->
 								</section>
 								<hr />
 								<!--文章列表2-->
 								<section>
 									<header>
-										<h3><a href="#">Sed lorem etiam consequat</a></h3>
+										<h3><a href="#">文章列表</a></h3>
 									</header>
-									<p>
+									<!--<p>
 										Tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-									</p>
+									</p>-->
 									<div class="row gtr-50">
 									
 										<@flipPage pageSize='5' src=channel>
 											<@articles channelCode='${channel.code}' level='null' orderStrs='topNo,ASC,publishDate,DESC'>
 											<@forEach>
 												<div class="col-4">
-													<a href="<@URL src=article ></@URL>" class="image fit"><img src="images/pic10.jpg" alt="" /></a>
+													<a href="<@URL src=article ></@URL>" class="image fit"><img src="<@URL src='${article.thumbnailsPath!}'/>" alt="" /></a>
 												</div>
 												<div class="col-8">
-													<h4>${stringWidth(article.title,36,"...")}</h4>
+													<h4><a href="<@URL src=article ></@URL>" class="image fit">${stringWidth(article.title,12,"...")}</a></h4>
 													<p>
-														<@content/>
+													${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}
 													</p>
 												</div>
 											</@forEach>
 											</@articles>
-									</@flipPage >
+											<footer>
+													共${page.total}条记录 第${page.number}/${page.count}页 每页${page.size}条
+													<br/>
+							<a href="javascript:goPage(1)">首&nbsp&nbsp页</a>
+			                 <#if page.number==1>上一页<#else>
+								<a href="javascript:goPage(${page.number-1})">上一页</a>
+							</#if>
+			                <#if page.number == page.count>下一页<#else>
+								<a href="javascript:goPage(${page.number+1})">下一页</a>
+							</#if>
+			                <a href="javascript:goPage(${page.count})">末&nbsp&nbsp&nbsp页</a>
+			                <br/>
+			             <label for="">选择跳转至</label>
+			                <input id='goPage' type="text"  style="width: 45px;height:20px;text-align: center;border-radius: 10%;">
+			                <label for="">页</label>
+										
+							<a href="#" onclick="go()" >确&nbsp&nbsp&nbsp定</a>
+										
+									</footer>
+										</@flipPage >
 										
 									</div>
-									<footer>
-										<a href="#" class="button">Magna Adipiscing</a>
-									</footer>
+									
 								</section>
 							</div>
 							<!--右侧1-->
 							<div class="col-8 col-12-mobile imp-mobile" id="content">
 								<article id="main">
+									
+											<@articles channelCode='${channel.code}'  count='1' level='null' orderStrs='topNo,ASC,publishDate,DESC'>
+											<@forEach>
 									<header>
-										<h2><a href="#">Left Sidebar</a></h2>
-										<p>
-											Morbi convallis lectus malesuada sed fermentum dolore amet
+										<h2><a href="<@URL src=article ></@URL>" class="image fit">${stringWidth(article.title,12,"...")}</a></h2>
+										<p style="text-align:right;">
+											${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}
 										</p>
 									</header>
-									<a href="#" class="image featured"><img src="images/pic06.jpg" alt="" /></a>
+									<!--<a href="<@URL src=article ></@URL>" class="image fit"><img src="<@URL src='${article.thumbnailsPath!}'/>" alt="" /></a>-->
 									<p>
-										Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-										posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-										lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-										consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-										interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-										natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+										<@content/>
 									</p>
 									
-								
+											</@forEach>
+											</@articles>
+										
 								</article>
 							</div>
 							

@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title></title>
+		<title>Spring IOC/DI 及其原理</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
@@ -15,13 +15,13 @@
 <script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
 <script>
 	var global_siteId = "4028ba817385534401738555e7d30000";
-	var global_channelId = "4028ba817388fc8b0173891def440004";
-	var global_articleId = "";
+	var global_channelId = "4028ba817388fc8b01738a0202c20027";
+	var global_articleId = "4028ba817388fc8b01738a1175a2004a";
 </script>
 <script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
 
 	</head>
-	<body class="left-sidebar is-preload">
+	<body class="no-sidebar is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
@@ -38,11 +38,11 @@
 				<ul>
 					<li>
 						
-						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1595759846208">java基础</a>
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1595759847512">java基础</a>
 					</li>
 					<li>
 						
-						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1595759846208">spring</a>
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1595759847512">spring</a>
 					</li>
 						
 				</ul>	
@@ -59,24 +59,24 @@
 			</li>
 			<li>
 				
-				<a href="/bigmoo/mb1/qdxx/index.html?tm=1595759846224">前端学习</a>
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1595759847527">前端学习</a>
 			</li>
 			<li>
 				
-				<a href="/bigmoo/mb1/sjkxg/index.html?tm=1595759846246">数据库相关</a>
+				<a href="/bigmoo/mb1/sjkxg/index.html?tm=1595759847549">数据库相关</a>
 			</li>
 			<li>
 			
-				<a href="/bigmoo/mb1/zjj/index.html?tm=1595759846246">中间件</a>
+				<a href="/bigmoo/mb1/zjj/index.html?tm=1595759847549">中间件</a>
 			</li>
 			<li>
 				
-				<a href="/bigmoo/mb1/ywzs/index.html?tm=1595759846262">运维知识</a>
+				<a href="/bigmoo/mb1/ywzs/index.html?tm=1595759847565">运维知识</a>
 			</li>
 		
 			<li>
 				
-				<a href="/bigmoo/mb1/mstj/index.html?tm=1595759846277">面试题集</a>
+				<a href="/bigmoo/mb1/mstj/index.html?tm=1595759847581">面试题集</a>
 			</li>
 		</ul>
 	</nav>
@@ -86,97 +86,29 @@
 				<div class="wrapper style1">
 
 					<div class="container">
-						<div class="row gtr-200">
-							<div class="col-4 col-12-mobile" id="sidebar">
-								<hr class="first" />
-								<!--左侧文章1-->
-								<section>
-									<header>
-
-										<h3><a href="#">数据库相关</a></h3>
-										
-									</header>
-									<p>
-										入冬了，打开衣柜一看，我该逛街了，打开钱包一看，我还年轻，不冷。
-									</p>
-									<!--<footer>
-										<a href="#" class="button">Learn More</a>
-									</footer>-->
-								</section>
-								<hr />
-								<!--文章列表2-->
-								<section>
-									<header>
-										<h3><a href="#">文章列表</a></h3>
-									</header>
-									<!--<p>
-										Tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-									</p>-->
-									<div class="row gtr-50">
-									
-											<footer>
-													共0条记录 第1/1页 每页5条
-													<br/>
-							<a href="javascript:goPage(1)">首&nbsp&nbsp页</a>
-			                 上一页			                下一页			                <a href="javascript:goPage(1)">末&nbsp&nbsp&nbsp页</a>
-			                <br/>
-			             <label for="">选择跳转至</label>
-			                <input id='goPage' type="text"  style="width: 45px;height:20px;text-align: center;border-radius: 10%;">
-			                <label for="">页</label>
-										
-							<a href="#" onclick="go()" >确&nbsp&nbsp&nbsp定</a>
-										
-									</footer>
-	<div id="contentListDiv" >
-	</div>
-<script type="text/javascript">
-	function goPage(pageNum) {
-		var num = parseInt(pageNum);
-		if(isNaN(num)){
-			alert("非法数字");
-			return;
-		}
-		var pageCount = 1;
-		if(num>pageCount&&pageCount!=0){
-			alert("输入页数，不能大于最大页数");
-			return;
-		}else if(num<1){
-			alert("输入页数，不能小于1");
-			return;
-		}
-		var urlPath = "/bigmoo/mb1/sjkxg/index.html?tm=1595759846277";
-			if(num!=1){
-				urlPath = urlPath.substring(0,urlPath.lastIndexOf("."))+"_"+(num-1)+urlPath.substring(urlPath.lastIndexOf("."));
-			}
-	        window.location.href=urlPath;
-    }
-    
-    function go(){
-		var gopage = document.getElementById("goPage").value;
-		goPage(gopage);
-		document.getElementById("goPage").value=gopage;
-	}
-</script>
-										
-									</div>
-									
-								</section>
-							</div>
-							<!--右侧1-->
-							<div class="col-8 col-12-mobile imp-mobile" id="content">
-								<article id="main">
-									
-										
-								</article>
-							</div>
-							
-						</div>
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> Spring IOC/DI 及其原理</a></h2>
+								<p>
+									2020年07月26日 15:40:50
+								</p>
+							</header>
 						
+							<p>
+<div style="-en-clipboard:true;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-weight: 400; line-height: 26px;">Spring本身就是一个大的容器，来管理各种Bean，通常用来整合其它框架。优秀！</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-weight: 400; line-height: 26px;">Ioc不是一种具体的技术，而是一种设计思想，Ioc的目的是为了如何指导我们编写出更加松耦合，更加优雅的程序。传统的应用程序使我们在类的内部显式的创建依赖的对象。从而导致类于类之间耦合度过高。而使用了Ioc的设计思想，将对象的创建，查找依赖，以及生命周期的控制权交给了Ioc容器。对象之间耦合较松，更加灵活。</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-weight: 400; line-height: 26px;">IoC的一个重点是在系统运行中，动态的向某个对象提供它所需要的其他对象。这一点是通过DI（Dependency Injection，依赖注入）来实现的。DI通过反射实现</span></span></div>
+							</p>
+							
+						</article>
+
 					</div>
 
 				</div>
 
-			<!-- Footer  -->
+			<!-- Footer -->
 <div id="footer">
 	<div class="container">
 		
@@ -226,11 +158,10 @@
 		</div>
 	</div>
 </div>
-				
 
 		</div>
 
-		<!-- Scripts -->
+			<!-- Scripts -->
 			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
 			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
 			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
