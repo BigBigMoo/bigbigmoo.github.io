@@ -33,7 +33,7 @@
 			</section>
 
 			<!-- Carousel 轮播图 -->
-		<!--	<section class="carousel">
+			<!--	<section class="carousel">
 				<div class="reel">
 
 					<@articles channelCode='sylbt' count='8' level='null' orderStrs='topNo,ASC,publishDate,DESC'>
@@ -79,17 +79,18 @@
 
 						<!-- Tweets 1-->
 						<section class="col-4 col-12-mobile">
-							<header>
+							<!--<header>
 								<h2 class="fa fa-backward"><span class="label"></span></h2>
-							</header>
+							</header>-->
 							<ul class="divided">
 
 								<@articles channelCode='sjkxg' level='null' count='5' orderStrs='topNo,ASC,publishDate,DESC'>
 									<@forEach>
 										<li>
-											<article class="tweet">
-												<a href="<@URL src=article ></@URL>">${stringWidth(article.title,12,"...")}</a>
-
+											<article class="post stub">
+												<header>
+													<a href="<@URL src=article ></@URL>">${stringWidth(article.title,12,"...")}</a>
+												</header>
 												<span class="timestamp">${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}</span>
 											</article>
 										</li>
@@ -101,9 +102,9 @@
 
 						<!-- Posts 2-->
 						<section class="col-4 col-12-mobile">
-							<header>
-								<h2  class="fa fa-play" ><span class="label"></span></h2>
-							</header>
+							<!--<header>
+								<h2 class="fa fa-play"><span class="label"></span></h2>
+							</header>-->
 							<ul class="divided">
 								<!--<li>
 									<article class="post stub">
@@ -117,8 +118,9 @@
 									<@forEach>
 										<li>
 											<article class="post stub">
-												<a href="<@URL src=article ></@URL>">${stringWidth(article.title,12,"...")}</a>
-
+												<header>
+													<a href="<@URL src=article ></@URL>">${stringWidth(article.title,12,"...")}</a>
+												</header>
 												<span class="timestamp">${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}</span>
 											</article>
 										</li>
@@ -129,17 +131,18 @@
 
 						<!-- Photos 3-->
 						<section class="col-4 col-12-mobile">
-							<header>
+							<!--<header>
 								<h2 class="fa fa-forward"><span class="label"></span></h2>
-							</header>
+							</header>-->
 							<ul class="divided">
-							
+
 								<@articles channelCode='ywzs' level='null' count='5' orderStrs='topNo,ASC,publishDate,DESC'>
 									<@forEach>
 										<li>
 											<article class="post stub">
-												<a href="<@URL src=article ></@URL>">${stringWidth(article.title,12,"...")}</a>
-
+												<header>
+													<a href="<@URL src=article ></@URL>">${stringWidth(article.title,12,"...")}</a>
+												</header>
 												<span class="timestamp">${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}</span>
 											</article>
 										</li>
@@ -147,7 +150,7 @@
 								</@articles>
 							</ul>
 						</section>
-						
+
 						<!--<section class="col-4 col-12-mobile">
 							<header>
 								<h2 class="icon solid fa-camera circled"><span class="label">Photos</span></h2>
@@ -182,13 +185,13 @@
 					</header>
 					<div class="row">
 						<article class="col-4 col-12-mobile special">
-							<@articles channelCode='hdjs_javajc' level='null' count='1' orderStrs='topNo,ASC,publishDate,DESC'>
+						<!--	<@articles channelCode='hdjs_javajc' level='null' count='1' orderStrs='topNo,ASC,publishDate,DESC'>
 								<@forEach>
 
 									<a href="<@URL src=article ></@URL>" class="image featured"><img src="<@URL src='${article.thumbnailsPath!}'/>" alt="" /></a>
 
 								</@forEach>
-							</@articles>
+							</@articles>-->
 							<section>
 
 								<@articles channelCode='hdjs_javajc' level='null' count='3' orderStrs='topNo,ASC,publishDate,DESC'>
@@ -207,13 +210,13 @@
 							</section>
 						</article>
 						<article class="col-4 col-12-mobile special">
-							<@articles channelCode='hdjs_spring' level='null' count='1' orderStrs='topNo,ASC,publishDate,DESC'>
+							<!--<@articles channelCode='hdjs_spring' level='null' count='1' orderStrs='topNo,ASC,publishDate,DESC'>
 								<@forEach>
 
 									<a href="<@URL src=article ></@URL>" class="image featured"><img src="<@URL src='${article.thumbnailsPath!}'/>" alt="" /></a>
 
 								</@forEach>
-							</@articles>
+							</@articles>-->
 							<section>
 
 								<@articles channelCode='hdjs_spring' level='null' count='3' orderStrs='topNo,ASC,publishDate,DESC'>
@@ -232,13 +235,13 @@
 							</section>
 						</article>
 						<article class="col-4 col-12-mobile special">
-							<@articles channelCode='mstj' level='null' count='1' orderStrs='topNo,ASC,publishDate,DESC'>
+							<!--<@articles channelCode='mstj' level='null' count='1' orderStrs='topNo,ASC,publishDate,DESC'>
 								<@forEach>
 
 									<a href="<@URL src=article ></@URL>" class="image featured"><img src="<@URL src='${article.thumbnailsPath!}'/>" alt="" /></a>
 
 								</@forEach>
-							</@articles>
+							</@articles>-->
 
 							<section>
 
