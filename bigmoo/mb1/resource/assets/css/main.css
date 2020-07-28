@@ -2178,7 +2178,7 @@ input, select, textarea {
 	#header {
 		position: relative;
 		/*background-image: url("../../images/pic01.jpg");*/
-		background-color: #508da3;
+		background-color: #009394;
 		background-size: cover;
 		background-position: center center;
 		background-attachment: fixed;
@@ -2463,7 +2463,7 @@ input, select, textarea {
 		position: relative;
 		overflow: hidden;
 		padding: 6em 0 6em 0;
-		background: #508da3;
+		background: #009394;
 		color: #fff;
 	}
 
