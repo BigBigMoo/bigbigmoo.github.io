@@ -1,0 +1,698 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>面试题集1</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891ed9c00007";
+	var global_articleId = "4028ba8173a37a8f0173a3c4fc900040";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596180462896">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596180462896">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596180462916">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596180462936">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596180462956">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596180462956">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596180462976">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> 面试题集1</a></h2>
+								<p>
+									2019年07月17日
+								</p>
+							</header>
+						
+							<p>
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;-en-clipboard:true;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; java中wait和sleep有什么区别？多线程条件下如何保证数据安全？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp; 答：最大区别是等待时wait会释放锁，而sleep会一直持有锁，wait通常用于线程时交，互，sleep通常被用于暂停执行。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; java中volatile和synchronized有什么区别?</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">1.volatile本质是在告诉jvm当前变量在寄存器（工作内存）中的值是不确定的，需要从主存中读取；synchronized则是锁定当前变量，只有当前线程可以访问该变量，其他线程被阻塞住。</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">2.volatile仅能使用在变量级别；synchronized则可以使用在变量、方法、和类级别的。</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">3.volatile仅能实现变量的修改可见性，并不能保证原子性；而synchronized则可以保证变量的修改可见性和原子性。</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">4.volatile不会造成线程的阻塞；synchronized可能会造成线程的阻塞。</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">5.volatile标记的变量不会被编译器优化；synchronized标记的变量可以被编译器优化。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">3. 有了解java的原子类？实现原理是什么?</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; 答：采用硬件提供原子操作指令实现的，即CAS。每次调用都会先判断预期的值是否符合，才进行写操作，保证数据安全。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">4.&nbsp; spring主要使用了哪些？IOC实现原理是什么？AOP实现原理是什么？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif;">答：spring主要功能有IOC，AOP，MVC等，IOC实现原理：先反射生成实例，然后调用时主动注入。AOP原理：主要使用java动态代理，</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">5.&nbsp; mybatis有了解吗？它与hibernate有什么区别？项目中，你会选哪个？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;答：两者都是轻量级ORM框架，hibernate实现功能比较多，通过HQL操作数据库，比较简单方便，但hibernate自动生成的sql相长，不利测试和查找原因。复杂sql时，编写比较困难，同时性能也会降低。mybatis是半自动化，手动编写SQL语句，同时提供丰富的参数判断功能。sql语句较清晰，可以直接进行测试，性能也较好，操作起来非常简单。同时hibernate容易产生n+1问题。hibernate学习成本较mybatis高。国内一些大公司基本上使用mybatis</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">6.&nbsp; 缓存框架有使用过哪些？memcache和redis有什么区别？项目中，怎么去选择？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;答：缓存有:ehcache,memcache和redis等</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;区别：</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1、 Redis和Memcache都是将数据存放在内存中，都是内存数据库。不过&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; memcache还可用于缓存其他东西，例如图片、视频等等。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2、Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，hash等数据结构的&nbsp;&nbsp; 存储。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3、虚拟内存&mdash;Redis当物理内存用完时，可以将一些很久没用到的value 交换到磁盘</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4、过期策略&mdash;memcache在set时就指定，例如set key1 0 0 8,即永不过期。Redis可以通 过例如expire 设定，例如expire name 10</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5、分布式&mdash;设定memcache集群，利用magent做一主多从;redis可以做一主多从。都&nbsp;&nbsp;&nbsp;&nbsp; 可以一主一从</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6、存储数据安全&mdash;memcache挂掉后，数据没了；redis可以定期保存到磁盘（持久化）</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7、灾难恢复&mdash;memcache挂掉后，数据不可恢复; redis数据丢失后可以通过aof恢复</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8、Redis支持数据的备份，即master-slave模式的数据备份。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;项目使用选择：</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; redis是单线程实现，若需要使用控制某些并发状态时，可以使用redis.项目中需要使用 复杂的list,set操作时，同时可以对数据进行持久化。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当存储数据较大时，如100k以上，那memcache性能较好，在多核上，memcache较&nbsp;&nbsp;&nbsp;&nbsp; 好</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">7.&nbsp; &nbsp;说说数据库性能优化有哪些方法？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 答：使用explain进行优化，查看sql是否充分使用索引。避免使用in,用exist替代，字段值尽可能使用更小的值，任何对列的操作都将导致表扫描，它包括数据库函数、计算表达式等等，查询时要尽可能将操作移至等号右边。使用连接查询(join)代替子查询。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">在表的多列字段上建立一个索引，但只有在查询这些字段的第一个字段时，索引才会被使用。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">8.&nbsp; &nbsp;HTTP请求方法get和post有什么区别？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1：Post传输数据时，不需要在URL中显示出来，而Get方法要在URL中显示。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;2：Post传输的数据量大，可以达到2M，而Get方法由于受到URL长度限制,只能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 传递大约1024字节.</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;3：Post就是为了将数据传送到服务器段,Get就是为了从服务器段取得数据.而Get&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 之所以也能传送数据,只是用来设计告诉服务器,你到底需要什么样的数据.Post&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 的信息作为http请求的内容，而Get是在Http头部传输的。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">9.&nbsp; linux命令熟悉？查看某个线程命令是什么？查看整个机器负载命令？文件内容快速查找命令是什么？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 查看线程：ps -ef|greptomcat</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 查看负载：top</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 文件内容查找：vi&nbsp; /aa&nbsp;test.txt 或者先打开文件，再查找: vi test.txt&nbsp;&nbsp; /aa</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">10.&nbsp; JVM内存模型是如何？垃圾回收机制有哪些？如何对JVM进行调优？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 答：由栈和堆组成，栈是运行时单位，堆内存则分为年轻代、年老代、持久代等，年轻代中的对象经过几次的回收，仍然存在则被移到年老代；持久代主要是保存class,method,filed等对象。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">sun回收机制：主要对年轻代和年老代中的存活对象进行回收，分为以下：</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">年轻代串行（Serial Copying）、年轻代并行（ParNew）、年老代串行（SerialMSC），年老代并行（Parallel Mark Sweep），年老代并发（Concurrent Mark-Sweep GC，即CMS）等等,目前CMS回收算法使用最广泛。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">JVM调优主要是对堆内容和回收算法进行配置，需要对jdk产生的回收日志进行观察，同时通过工具（Jconsole，jProfile，VisualVM）对堆内存不断分析，这些优化是一个过程，需要不断地进行观察和维护。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">11.&nbsp; 如银行内部转账功能，如何保证数据一致性，即要么同时成功，要么同时失败？高并发时，又如何保证性能和数据正确？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 答：如果是单机内完成这些操作，那使用数据库的事务，即可轻松实现。若是分布式呢？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">12.&nbsp; 有了解分布式事务如何实现？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp;答：分布式事务可以采用分布式锁进行实现，目前zookeeper就提供此锁；分布式锁需要牺牲一定性能去实现，若业务支付最终一致性，那此方法是最佳方案。如在京东下订单，过一会才会告诉你订单审核通过，而不是马上响应订单结果。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">13.&nbsp; java抽象类和接口有什么区别？项目中怎么去使用它们？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 相同点：</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A. 两者都是抽象类，都不能实例化。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B. interface实现类及abstractclass的子类都必须要实现已经声明的抽象方法。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 不同点：</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A. interface需要实现，要用implements，而abstractclass需要继承，要用extends。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B. 一个类可以实现多个interface，但一个类只能继承一个abstractclass。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C. interface强调特定功能的实现，而abstractclass强调所属关系。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; D. 尽管interface实现类及abstrctclass的子类都必须要实现相应的抽象方法，但实现的&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 形式不同。interface中的每一个方法都是抽象方法，都只是声明的 (declaration, 没有方&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 法体)，实现类必须要实现。而abstractclass的子类可以有选择地实现。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; 使用：</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abstract：在既需要统一的接口，又需要实例变量或缺省的方法的情况下，使用abstract;</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; interface：使用: 类与类之前需要特定的接口进行协调，而不在乎其如何实现。 作为能&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 够实现特定功能的标识存在，也可以是什么接口方法都没有的纯粹标识。需要将一组类&nbsp;&nbsp;&nbsp;&nbsp; 视为单一的类，而调用者只通过接口来与这组类发生联系。需要实现特定的多项功能，&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 而这些功能之间可能完全没有任何联系。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">14.&nbsp; 对socket熟悉？TCP通讯有几次握手？有使用过哪些socket框架？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 答：3次握手，客户端&mdash;&gt;服务端，服务端&mdash;&gt;客户端，客户端&mdash;&gt;服务端，当这些过程完成之后，才真正建立起通信。java中比较有名的socket框架有：mina,netty,都是韩国小棒子写的。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">15.&nbsp; 了解java反射机制？反射生成类，能访问私有变量？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 答：即动态生成java的实例，可以</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">16.&nbsp; RPC是什么？有使用过哪些RPC框架？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 答：即远程进程调用，本地机器调用远程的服务，在项目规模大到一定程度，需要使用RPC相关框架进行服务化部署。如：hessian 、webservice等</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">17.&nbsp; 熟悉js或css？jquery如何绑定页面某元素的点击事件？</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">答：$(&ldquo;#btn&rdquo;).click(function(){</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">})</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; 18 .private、默认、protected、public作用范围</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1）private，同类</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2）默认，同类、同包</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3）protected，同类，同包，子类</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4）public，所有</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; String trim的实现原理</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;去掉首尾ASCII码值小于&rsquo; &lsquo;（空格）的字符</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;StringBuffer、StringBuilder区别</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; StringBuffer线程安全</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; StringBuilder线程不安全</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; 抽象类与接口的异同</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;同：具有抽象方法</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;异：1）抽象类可以有构造器，非抽象方法，非公有属性，仅可以单继承抽象类</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2）接口仅有公有抽象方法或者公有静态常量，可以同时实现多个接口</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 个人使用经验：一般在控制层使用抽象类，提取公共初始化方法、框架定制化工具方法等</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 一般会在业务层使用接口</span></span></div>
+
+<div>&nbsp;</div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">List、Set、Collections区别</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）List，有序可重复</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）Set， 无序不可重复</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">3）Collections，集合工具类</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">列举键值容器</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）HashMap，实现Map，异步</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）Hashtable，实现Map，同时继承旧的Dictionary类，同步</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">3）Properties，Hashtable的子类，系统参数</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">算法：快速排序</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">public static void quickSort(int a[], int start, int end) {</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">int i, j;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">i = start;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">j = end;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">if ((a == null) || (a.length == 0))</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">return;</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">while (i &lt; j) {//查找基准点下标</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">while (i &lt; j &amp;&amp; a[i] &lt;= a[j])</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">// 以数组start下标的数据为key，右侧扫描</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">j&mdash;;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">if (i &lt; j) { // 右侧扫描，找出第一个比key小的，交换位置</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">int temp = a[i];</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">a[i] = a[j];</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">a[j] = temp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">}</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">while (i &lt; j &amp;&amp; a[i] &lt; a[j])</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">// 左侧扫描（此时a[j]中存储着key值）</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">i++;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">if (i &lt; j) { // 找出第一个比key大的，交换位置</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">int temp = a[i];</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">a[i] = a[j];</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">a[j] = temp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">}</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">}</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">if (i - start &gt; 1) { // 递归调用，把key前面的完成排序</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">quickSort(a, start, i - 1);</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">}</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">if (end - j &gt; 1) {</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">quickSort(a, j + 1, end); // 递归调用，把key后面的完成排序</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">}</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">}</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif;">iner join、left join、 right join区别</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）inner join，两表字段值相同</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）left join，两表字段值相同，以及左表字段有值，右表字段值为null</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">3）right join，与上相反</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">需要写sql的试题</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">一般会让查出值是最大的，用到子查询、组函数等</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">Reads(id, ip, cnt) ip不唯一，查出访问量最大的前10个ip并排序</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">select r.ip, r.s, rownum from (select ip, sum(cnt) s from reads group by ip order by s desc) r where r.rownum &lt;= 10</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">数据库性能调优</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）经常做查询条件的字段建立序列</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）关联查询时，关联结果集，替代直接关联整张表；或者使用exists</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">jsp表单js校验</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">var name = document.getElementById(&lsquo;userName&rsquo;).value;</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">if (name == &lsquo;&rsquo;)</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">{</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">alert(&lsquo;用户名不能为空&rsquo;);</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">return false;</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">}</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">Struts的Action是单例吗</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）Struts1的Action是单例且线程安全</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）Struts2的Action不是单例，针对每一请求产生一个实例</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">Hibernate与Mybatis区别</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）Hibernate，使用pojo实现orm，查询速度相比较慢，插入/更新开发容易</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）Mybaits，使用纯sql开发，执行效率较快，比较适合统计、多表关联查询</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">Hibernate状态</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">瞬时态：new对象</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">持久态：实例与数据库中记录对应，拥有持久化标识</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">游离态：session关闭；session打开，游离态转成持久态</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">ibatis中#与$的区别</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）#，变量替换，即prepareStament设置字段值，并可以匹配变量类型</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）$，字符串拼接，需要小心依赖注入</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">事务特性</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）原子性：诸多操作要么全做，要么全不做</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）一致性：事务执行结果使数据库从一个一致性状态变到另一个一致性状态</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">3）隔离性：事务执行不被其他事务影响</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">4）持久性：一旦提交，对数据库的改变是永久性的</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">spring mvc与struts2的区别</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）struts2封装展示层与控制层，展示层提供标签库及验证器，请求与应答需要配置文件</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）spring mvc是单纯的控制层框架，url实现零配置，运行效率提高</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">Spring IOC注入方式</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）配置文件中，配置属性，提供setter/getter方法</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）零配置，@Autowired，统一配置根据名称或者类型注入</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">Spring AOP思想</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">针对请求做统一预处理，如有效性校验；或后处理，如记录处理结果；针对方法加before或after处理</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">Spring事务配置</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）使用tx:advice，针对业务接口层，如以do、get等命名的方法，作事务配置</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">WebService技术</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">1）axis、xfire、cxf，基于soap，传输xml</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">2）restful风格</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">&nbsp;</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em 0pt;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">jvm性能调优</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">tomcat性能调优</span></span></div>
+</div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

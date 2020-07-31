@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Lock和synchronized的选择</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891def440004";
+	var global_articleId = "4028ba81739fc4a501739fe4cc1d001c";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596115438753">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596115438768">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596115438768">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596115438784">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596115438799">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596115438822">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596115438822">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> Lock和synchronized的选择</a></h2>
+								<p>
+									2018年03月04日
+								</p>
+							</header>
+						
+							<p>
+<div style="margin-top: 1em; margin-bottom: 1em; text-align: justify;"><span><span style="font-family: Calibri, sans-serif;-en-paragraph:true;">&nbsp;&nbsp; &nbsp;&nbsp;<font style="font-size: 14pt;"><span style="font-family: Calibri, sans-serif; font-size: 14pt;">&nbsp; &nbsp; &nbsp; </span><span style="font-family: Calibri, sans-serif; font-size: 14pt;">1</span></font></span><font style="font-size: 14pt;"><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">.</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">Lock</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">是一个接口，而</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">synchronized</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">是</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">Java</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">中的关键字，</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">synchronized</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">是内置的语言实现；</span></font></span></div>
+
+<div style="margin-top: 1em; margin-bottom: 1em; text-align: justify;"><span><font style="font-size: 14pt;"><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">　　</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">2</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">.</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">synchronized</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生；而</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">Lock</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">在发生异常时，如果没有主动通过</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">unLock()</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">去释放锁，则很可能造成死锁现象，因此使用</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">Lock</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">时需要在</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">finally</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">块中释放锁；</span></font></span></div>
+
+<div style="margin-top: 1em; margin-bottom: 1em; text-align: justify;"><span><font style="font-size: 14pt;"><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">　　</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">3</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">.</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">Lock</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">可以让等待锁的线程响应中断，而</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">synchronized</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">却不行，使用</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">synchronized</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">时，等待的线程会一直等待下去，不能够响应中断；</span></font></span></div>
+
+<div style="margin-top: 1em; margin-bottom: 1em; text-align: justify;"><span><font style="font-size: 14pt;"><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">　　</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">4</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">.通过</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">Lock</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">可以知道有没有成功获取锁，而</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">synchronized</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">却无法办到。</span></font></span></div>
+
+<div style="margin-top: 1em; margin-bottom: 1em; text-align: justify;"><span><font style="font-size: 14pt;"><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">　　</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">5</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">.</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">Lock</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">可以提高多个线程进行读操作的效率。</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></font></span></div>
+
+<div style="min-height: 15pt; text-align: justify;"><span><font style="font-size: 14pt;"><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">　　在性能上来说，如果竞争资源不激烈，两者的性能是差不多的，而当竞争资源非常激烈时（即有大量线程同时竞争），此时</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">Lock</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">的性能要远远优于</span><span style="font-size: 14pt; font-family: Calibri, sans-serif;-en-paragraph:true;">synchronized</span><span style="font-size: 14pt; font-family: 宋体;-en-paragraph:true;">。所以说，在具体使用时要根据适当情况选择。</span></font></span></div>
+
+<p><!--EndFragment--></p>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

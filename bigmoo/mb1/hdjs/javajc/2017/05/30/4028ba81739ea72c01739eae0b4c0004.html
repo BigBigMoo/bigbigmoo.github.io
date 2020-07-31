@@ -1,0 +1,322 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>JDK源码阅读顺序</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b01738a0202c20027";
+	var global_articleId = "4028ba81739ea72c01739eae0b4c0004";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596097089171">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596097089172">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596097089174">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596097089176">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596097089180">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596097089182">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596097089184">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> JDK源码阅读顺序</a></h2>
+								<p>
+									2017年05月30日
+								</p>
+							</header>
+						
+							<p>
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">1、Object</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">wait(), notify(), notifyAll(), wait(timeout)</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">hashCode(), equals()</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">clone()</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">2、String</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">char[] value</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">int hash</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">equals(), startWith(), endWith(), replace</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">3、AbstractStringBuilder</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">char[] value</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">int count</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">扩容：翻倍，不够取所需最小</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">4、StringBuffer</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">继承AbstractStringBuilder</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">synchronized方法保证线程安全</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">char[] toStringCache</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">5、StringBuilder 继承AbstractStringBuilder</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">6、ArrayList</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">Object[] elementData</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">int size</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">默认大小10</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">扩容：1.5倍，不够取所需最小</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">7、LinkedList</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">Node {E item, Node prev, Node next}</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">int size</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">Node first</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">Node last</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">linkFirst(), linkLast(), linkBefore(), unLinkFirst(), unLinkLast(), unLink(), indexOf()</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">8、HashMap</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">Node{int hash, K key, V value, Node next}</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">默认容量16，负载因子0.75f</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">int size, modCount, threshold, float loadFactor</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">Node[] table</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">Set entrySet</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;">
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">put():根据key算hash，根据容量和hash算index，table[index]没有直接添加到数组中，table[index]有，若index位置同一个key则更新，否则遍历next是否有，有则更新，无则新增，最后根据thread与size判断是否扩容。注：扩容时容量翻倍，重新算hash复制到新数组</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">7）get()类似</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">注：先比较hash，若相等在比较equals</font></span></span></div>
+</div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">9、Hashtable</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;">
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">结构实现与HashMap基本一致</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">2)通过synchronized方法保证线程安全</font></span></span></div>
+</div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">10、HashSet：委托给HashMap，其Value是同一个默认对象</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">11、LinkedHashMap继承HashMap</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">Entry{HashMap.Node, Entry before, after}</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">Entry head, tail</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;"><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">重写newNode()添加节点时，除像HashMap中添加外，保存before、after信息</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">12、LinkedHashSet继承HashSet：底层存储使用的LinkedHashMap，从而保证有序</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">13、AbstractMap维护EntrySet，AbstractSet维护Iterator，AbstractList维护Iterator</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">14、ConcurrentHashMap</font></span></span></div>
+
+<div style="outline: 0px; padding: 0px; margin: 8px 0px 0px 40px; box-sizing: border-box; list-style-type: decimal; overflow-wrap: break-word;">
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">JDK1.7及以前：</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">a、Segment[] ,HashEntry[] , HashEntry{hash, k, v, next}</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">b、根据key算hash，根据hash和Segment的大小算位置，每个segment拥有一个自己的HashEntry[]</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">c、get()：不加锁，volatile类型</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">d、put(): 对相应segment加锁</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">e、size()：各HashEntry[] 之和，先不加锁算两遍，若一致则返回，若不一致则加锁重新计算</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">2）JDK1.8</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">a、Node{hash, key, value, next}</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">b、Node[] table</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">c、大多数操作类似于HashMap，不同CAS方式设置，根据key算hash，在根据hash和容量算index，对table[index]加锁，从而达到更大的并发量</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">d、get(): 同HashMap</font></span></span></div>
+
+<div><span><span style="color: rgba(0, 0, 0, 0.75); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 1.625;"><font style="font-size: 12pt;">e、put(): 对table[index]加锁</font></span></span></div>
+</div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;">
+<div><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">15、TreeMap</font></span></span></div>
+
+<div><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">1）红黑树，即自平衡二叉查找树，时间复杂度O(logn)</font></span></span></div>
+
+<div><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">2）Entry{K k, V v, Entry parent, left, right, boolean color}</font></span></span></div>
+
+<div><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">3）Entry root，int size， int modeCount</font></span></span></div>
+</div>
+
+<div style="outline: 0px; padding: 0px; box-sizing: border-box; overflow-wrap: break-word; margin: 1.2em 0px;"><span><span style="color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; line-height: 26px; font-weight: 400;"><font style="font-size: 12pt;">16、TreeSet：委托TreeMap实现</font></span></span></div>
+
+<p><!--EndFragment--></p>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

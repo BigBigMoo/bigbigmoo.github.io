@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>JVM知识</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891ed9c00007";
+	var global_articleId = "4028ba8173a37a8f0173a3c8ecc80046";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596180721009">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596180721011">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596180721013">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596180721015">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596180721021">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596180721024">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596180721029">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> JVM知识</a></h2>
+								<p>
+									2019年05月11日
+								</p>
+							</header>
+						
+							<p>
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;-en-clipboard:true;"><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">JVM知识</span></span></div>
+
+<ol style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: decimal;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">什么情况下会发生栈内存溢出。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">JVM的内存结构，Eden和Survivor比例。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">JVM内存为什么要分成新生代，老年代，持久代。新生代中为什么要分为Eden和Survivor。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">JVM中一次完整的GC流程是怎样的，对象如何晋升到老年代，说说你知道的几种主要的JVM参</span></span></div>
+	</li>
+</ol>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数。</span></span></div>
+
+<ol style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: decimal;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">你知道哪几种垃圾收集器，各自的优缺点，重点讲下cms和G1，包括原理，流程，优缺点。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">垃圾回收算法的实现原理。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">当出现了内存溢出，你怎么排错。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">JVM内存模型的相关知识了解多少，比如重排序，内存屏障，happen-before，主内存，工作</span></span></div>
+	</li>
+</ol>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">内存等。</span></span></div>
+
+<ol style="padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: decimal;">
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">简单说说你了解的类加载器，可以打破双亲委派么，怎么打破。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">讲讲JAVA的反射机制。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">你们线上应用的JVM参数有哪些。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">g1和cms区别,吞吐量优先和响应优先的垃圾收集器选择。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">怎么打出线程栈信息。</span></span></div>
+	</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;">
+	<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">请解释如下jvm参数的含义：</span></span></div>
+	</li>
+</ol>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">-server -Xms512m -Xmx512m -Xss1024K</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">-XX:PermSize=256m -XX:MaxPermSize=512m -</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">XX:MaxTenuringThreshold=20XX:CMSInitiatingOccupancyFraction=80 -</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">XX:+UseCMSInitiatingOccupancyOnly。</span></span></div>
+</div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Java中NIO和IO区别和适用场景</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891def440004";
+	var global_articleId = "4028ba8173a37a8f0173a37c782c0000";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596175710696">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596175710701">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596175710705">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596175710709">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596175710719">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596175710723">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596175710728">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> Java中NIO和IO区别和适用场景</a></h2>
+								<p>
+									2018年06月30日
+								</p>
+							</header>
+						
+							<p>
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;-en-clipboard:true;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">NIO是为了弥补IO操作的不足而诞生的，NIO的一些新特性有：非阻塞I/O，选择器，缓冲以及管道。管道（Channel），缓冲（Buffer） ，选择器（ Selector）是其主要特征。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">概念解释：</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">Channel&mdash;&mdash;管道实际上就像传统IO中的流，到任何目的地(或来自任何地方)的所有数据都必须通过一个 Channel 对象。一个 Buffer 实质上是一个容器对象。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">Selector&mdash;&mdash;选择器用于监听多个管道的事件，使用传统的阻塞IO时我们可以方便的知道什么时候可以进行读写，而使用非阻塞通道，我们需要一些方法来知道什么时候通道准备好了，选择器正是为这个需要而诞生的。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">NIO和传统的IO有什么区别呢?</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">1，IO是面向流的，NIO是面向块（缓冲区）的。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IO面向流的操作一次一个字节地处理数据。一个输入流产生一个字节的数据，一个输出流消费一个字节的数据。，导致了数据的读取和写入效率不佳；</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NIO面向块的操作在一步中产生或者消费一个数据块。按块处理数据比按(流式的)字节处理数据要快得多，同时数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。通俗来说，NIO采取了&ldquo;预读&rdquo;的方式，当你读取某一部分数据时，他就会猜测你下一步可能会读取的数据而预先缓冲下来。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">2，IO是阻塞的，NIO是非阻塞的。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于传统的IO，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;而对于NIO，使用一个线程发送读取数据请求，没有得到响应之前，线程是空闲的，此时线程可以去执行别的任务，而不是像IO中那样只能等待响应完成。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">3，NIO和IO适用场景</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NIO是为弥补传统IO的不足而诞生的，但是</span><a href="https://www.baidu.com/s?wd=%E5%B0%BA%E6%9C%89%E6%89%80%E7%9F%AD&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" style="margin: 0px; padding: 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8; text-decoration: underline;" target="_blank">尺有所短</a><a href="https://www.baidu.com/s?wd=%E5%AF%B8%E6%9C%89%E6%89%80%E9%95%BF&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" style="margin: 0px; padding: 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8; text-decoration: underline;" target="_blank">寸有所长</a><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">，NIO也有缺点，因为NIO是面向缓冲区的操作，每一次的数据处理都是对缓冲区进行的，那么就会有一个问题，在数据处理之前必须要判断缓冲区的数据是否完整或者已经读取完毕，如果没有，假设数据只读取了一部分，那么对不完整的数据处理没有任何意义。所以每次数据处理之前都要检测缓冲区数据。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">那么NIO和IO各适用的场景是什么呢？</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果需要管理同时打开的</span><a href="https://www.baidu.com/s?wd=%E6%88%90%E5%8D%83%E4%B8%8A%E4%B8%87&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" style="margin: 0px; padding: 0px; font-size: 14px; color: rgb(0, 0, 0); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8; text-decoration: underline;" target="_blank">成千上万</a><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">个连接，这些连接每次只是发送少量的数据，例如聊天服务器，这时候用NIO处理数据可能是个很好的选择。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;而如果只有少量的连接，而这些连接每次要发送大量的数据，这时候传统的IO更合适。使用哪种处理数据，需要在数据的响应等待时间和检查缓冲区数据的时间上作比较来权衡选择。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">4，通俗解释</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">最后，对于NIO和传统IO，有一个网友讲的生动的例子：</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">以前的流总是堵塞的，一个线程只要对它进行操作，其它操作就会被堵塞，也就相当于水管没有阀门，你伸手接水的时候，不管水到了没有，你就都只能耗在接水（流）上。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">nio的Channel的加入，相当于增加了水龙头（有阀门），虽然一个时刻也只能接一个水管的水，但依赖轮换策略，在水量不大的时候，各个水管里流出来的水，都可以得到妥</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">善接纳，这个关键之处就是增加了一个接水工，也就是Selector，他负责协调，也就是看哪根水管有水了的话，在当前水管的水接到一定程度的时候，就切换一下：临时关上当前水龙头，试着打开另一个水龙头（看看有没有水）。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">当其他人需要用水的时候，不是直接去接水，而是事前提了一个水桶给接水工，这个水桶就是Buffer。也就是，其他人虽然也可能要等，但不会在现场等，而是回家等，可以做其它事去，水接满了，接水工会通知他们。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: &quot;PingFang SC&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 1.8;">这其实也是非常接近当前社会分工细化的现实，也是统分利用现有资源达到并发效果的一种很经济的手段，而不是动不动就来个并行处理，虽然那样是最简单的，但也是最浪费资源的方式。</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

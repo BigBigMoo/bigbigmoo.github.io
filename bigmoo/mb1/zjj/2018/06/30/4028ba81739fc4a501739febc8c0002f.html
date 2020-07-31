@@ -1,0 +1,490 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>JVM内存模型和结构</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891e30c50005";
+	var global_articleId = "4028ba81739fc4a501739febc8c0002f";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596115896625">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596115896631">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596115896633">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596115896635">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596115896639">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596115896641">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596115896645">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> JVM内存模型和结构</a></h2>
+								<p>
+									2018年06月30日
+								</p>
+							</header>
+						
+							<p>
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;-en-clipboard:true;">
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;">
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;; font-weight: bold; line-height: 26px;">1.<span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(85, 85, 85); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: bold; line-height: 26px;">1. JVM相关(包括了各个版本的特性)</span></span></span></span></div>
+
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(85, 85, 85); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: bold; line-height: 26px;">对于刚刚接触Java的人来说，JVM相关的知识不一定需要理解很深，对此里面的概念有一些简单的了解即可。不过对于一个有着3年以上Java经验的资深开发者来说，不会JVM几乎是不可接受的。</span></span></span></span></div>
+
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(85, 85, 85); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: bold; line-height: 26px;">JVM作为java运行的基础，很难相信对于JVM一点都不了解的人可以把java语言吃得很透。我在面试有超过3年Java经验的开发者的时候， JVM几乎就是一个必问的问题了。当然JVM不是唯一决定技术能力好坏的面试问题，但是可以佐证java开发能力的高低。</span></span></span></span></div>
+
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(85, 85, 85); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: bold; line-height: 26px;">在JVM这个大类中，我认为需要掌握的知识有：</span></span></span></span></div>
+
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(255, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: bold; line-height: 26px;">JVM内存模型和结构</span></span></span></span></span></div>
+
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(255, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: bold; line-height: 26px;">GC原理，性能调优</span></span></span></span></span></span></div>
+
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(255, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: bold; line-height: 26px;">调优：Thread Dump， 分析内存结构</span></span></span></span></span></span></div>
+
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(255, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: bold; line-height: 26px;">class 二进制字节码结构， class loader 体系 ， class加载过程 ， 实例创建过程</span></span></span></span></span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><strong style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; font-weight: 700; color: rgb(255, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 26px;">方法执行过程：Java各个大版本更新提供的新特性(需要简单了解)</span></span></strong></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;">&nbsp;</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; font-size: 16px; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em;"><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box;"><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">Ps:JVM内存模型和结构：&nbsp; &nbsp;&nbsp;</span></span></span></span></div>
+
+<blockquote style="margin: 0px 0px 1.5em 2em; padding: 16px 16px 0px 1em; border-top: none; border-right: none; border-bottom: none; border-image: initial; font-size: inherit; vertical-align: baseline; quotes: none; box-sizing: border-box; background: rgb(238, 240, 244); overflow: auto; overflow-wrap: normal; word-break: normal; border-left: 5px solid;">
+<p style="padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif;overflow-x:auto;box-sizing:border-box;margin:0px 0px 16px;font-size:16px;color:rgb(79, 79, 79);font-weight:400;line-height:26px;margin-bottom:1.5em;">&nbsp;</p>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;; font-style: italic; font-weight: 400; line-height: 26px;">关于jvm的体系结构分为五个结构。方法区，堆，虚拟机栈，本地方法区，程序计数器PC。其中方法区和堆是所有线程共享的，每一个线程都有一个程序计数器。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;; font-style: italic; font-weight: 400; line-height: 26px;"><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;; font-style: italic; font-weight: bold; line-height: 26px;">程序计数器</span>内存空间比较小，可以理解成程序存放的地址。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;; font-style: italic; font-weight: 400; line-height: 26px;"><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;; font-style: italic; font-weight: bold; line-height: 26px;">虚拟机栈</span>，简称栈，</span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(255, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">成员方法</span></span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;; font-style: italic; font-weight: 400; line-height: 26px;">会开辟一个空间可以叫做栈帧，栈帧里可以放</span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(255, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">方法里的</span></span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;; font-style: italic; font-weight: 400; line-height: 26px;">局部变量，操作栈，返回地址等。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;; font-style: italic; font-weight: 400; line-height: 26px;"><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;; font-style: italic; font-weight: bold; line-height: 26px;">本地方法栈</span>，和虚拟机栈类似，为虚拟机执行java方法（字节码）服务。这个为本地方法服务。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">方法区</span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">，线程共享，用来存放</span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(255, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">已经被虚拟机加载</span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">的</span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(255, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">类</span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">信息，常量，静态变量等。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;"><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: bold; line-height: 26px;">java堆</span>，是被线程共享的一块区域。创建的</span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(255, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">对象和数组</span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">都保存在java堆内存中，也是垃圾收集器进行垃圾收集的重要内存区域。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 15px;"><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(0, 0, 0); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 400; line-height: 26px;">运行时常量池，是方法区的一部分，用于保存编译器生成的各种字面量和富豪引用。</span></span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><img height="371" src="/bigmoo/upload/image/2020/07/30/upload_160e97c6_56ee_43be_bbe7_e4966ae7175e_00000014.png" width="440" /></div>
+
+<p style="padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif;overflow-x:auto;box-sizing:border-box;margin:0px 0px 16px;font-size:16px;color:rgb(79, 79, 79);font-weight:400;line-height:26px;margin-bottom:1.5em;">&nbsp;</p>
+
+<h2 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: bold; line-height: 35px;">1. 程序计数器</span></span></h2>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">1.1. 什么是程序计数器？</span></span></h3>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;">
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">程序计数器是一块较小的内存空间，可以把它看作当前线程正在执行的字节码的行号指示器。也就是说，程序计数器里面记录的是当前线程正在执行的那一条字节码指令的地址。&nbsp;</span></span></div>
+
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(79, 79, 79); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 700; line-height: 26px;">注：</span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">但是，如果当前线程正在执行的是一个本地方法，那么此时程序计数器为空。&nbsp;</span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">1.2. 程序计数器的作用</span></span></h3>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; line-height: 26px;">程序计数器有两个作用：</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">字节码解释器通过改变程序计数器来依次读取指令，从而实现代码的流程控制，如：顺序执行、选择、循环、异常处理。</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">在多线程的情况下，程序计数器用于记录当前线程执行的位置，从而当线程被切换回来的时候能够知道该线程上次运行到哪儿了。<span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em; font-style: italic;">&nbsp;</span></span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">1.3. 程序计数器的特点</span></span></h3>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">是一块较小的存储空间</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">线程私有。每条线程都有一个程序计数器。</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">是唯一一个不会出现OutOfMemoryError的内存区域。</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">生命周期随着线程的创建而创建，随着线程的结束而死亡。</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">&nbsp;</span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h2 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: bold; line-height: 35px;">2. Java虚拟机栈(JVM Stack)</span></span></h2>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">2.1. 什么是Java虚拟机栈？</span></span></h3>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;">
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-weight: 400; line-height: 26px;">Java虚拟机栈是描述Java方法运行过程的内存模型。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-weight: 400; line-height: 26px;">Java虚拟机栈会为每一个即将运行的Java方法创建一块叫做&ldquo;栈帧&rdquo;的区域，这块区域用于存储该方法在运行过程中所需要的一些信息，这些信息包括：</span></span></div>
+</div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">局部变量表&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">存放基本数据类型变量、引用类型的变量、returnAddress类型的变量。</span></span></div>
+</div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">操作数栈</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">动态链接</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">方法出口信息</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; line-height: 1.5em;">等</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;">
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-weight: 400; line-height: 26px;">当一个方法即将被运行时，Java虚拟机栈首先会在Java虚拟机栈中为该方法创建一块&ldquo;栈帧&rdquo;，栈帧中包含局部变量表、操作数栈、动态链接、方法出口信息等。当方法在运行过程中需要创建局部变量时，就将局部变量的值存入栈帧的局部变量表中。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-weight: 400; line-height: 26px;">当这个方法执行完毕后，这个方法所对应的栈帧将会出栈，并释放内存空间。</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;">
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(79, 79, 79); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 700; line-height: 26px;">注意：</span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-weight: 400; line-height: 26px;">人们常说，Java的内存空间分为&ldquo;栈&rdquo;和&ldquo;堆&rdquo;，栈中存放局部变量，堆中存放对象。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-weight: 400; line-height: 26px;">这句话不完全正确！这里的&ldquo;堆&rdquo;可以这么理解，但这里的&ldquo;栈&rdquo;只代表了Java虚拟机栈中的局部变量表部分。真正的Java虚拟机栈是由一个个栈帧组成，而每个栈帧中都拥有：局部变量表、操作数栈、动态链接、方法出口信息。&nbsp;</span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">2.2. Java虚拟机栈的特点</span></span></h3>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">局部变量表的创建是在方法被执行的时候，随着栈帧的创建而创建。而且，局部变量表的大小在编译时期就确定下来了，在创建的时候只需分配事先规定好的大小即可。此外，在方法运行的过程中局部变量表的大小是不会发生改变的。</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">Java虚拟机栈会出现两种异常：StackOverFlowError和OutOfMemoryError。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">a) StackOverFlowError：&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">若Java虚拟机栈的内存大小不允许动态扩展，那么当线程请求栈的深度超过当前Java虚拟机栈的最大深度的时候，就抛出StackOverFlowError异常。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">b) OutOfMemoryError：&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">若Java虚拟机栈的内存大小允许动态扩展，且当线程请求栈时内存用完了，无法再动态扩展了，此时抛出OutOfMemoryError异常。</span></span></div>
+</div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">Java虚拟机栈也是线程私有的，每个线程都有各自的Java虚拟机栈，而且随着线程的创建而创建，随着线程的死亡而死亡。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;">
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(79, 79, 79); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 700; line-height: 26px;">注：StackOverFlowError和OutOfMemoryError的异同？</span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">StackOverFlowError表示当前线程申请的栈超过了事先定好的栈的最大深度，但内存空间可能还有很多。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">而OutOfMemoryError是指当线程申请栈时发现栈已经满了，而且内存也全都用光了。&nbsp;</span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h2 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: bold; line-height: 35px;">3. 本地方法栈</span></span></h2>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">3.1. 什么是本地方法栈？</span></span></h3>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">本地方法栈和Java虚拟机栈实现的功能类似，只不过本地方法区是本地方法运行的内存模型。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">本地方法被执行的时候，在本地方法栈也会创建一个栈帧，用于存放该本地方法的局部变量表、操作数栈、动态链接、出口信息。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">方法执行完毕后相应的栈帧也会出栈并释放内存空间。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">也会抛出StackOverFlowError和OutOfMemoryError异常。</span></span></div>
+
+<h2 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: bold; line-height: 35px;">4. 堆</span></span></h2>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">4.1. 什么是堆？</span></span></h3>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;">
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">堆是用来存放对象的内存空间。&nbsp;</span></span></div>
+
+<div><span><span style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; color: rgb(79, 79, 79); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; font-weight: 700; line-height: 26px;">几乎所有</span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">的对象都存储在堆中。&nbsp;</span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">4.2. 堆的特点</span></span></h3>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">线程共享&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">整个Java虚拟机只有一个堆，所有的线程都访问同一个堆。而程序计数器、Java虚拟机栈、本地方法栈都是一个线程对应一个的。</span></span></div>
+</div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">在虚拟机启动时创建</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">垃圾回收的主要场所。</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">可以进一步细分为：新生代、老年代。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">新生代又可被分为：Eden、From Survior、To Survior。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">不同的区域存放具有不同生命周期的对象。这样可以根据不同的区域使用不同的垃圾回收算法，从而更具有针对性，从而更高效。</span></span></div>
+</div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">堆的大小既可以固定也可以扩展，但主流的虚拟机堆的大小是可扩展的，因此当线程请求分配内存，但堆已满，且内存已满无法再扩展时，就抛出OutOfMemoryError。&nbsp;</span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h2 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: bold; line-height: 35px;">5. 方法区</span></span></h2>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">5.1. 什么是方法区？</span></span></h3>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;">
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">Java虚拟机规范中定义方法区是堆的一个逻辑部分。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">方法区中存放已经被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等。&nbsp;</span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">5.2. 方法区的特点</span></span></h3>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">线程共享&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">方法区是堆的一个逻辑部分，因此和堆一样，都是线程共享的。整个虚拟机中只有一个方法区。</span></span></div>
+</div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">永久代&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">方法区中的信息一般需要长期存在，而且它又是堆的逻辑分区，因此用堆的划分方法，我们把方法区称为老年代。</span></span></div>
+</div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">内存回收效率低&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">方法区中的信息一般需要长期存在，回收一遍内存之后可能只有少量信息无效。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">对方法区的内存回收的主要目标是：对常量池的回收 和 对类型的卸载。</span></span></div>
+</div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">Java虚拟机规范对方法区的要求比较宽松。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">和堆一样，允许固定大小，也允许可扩展的大小，还允许不实现垃圾回收。&nbsp;</span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h3 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: normal; line-height: 35px;">5.3. 什么是运行时常量池？</span></span></h3>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">方法区中存放三种数据：类信息、常量、静态变量、即时编译器编译后的代码。其中常量存储在运行时常量池中。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">我们一般在一个类中通过public static final来声明一个常量。这个类被编译后便生成Class文件，这个类的所有信息都存储在这个class文件中。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">当这个类被Java虚拟机加载后，class文件中的常量就存放在方法区的运行时常量池中。而且在运行期间，可以向常量池中添加新的常量。如：String类的intern()方法就能在运行期间向常量池中添加字符串常量。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;">
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">当运行时常量池中的某些常量没有被对象引用，同时也没有被变量引用，那么就需要垃圾收集器回收。&nbsp;</span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h2 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: bold; line-height: 35px;">6. 直接内存</span></span></h2>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">直接内存是除Java虚拟机之外的内存，但也有可能被Java使用。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;"><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">在NIO中引入了一种基于通道和缓冲的IO方式。它可以通过调用本地方法直接分配Java虚拟机之外的内存，然后通过一个存储在Java堆中的DirectByteBuffer对象直接操作该内存，而无需先将外面内存中的数据复制到堆中再操作，从而提升了数据操作的效率。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;">
+<div><span><span style="font-size: 16px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: 400; line-height: 26px;">直接内存的大小不受Java虚拟机控制，但既然是内存，当内存不足时就会抛出OOM异常。&nbsp;</span></span></div>
+
+<div>&nbsp;</div>
+</div>
+
+<h2 style="padding: 0px; border: 0px; vertical-align: baseline; text-align: left; box-sizing: border-box; margin: 35px 0px 15px; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(79, 79, 79); font-family: -apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif, SimHei, SimSun; font-style: italic; font-weight: bold; line-height: 35px;">综上所述</span></span></h2>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">Java虚拟机的内存模型中一共有两个&ldquo;栈&rdquo;，分别是：Java虚拟机栈和本地方法栈。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">两个&ldquo;栈&rdquo;的功能类似，都是方法运行过程的内存模型。并且两个&ldquo;栈&rdquo;内部构造相同，都是线程私有。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">只不过Java虚拟机栈描述的是Java方法运行过程的内存模型，而本地方法栈是描述Java本地方法运行过程的内存模型。</span></span></div>
+</div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">Java虚拟机的内存模型中一共有两个&ldquo;堆&rdquo;，一个是原本的堆，一个是方法区。方法区本质上是属于堆的一个逻辑部分。堆中存放对象，方法区中存放类信息、常量、静态变量、即时编译器编译的代码。</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">堆是Java虚拟机中最大的一块内存区域，也是垃圾收集器主要的工作区域。</span></span></div>
+
+<div style="margin: 8px 0px 0px 40px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; box-sizing: border-box; list-style-position: outside; list-style-type: inherit;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">程序计数器、Java虚拟机栈、本地方法栈是线程私有的，即每个线程都拥有各自的程序计数器、Java虚拟机栈、本地方法区。并且他们的生命周期和所属的线程一样。&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-style: italic; line-height: 1.5em;">而堆、方法区是线程共享的，在Java虚拟机中只有一个堆、一个方法栈。并在JVM启动的时候就创建，JVM停止才销毁。</span></span></div>
+</div>
+
+<div>&nbsp;</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; overflow-x: auto; box-sizing: border-box; margin: 0px 0px 1.5em; font-size: 16px;">&nbsp;</div>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div>
+<h4 style="margin: 30px 0px 1.5em; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 20px;">&nbsp;</h4>
+</div>
+</div>
+</div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

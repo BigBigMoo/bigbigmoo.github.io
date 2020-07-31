@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>基于redis+lua实现高并发场景下的秒杀限流解决方案</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891e30c50005";
+	var global_articleId = "4028ba8173a37a8f0173a3ba0850002d";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596179744972">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596179744974">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596179744977">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596179744979">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596179744985">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596179744988">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596179744990">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> 基于redis+lua实现高并发场景下的秒杀限流解决方案</a></h2>
+								<p>
+									2019年04月30日
+								</p>
+							</header>
+						
+							<p>
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; background-color: rgb(255, 255, 255);-en-clipboard:true;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">应用场景如下：</span></span></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; background-color: rgb(255, 255, 255);"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">公司内有多个业务系统，由于业务系统内有向用户发送消息的服务，所以通过统一消息系统对外暴露微服务接口供外部业务系统调用，所有公司内业务系统的消息(短信，APP，微信)推送都由统一消息系统去推送，短信推送需要走外部短信通道商去发送短信，APP和微信走内部系统的push服务器，但是不管是短信通道商还是内部push服务器都会有每秒上限的控制。在这假设n/s条。</span></span></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; background-color: rgb(255, 255, 255);"><img height="365" src="/bigmoo/upload/image/2020/07/31/upload_6da21738_3b3d_491e_a99a_bc6a9584598e_00000022.png" width="1046" /></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; background-color: rgb(255, 255, 255);"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">以下是统一消息系统内部的具体的限流方案：</span></span></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; text-align: center; background-color: rgb(255, 255, 255);"><img height="771" src="/bigmoo/upload/image/2020/07/31/upload_6da21738_3b3d_491e_a99a_bc6a9584598e_00000024.png" width="540" /></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; text-align: left; background-color: rgb(255, 255, 255);"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">时间限流队列如下：</span></span></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; text-align: left; background-color: rgb(255, 255, 255);"><img height="124" src="/bigmoo/upload/image/2020/07/31/upload_6da21738_3b3d_491e_a99a_bc6a9584598e_00000026.png" width="626" /></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; text-align: left; background-color: rgb(255, 255, 255);"><span><span style="margin: 0px; padding: 0px; outline: 0px; overflow-wrap: break-word; box-sizing: border-box; text-align: left; background-color: rgb(255, 255, 255); font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: normal; line-height: 26px;">1.统一消息中心接受消息m条，假定这m个待推送消息的推送时间为t1。</span></span></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; text-align: left; background-color: rgb(255, 255, 255);"><span><span style="margin: 0px; padding: 0px; outline: 0px; overflow-wrap: break-word; box-sizing: border-box; text-align: left; background-color: rgb(255, 255, 255); font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: normal; line-height: 26px;">2.因为时间限流队列的长度是n条，现在有m条要进时间限流队列，所以队列里必须要有n-m个长度才能保证新进来的m条待发送消息才能进入队列。</span></span></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; text-align: left; background-color: rgb(255, 255, 255);"><span><span style="margin: 0px; padding: 0px; outline: 0px; overflow-wrap: break-word; box-sizing: border-box; text-align: left; background-color: rgb(255, 255, 255); font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: normal; line-height: 26px;">3</span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">.所以判定队列里第n-m对应的时间点要比这m条待发送消息的发送时间小于1个单位秒时，即 t1-t2&gt;1s，才能保证n/s条的速率。</span></span></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; text-align: left; background-color: rgb(255, 255, 255);"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">4.通过第3部t1-t2&gt;1s?判断是否满足新来的m条待发送消息的发送时间是否比时间限流队列第n-m条对应的时间大于1个单位秒时，如果大于1个单位秒时，说明t1时间对应的上一秒对应的n条消息都已经发送，这时通过lpush命令循环将m条待发送消息推入时间限流队列。如有没有主线程睡眠1/10个秒时，轮询执行步骤一，直至m套待发送消息对应的发送时间t1进入至时间限流队列。</span></span></div>
+
+<div style="outline: 0px; padding: 0px; overflow-wrap: break-word; font-size: 16px; overflow-x: auto; margin: 0px 0px 16px; box-sizing: border-box; text-align: left; background-color: rgb(255, 255, 255);"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-weight: 400; line-height: 26px;">5.执行时间滑动窗口步骤，截取redis队列0 - n的长度数据，如图所示。</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

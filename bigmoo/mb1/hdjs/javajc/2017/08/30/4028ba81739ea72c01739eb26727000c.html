@@ -1,0 +1,586 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>谈谈ConcurrentHashMap1.7和1.8的不同实现</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b01738a0202c20027";
+	var global_articleId = "4028ba81739ea72c01739eb26727000c";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596095358949">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596095358953">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596095358956">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596095358959">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596095358964">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596095358970">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596095358973">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> 谈谈ConcurrentHashMap1.7和1.8的不同实现</a></h2>
+								<p>
+									2017年08月30日 15:47:39
+								</p>
+							</header>
+						
+							<p>
+<h3 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;-en-clipboard:true;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">ConcurrentHashMap</span></span></h3>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">在多线程环境下，使用</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">HashMap</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">进行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">put</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">操作时存在丢失数据的情况，为了避免这种bug的隐患，强烈建议使用</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">ConcurrentHashMap</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">代替</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">HashMap</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">，为了对更深入的了解，本文将对JDK1.7和1.8的不同实现进行分析。</span></span></div>
+
+<h3 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">JDK1.7</span></span></h3>
+
+<h4 style="margin: 30px 0px 1.5em; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 20px;"><span><span style="font-size: 20px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold;">数据结构</span></span></h4>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">jdk1.7中采用</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span> <span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">+</span> <span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">HashEntry</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">的方式进行实现，结构如下：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 1em 0px 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; text-align: center;"><img height="423" src="/bigmoo/upload/image/2020/07/30/upload_807f2c20_dc0b_4ccd_997e_170ae15f2443_00000004.png" width="767" /></div>
+</div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">ConcurrentHashMap</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">初始化时，计算出</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数组的大小</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">ssize</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">和每个</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">中</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">HashEntry</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数组的大小</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">cap</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">，并初始化</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数组的第一个元素；其中</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">ssize</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">大小为2的幂次方，默认为16，</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">cap</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">大小也是2的幂次方，最小值为2，最终结果根据根据初始化容量</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">initialCapacity</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">进行计算，计算过程如下：</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (c * ssize &lt; initialCapacity)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">++c;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">int cap = MIN_SEGMENT_TABLE_CAPACITY;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">while (cap &lt; c)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">cap &lt;&lt;= 1;</span></span></div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">其中</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">在实现上继承了</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">ReentrantLock</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">，这样就自带了锁的功能。</span></span></div>
+
+<h4 style="margin: 30px 0px 1.5em; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 20px;"><span><span style="font-size: 20px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold;">put实现</span></span></h4>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">当执行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">put</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法插入数据时，根据key的hash值，在</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数组中找到相应的位置，如果相应位置的</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">还未初始化，则通过CAS进行赋值，接着执行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">对象的</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">put</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法通过加锁机制插入数据，实现如下：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">场景：线程A和线程B同时执行相同</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">对象的</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">put</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">1、线程A执行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">tryLock()</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法成功获取锁，则把</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">HashEntry</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">对象插入到相应的位置；</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">2、线程B获取锁失败，则执行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">scanAndLockForPut()</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法，在</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">scanAndLockForPut</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法中，会通过重复执行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">tryLock()</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法尝试获取锁，在多处理器环境下，重复次数为64，单处理器重复次数为1，当执行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">tryLock()</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法的次数超过上限时，则执行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">lock()</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法挂起线程B；</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">3、当线程A执行完插入操作时，会通过</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">unlock()</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法释放锁，接着唤醒线程B继续执行；</span></span></div>
+</div>
+
+<h4 style="margin: 30px 0px 1.5em; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 20px;"><span><span style="font-size: 20px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold;">size实现</span></span></h4>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">因为</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">ConcurrentHashMap</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">是可以并发插入数据的，所以在准确计算元素时存在一定的难度，一般的思路是统计每个</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">对象中的元素个数，然后进行累加，但是这种方式计算出来的结果并不一样的准确的，因为在计算后面几个</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">的元素个数时，已经计算过的</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">同时可能有数据的插入或则删除，在1.7的实现中，采用了如下方式：</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">try {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">for (;;) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (retries++ == RETRIES_BEFORE_LOCK) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">for (int j = 0; j &lt; segments.length; ++j)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">ensureSegment(j).lock(); // force creation</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">sum = 0L;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">size = 0;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">overflow = false;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">for (int j = 0; j &lt; segments.length; ++j) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment&lt;K,V&gt; seg = segmentAt(segments, j);</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (seg != null) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">sum += seg.modCount;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">int c = seg.count;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (c &lt; 0 || (size += c) &lt; 0)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">overflow = true;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (sum == last)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">break;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">last = sum;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">} finally {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (retries &gt; RETRIES_BEFORE_LOCK) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">for (int j = 0; j &lt; segments.length; ++j)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">segmentAt(segments, j).unlock();</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">先采用不加锁的方式，连续计算元素的个数，最多计算3次：</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">1、如果前后两次计算结果相同，则说明计算出来的元素个数是准确的；</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">2、如果前后两次计算结果都不同，则给每个</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">进行加锁，再计算一次元素的个数；</span></span></div>
+</div>
+
+<h3 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">JDK1.8</span></span></h3>
+
+<h4 style="margin: 30px 0px 1.5em; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 20px;"><span><span style="font-size: 20px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold;">数据结构</span></span></h4>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">1.8中放弃了</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Segment</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">臃肿的设计，取而代之的是采用</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Node</span> <span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">+</span> <span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CAS</span> <span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">+</span> <span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Synchronized</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">来保证并发安全进行实现，结构如下：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;">
+<div style="margin: 1em 0px 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; text-align: center;"><img height="261" src="/bigmoo/upload/image/2020/07/30/upload_807f2c20_dc0b_4ccd_997e_170ae15f2443_00000006.png" width="768" /></div>
+</div>
+</div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">只有在执行第一次</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">put</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法时才会调用</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">initTable()</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">初始化</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Node</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数组，实现如下：</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">private final Node&lt;K,V&gt;[] initTable() {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Node&lt;K,V&gt;[] tab; int sc;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">while ((tab = table) == null || tab.length == 0) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if ((sc = sizeCtl) &lt; 0)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Thread.yield(); // lost initialization race; just spin</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">else if (U.compareAndSwapInt(this, SIZECTL, sc, -1)) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">try {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if ((tab = table) == null || tab.length == 0) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">int n = (sc &gt; 0) ? sc : DEFAULT_CAPACITY;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">@SuppressWarnings(&quot;unchecked&quot;)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Node&lt;K,V&gt;[] nt = (Node&lt;K,V&gt;[])new Node&lt;?,?&gt;[n];</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">table = tab = nt;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">sc = n - (n &gt;&gt;&gt; 2);</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">} finally {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">sizeCtl = sc;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">break;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">return tab;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+</div>
+
+<h4 style="margin: 30px 0px 1.5em; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 20px;"><span><span style="font-size: 20px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold;">put实现</span></span></h4>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">当执行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">put</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法插入数据时，根据key的hash值，在</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Node</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数组中找到相应的位置，实现如下：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">1、如果相应位置的</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Node</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">还未初始化，则通过CAS插入相应的数据；</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">else if ((f = tabAt(tab, i = (n - 1) &amp; hash)) == null) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (casTabAt(tab, i, null, new Node&lt;K,V&gt;(hash, key, value, null)))</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">break; // no lock when adding to empty bin</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">2、如果相应位置的</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Node</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">不为空，且当前该节点不处于移动状态，则对该节点加</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">synchronized</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">锁，如果该节点的</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">hash</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">不小于0，则遍历链表更新节点或插入新节点；</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (fh &gt;= 0) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">binCount = 1;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">for (Node&lt;K,V&gt; e = f;; ++binCount) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">K ek;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (e.hash == hash &amp;&amp;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">((ek = e.key) == key ||</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">(ek != null &amp;&amp; key.equals(ek)))) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">oldVal = e.val;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (!onlyIfAbsent)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">e.val = value;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">break;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Node&lt;K,V&gt; pred = e;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if ((e = e.next) == null) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">pred.next = new Node&lt;K,V&gt;(hash, key, value, null);</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">break;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">3、如果该节点是</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">TreeBin</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">类型的节点，说明是红黑树结构，则通过</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">putTreeVal</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法往红黑树中插入节点；</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">else if (f instanceof TreeBin) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">Node&lt;K,V&gt; p;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">binCount = 2;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if ((p = ((TreeBin&lt;K,V&gt;)f).putTreeVal(hash, key, value)) != null) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">oldVal = p.val;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (!onlyIfAbsent)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">p.val = value;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">4、如果</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">binCount</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">不为0，说明</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">put</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">操作对数据产生了影响，如果当前链表的个数达到8个，则通过</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">treeifyBin</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法转化为红黑树，如果</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">oldVal</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">不为空，说明是一次更新操作，没有对元素个数产生影响，则直接返回旧值；</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (binCount != 0) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (binCount &gt;= TREEIFY_THRESHOLD)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">treeifyBin(tab, i);</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (oldVal != null)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">return oldVal;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">break;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">5、如果插入的是一个新节点，则执行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">addCount()</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法尝试更新元素个数</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">baseCount</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">；</span></span></div>
+
+<h4 style="margin: 30px 0px 1.5em; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 20px;"><span><span style="font-size: 20px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold;">size实现</span></span></h4>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">1.8中使用一个</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">volatile</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">类型的变量</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">baseCount</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">记录元素的个数，当插入新数据或则删除数据时，会通过</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">addCount()</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法更新</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">baseCount</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">，实现如下：</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if ((as = counterCells) != null ||</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">!U.compareAndSwapLong(this, BASECOUNT, b = baseCount, s = b + x)) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CounterCell a; long v; int m;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">boolean uncontended = true;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (as == null || (m = as.length - 1) &lt; 0 ||</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">(a = as[ThreadLocalRandom.getProbe() &amp; m]) == null ||</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">!(uncontended =</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">U.compareAndSwapLong(a, CELLVALUE, v = a.value, v + x))) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">fullAddCount(x, uncontended);</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">return;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (check &lt;= 1)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">return;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">s = sumCount();</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">1、初始化时</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">counterCells</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">为空，在并发量很高时，如果存在两个线程同时执行</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CAS</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">修改</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">baseCount</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">值，则失败的线程会继续执行方法体中的逻辑，使用</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CounterCell</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">记录元素个数的变化；</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">2、如果</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CounterCell</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数组</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">counterCells</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">为空，调用</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">fullAddCount()</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">方法进行初始化，并插入对应的记录数，通过</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CAS</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">设置cellsBusy字段，只有设置成功的线程才能初始化</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CounterCell</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数组，实现如下：</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">else if (cellsBusy == 0 &amp;&amp; counterCells == as &amp;&amp;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">U.compareAndSwapInt(this, CELLSBUSY, 0, 1)) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">boolean init = false;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">try { // Initialize table</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (counterCells == as) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CounterCell[] rs = new CounterCell[2];</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">rs[h &amp; 1] = new CounterCell(x);</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">counterCells = rs;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">init = true;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">} finally {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">cellsBusy = 0;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (init)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">break;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">3、如果通过</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CAS</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">设置cellsBusy字段失败的话，则继续尝试通过</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CAS</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">修改</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">baseCount</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">字段，如果修改</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">baseCount</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">字段成功的话，就退出循环，否则继续循环插入</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CounterCell</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">对象；</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">else if (U.compareAndSwapLong(this, BASECOUNT, v = baseCount, v + x))</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">break;</span></span></div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">所以在1.8中的</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">size</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">实现比1.7简单多，因为元素个数保存</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">baseCount</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">中，部分元素的变化个数保存在</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CounterCell</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数组中，实现如下：</span></span></div>
+
+<div style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto; font-size: 0.875em;">
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">public int size() {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">long n = sumCount();</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">return ((n &lt; 0L) ? 0 :</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">(n &gt; (long)Integer.MAX_VALUE) ? Integer.MAX_VALUE :</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">(int)n);</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">final long sumCount() {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CounterCell[] as = counterCells; CounterCell a;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">long sum = baseCount;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if (as != null) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">for (int i = 0; i &lt; as.length; ++i) {</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">if ((a = as[i]) != null)</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">sum += a.value;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">return sum;</span></span></div>
+
+<div><span><span style="font-size: 1.15em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">}</span></span></div>
+</div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">通过累加</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">baseCount</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">和</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">CounterCell</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">数组中的数量，即可得到元素的总个数；</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

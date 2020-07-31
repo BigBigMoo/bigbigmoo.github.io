@@ -60,7 +60,7 @@
 												<div class="col-8">
 													<h4><a href="<@URL src=article ></@URL>" class="image fit">${stringWidth(article.title,12,"...")}</a></h4>
 													<p>
-														${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}
+														${dateFormat(article.publishDate,'yyyy-MM-dd')}
 													</p>
 												</div>
 												<div class="col-4">
@@ -104,7 +104,7 @@
 										<header>
 											<h2><a href="<@URL src=article ></@URL>" class="image fit">${stringWidth(article.title,50,"...")}</a></h2>
 											<p style="text-align:right;">
-												${dateFormat(article.publishDate,'yyyy-MM-dd HH:mm:ss')}
+												${dateFormat(article.publishDate,'yyyy-MM-dd')}
 											</p>
 										</header>
 										<!--<a href="<@URL src=article ></@URL>" class="image fit"><img src="<@URL src='${article.thumbnailsPath!}'/>" alt="" /></a>-->

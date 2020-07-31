@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>不用线程池的缺点</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891def440004";
+	var global_articleId = "4028ba81739fc4a501739fe39b00001a";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596115360681">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596115360681">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596115360697">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596115360712">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596115360728">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596115360728">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596115360744">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> 不用线程池的缺点</a></h2>
+								<p>
+									2018年02月28日
+								</p>
+							</header>
+						
+							<p>
+<div style="-en-clipboard:true;">
+<p><span><span style="font-size: 16pt; color: rgb(1, 1, 1); font-family: ����; font-weight: bold; line-height: 173%;-en-paragraph:true;">不应用线程池的缺点</span></span></p>
+
+<div style="margin-top: 0px; margin-bottom: 0px; min-height: 20pt;"><span><span style="min-height: 20pt; font-size: 10.5pt; color: rgb(51, 51, 51); font-family: 宋体; line-height: 20pt;">有些开发者图省事，遇到需要多线程处理的地方，直接</span><span style="min-height: 20pt; font-size: 10.5pt; color: rgb(51, 51, 51); font-family: Arial; line-height: 20pt;">new Thread(...).start()</span><span style="min-height: 20pt; font-size: 10.5pt; color: rgb(51, 51, 51); font-family: 宋体; line-height: 20pt;">，对于一般场景是没问题的，但如果是在并发请求很高的情况下，就会有些隐患：</span></span></div>
+
+<ul style="margin-top: 0mm; margin-bottom: 0mm; margin-left: 0mm; padding-left: 0pt; list-style-type: disc;">
+	<li style="margin-left: 33pt; margin-right: 0pt; padding-left: 0pt; text-indent: 0pt; font-size: 10pt;">
+	<div><span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: ����;">新建线程的开销。线程虽然比进程要轻量许多，但对于</span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: Arial;">JVM</span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: 宋体;">来说，新建一个线程的代价还是挺大的，决不同于新建一个对象</span></span></div>
+	</li>
+	<li style="margin-left: 33pt; margin-right: 0pt; padding-left: 0pt; text-indent: 0pt; font-size: 10pt;">
+	<div><span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: ����;">资源消耗量。没有一个池来限制线程的数量，会导致线程的数量直接取决于应用的并发量，这样有潜在的线程数据巨大的可能，那么资源消耗量将是巨大的</span></span></div>
+	</li>
+	<li style="margin-left: 33pt; margin-right: 0pt; padding-left: 0pt; text-indent: 0pt; font-size: 10pt;">
+	<div><span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: ����;">稳定性。当线程数量超过系统资源所能承受的程度，稳定性就会成问题</span></span></div>
+	</li>
+	<li>
+	<div style="margin-top: 0px; margin-bottom: 0px; min-height: 34pt;"><span><span style="font-size: 16pt; color: rgb(1, 1, 1); font-family: ����; font-weight: bold; line-height: 173%;-en-paragraph:true;">制定执行策略</span></span></div>
+	</li>
+	<li>
+	<div style="margin-top: 0px; margin-bottom: 0px; min-height: 34pt;"><span><span style="min-height: 34pt; font-size: 10.5pt; line-height: 34pt; color: rgb(51, 51, 51); font-family: 宋体;">在每个需要多线程处理的地方，不管并发量有多大，需要考虑线程的执行策略</span></span></div>
+	</li>
+	<li style="margin-left: 33pt; margin-right: 0pt; padding-left: 0pt; text-indent: 0pt; font-size: 10pt;">
+	<div><span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: ����;">任务以什么顺序执行</span></span></div>
+	</li>
+	<li style="margin-left: 33pt; margin-right: 0pt; padding-left: 0pt; text-indent: 0pt; font-size: 10pt;">
+	<div><span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: ����;">可以有多少个任务并发执行</span></span></div>
+	</li>
+	<li style="margin-left: 33pt; margin-right: 0pt; padding-left: 0pt; text-indent: 0pt; font-size: 10pt;">
+	<div><span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: ����;">可以有多少个任务进入等待执行队列</span></span></div>
+	</li>
+	<li style="margin-left: 33pt; margin-right: 0pt; padding-left: 0pt; text-indent: 0pt; font-size: 10pt;">
+	<div><span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: ����;">系统过载的时候，应该放弃哪些任务？如何通知到应用程序？</span></span></div>
+	</li>
+	<li>
+	<div><span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: ����;">一个任务的执行前后应该做什么处理</span></span></div>
+	</li>
+	<li>
+	<div><span><span style="font-size: 16pt; color: rgb(1, 1, 1); font-family: ����; font-weight: bold; line-height: 173%;-en-paragraph:true;">线程无依赖性</span></span></div>
+	</li>
+</ul>
+
+<div style="margin-top: 0px; margin-bottom: 0px; min-height: 34pt;"><span><span style="min-height: 34pt; font-size: 10.5pt; line-height: 34pt; color: rgb(51, 51, 51); font-family: 宋体;">多线程任务设计上尽量使得各任务是独立无依赖的，所谓依赖性可两个方面：</span></span></div>
+
+<ul style="margin-top: 0mm; margin-bottom: 0mm; margin-left: 0mm; padding-left: 0pt; list-style-type: disc;">
+	<li style="margin-left: 33pt; margin-right: 0pt; padding-left: 0pt; text-indent: 0pt; font-size: 10pt;">
+	<div><span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: ����;">线程之间的依赖性。如果线程有依赖可能会造成死锁或饥饿</span></span></div>
+	</li>
+	<li style="margin-left: 33pt; margin-right: 0pt; padding-left: 0pt; text-indent: 0pt; font-size: 10pt;">
+	<div style="margin-top: 0pt; margin-bottom: 14pt;"><span><span style="font-size: 10.5pt; color: rgb(51, 51, 51); font-family: ����;">调用者与线程的依赖性。调用者得监视线程的完成情况，影响可并发量</span></span></div>
+	</li>
+</ul>
+
+<div style="margin-top: 0px; margin-bottom: 0px; min-height: 19pt;"><span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: 宋体;">当然，在有些业务里确实需要一定的依赖性，比如调用者需要得到线程完成后结果，传统的</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: Arial;">Thread</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: 宋体;">是不便完成的，因为</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: Arial;">run</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: 宋体;">方法无返回值，只能通过一些共享的变量来传递结果，但在</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: Arial;">Executor</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: 宋体;">框架里可以通过</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: Arial;">Future</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: 宋体;">和</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: Arial;">Callable</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: 宋体;">实现需要有返回值的任务，当然线程的异步性导致需要有相应机制来保证调用者能等待任务完成，关于</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: Arial;">Future</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: 宋体;">和</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: Arial;">Callable</span><span style="min-height: 19pt; font-size: 10.5pt; line-height: 19pt; color: rgb(51, 51, 51); font-family: 宋体;">的用法前文已讲解；&nbsp;</span></span></div>
+</div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>shell编程2</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891e84c50006";
+	var global_articleId = "4028ba81739fc4a501739fdd585f0012";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596114950359">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596114950362">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596114950366">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596114950369">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596114950377">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596114950380">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596114950383">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> shell编程2</a></h2>
+								<p>
+									2018年01月08日
+								</p>
+							</header>
+						
+							<p>
+<div style="margin: 10px auto; text-indent: 0px;-en-clipboard:true;">
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">上篇我们学会了如何使用及定义变量。按照尿性，一般接下来就该学基本数据类型的运算了。</span></span></div>
+
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">没错，本篇就仍是这么俗套的来讲讲这无聊但又必学的基本数据类型的运算了。</span></span></div>
+</div>
+
+<h2 style="font-size: 21px; margin: 10px 0px;"><span><span style="font-size: 21px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-weight: bold;">基本数据类型运算</span></span></h2>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">操作符</span></span></h3>
+
+<table style="font-size: inherit; border: 1px solid silver; border-collapse: collapse; word-break: break-word; overflow-x: scroll;">
+	<colgroup>
+		<col />
+		<col />
+		<col />
+	</colgroup>
+	<tbody>
+		<tr>
+			<td style="background-color: rgb(250, 250, 250); border: 1px solid silver; border-collapse: collapse; padding: 8px 14px; white-space: nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">符号</span></span></td>
+			<td style="background-color: rgb(250, 250, 250); border: 1px solid silver; border-collapse: collapse; padding: 8px 14px; white-space: nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">语义</span></span></td>
+			<td style="background-color: rgb(250, 250, 250); border: 1px solid silver; border-collapse: collapse; padding: 8px 14px; white-space: nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">描述</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">+</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">加</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">10+10，结果为20</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">-</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">减</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">10-3， 结果为7</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">*</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">乘</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">10*2，结果为20</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">/</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">除</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">10/3, 结果为3（取整数）</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">%</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">求余</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">10%3, 结果为1 (取余数)</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">==</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断是否相等</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">两数相等返回1，否则0</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">!=</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断是否不等</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">两数不等返回1，否则0</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">&gt;</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">大于</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">前者大于后者返回1，否则0</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">&gt;=</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">大于或等于</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">前者大于或等于后者返回1，否则0</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">&lt;</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">小于</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">前者小于后者返回1，否则0</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">&lt;=</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">小于或等于</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">前者小于或等于后者返回1，否则0</span></span></td>
+		</tr>
+	</tbody>
+</table>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">上述操作符与其它语言相比，并无特殊之处。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">在shell中，对于基本数据类型的运算主要分为两种，</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">整数运算</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">和</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">浮点数（小数）运算</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">。下面就分别来看看这两种运算:</span></span></div>
+
+<h2 style="font-size: 21px; margin: 10px 0px;"><span><span style="font-size: 21px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-weight: bold;">整数运算</span></span></h2>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">在shell中，有两种方式能实现整数运算，一种是使用</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">expr</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">命令， 另外一种是通过方括号（</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">$[]</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">）来实现。下面分别来看看：</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">expr</span></span></h3>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出13</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">expr 10 + 3</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出10+3</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">expr 10+3</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出7</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">expr 10 - 3</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出30</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">expr 10 \* 3</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出3</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">expr 10 / 3</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出1</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">expr 10 % 3</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#将计算结果赋值给变量</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num1=$(expr 10 % 3)</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#将计算结果赋值给变量</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num2=`expr 10 % 3`</span></span></div>
+</div>
+</div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">注意:</span></span></div>
+
+<ol style="padding-left:40px;">
+	<li style="list-style-type:decimal;">
+	<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">在以上的乘法(*)中，我们用了反斜线（）来转义，不然会报错。</span></span></div>
+	</li>
+	<li style="list-style-type:decimal;">
+	<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">运算符前后必须还有空格，否则会被直接当作字符串返回。</span></span></div>
+	</li>
+	<li style="list-style-type:decimal;">
+	<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">如果要将计算结果保存到变量，就需要用到我们上篇文章讲到的那两种方式（$() 或者 ``）来替换命令了。</span></span></div>
+	</li>
+</ol>
+</blockquote>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">这种种迹象无不让人吐槽啊。幸好还有一种实现方式，那就是接下来要看的方括号。</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">方括号($[])</span></span></h3>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num1=10</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num2=3</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出num1 + num2=13</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num1 + num2=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num1</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">+</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num2</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">]&quot;</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出num1+num2=13</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num1+num2=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num1</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">+</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num2</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">]&quot;</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出num1 - num2=7</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num1 - num2=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num1</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">-</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num2</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">]&quot;</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出num1 * num2=30</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num1 * num2=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num1</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">*</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num2</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">]&quot;</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出num1 &gt; num2=1</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num1 &gt; num2=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num1</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&gt;</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num2</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">]&quot;</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#输出num1 &lt; num2=0</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num1 &lt; num2=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num1</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&lt;</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num2</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">]&quot;</span></span></div>
+
+<div>&nbsp;</div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#将运算结果赋值给变量，输出num3=3</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num3=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num1</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">/</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num2</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">]</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num3=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num3</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;</span></span></div>
+</div>
+</div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">看了这种运算，再回看expr, 是不是觉得要升天，终于正常了。expr的那几个注意事项，在这儿都不算事儿。所以，如果要图简单，还是用这种方式吧。</span></span></div>
+</blockquote>
+
+<h2 style="font-size: 21px; margin: 10px 0px;"><span><span style="font-size: 21px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-weight: bold;">浮点运算</span></span></h2>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">在shell中，做浮点运算一般是用bash的计算器(bc)。在shell脚本中，一般我们的使用方法是：</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">variable=$(echo &quot;options; expression&quot; | bc)</span></span></div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">options是bc的一些选项，例如： 可以通过scale去设置保留的小数位数。具体有哪些参数，可以man bc进行查看</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">expression就是我们具体的表达式，例如 10 * 3</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">&quot; | &quot;</span> <span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">这个符号，对于熟悉linux系统的人来说，这个再熟悉不过了。它叫做管道， 之所以会叫做管道，其实很形象，你可以把它看作一根水管，水管一头接入前一个命令的返回结果, 一头接入下一个命令。表示将前一个命令的执行结果作为后一个命令的参数输入。以上，表示将我们的表达式作为bc的参数输入。</span></span></div>
+</blockquote>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#表示 10/3， 保留2位小数，将结果赋值给了num, 输出3.33</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num=$(</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;scale=2; 10 / 3&quot;</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">| bc)</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num</span></span></div>
+</div>
+</div>
+
+<h2 style="font-size: 21px; margin: 10px 0px;"><span><span style="font-size: 21px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-weight: bold;">小结</span></span></h2>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">本篇比较无聊，简单介绍了shell的基本运算符及其运算。shell运算主要分为整型和浮点型的运算。整型又有两种实现方式，浮点型是通过使用bash内置的计算器(bc)来实现的。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">好啦，到此，我们学习了shell的变量的使用，也学习了基本数据类型变量的计算啦！挺简单吧</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

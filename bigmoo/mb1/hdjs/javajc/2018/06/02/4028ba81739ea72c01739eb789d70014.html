@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Java中访问修饰符public、private、protecte、default</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b01738a0202c20027";
+	var global_articleId = "4028ba81739ea72c01739eb789d70014";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596095695427">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596095695430">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596095695433">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596095695438">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596095695443">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596095695447">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596095695450">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> Java中访问修饰符public、private、protecte、default</a></h2>
+								<p>
+									2018年06月02日 15:53:59
+								</p>
+							</header>
+						
+							<p>
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;"><span><span style="box-sizing: border-box; font-size: 16px; color: red; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">访问修饰符，主要标示修饰块的作用域，方便隔离防护。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;"><span><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: bold; line-height: 26px;">public： Java语言中访问限制最宽的修饰符，一般称之为&ldquo;公共的&rdquo;。被其修饰的类、属性以及方法不仅可以跨类访问，而且允许跨包（package）访问。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;"><span><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: bold; line-height: 26px;">private: Java语言中对访问权限限制的最窄的修饰符，一般称之为&ldquo;私有的&rdquo;。被其修饰的类、属性以及方法只能被该类的对象访问，其子类不能访问，更不能允许跨包访问。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;"><span><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: bold; line-height: 26px;">protect: 介于public 和 private 之间的一种访问修饰符，一般称之为&ldquo;保护形&rdquo;。被其修饰的类、属性以及方法只能被类本身的方法及子类访问，即使子类在不同的包中也可以访问。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;"><span><span style="font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: bold; line-height: 26px;">default：即不加任何访问修饰符，通常称为&ldquo;默认访问模式&ldquo;。该模式下，只允许在同一个包中进行访问。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;"><img height="180" src="/bigmoo/upload/image/2020/07/30/upload_807f2c20_dc0b_4ccd_997e_170ae15f2443_00000008.png" width="429" /></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">类的只有两种public,default(不同包不可以访问)</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">public&ndash;都可访问(公有)</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">private&ndash;类内可访问（私有）</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">protected&ndash;包内和子类可访问（保护）</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">不写(default)&ndash;包内可访问 （默认）</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;">
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">public&gt;protected&gt;default&gt;private</span></span></div>
+
+<div><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">Java 方法默认访问级别 : 包访问</span></span></div>
+</div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">Java 类默认访问级别 : 包访问对于一个Class的成员变量或成员函数，如果不用public, protected, private中的任何一个修饰，那么该成员获得&ldquo;默认访问控制&rdquo;级别，即package access （包访问）。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">属于package access的成员可以被同一个包中的其他类访问，但不能被其他包的类访问。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">包访问的控制力弱于private，但强于protected。因为一方面，只要是子类，不管子类与父类是否位于同一个包中，那么子类都可以访问父 类中的protected方法。但是一旦位于原类的包外，不管是否是其子类，都无法访问其属于package access级别的成员。而另一方面，一个类可以访问同一个包中另一个类的package access成员，同时也能访问其protected成员。</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px 0px 1.5em;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">(注：package是Java中的关键字，虽然包访问也是一种访问控制级别，但关键字&rdquo;package&rdquo;只能用来表示类属于哪个包，而不能像&rdquo;private&rdquo;,&rdquo;public&rdquo;那样放到成员变量或函数前面，作为访问控制修饰符。)</span></span></div>
+
+<div style="padding: 0px; border: 0px; vertical-align: baseline; box-sizing: border-box; font-size: 16px; margin: 0px;"><span><span style="font-size: 16px; color: rgb(77, 77, 77); font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-variant-ligatures: common-ligatures; font-weight: 400; line-height: 26px;">访问级别保护的强度：public&lt;protected&lt;默认&lt;private</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

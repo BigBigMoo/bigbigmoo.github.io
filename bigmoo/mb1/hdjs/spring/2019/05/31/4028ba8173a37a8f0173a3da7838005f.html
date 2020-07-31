@@ -1,0 +1,723 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>SpringCloud五大组件</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b01738a0242b00028";
+	var global_articleId = "4028ba8173a37a8f0173a3da7838005f";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596181870764">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596181870766">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596181870769">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596181870770">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596181870774">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596181870776">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596181870778">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> SpringCloud五大组件</a></h2>
+								<p>
+									2019年05月31日
+								</p>
+							</header>
+						
+							<p>
+<p>SpringCloud五大组件<br />
+五大组件:Eureka(注册中心),</p>
+
+<p>​ Ribbon/Feign(负载均衡),</p>
+
+<p>​ Zuul(网关),</p>
+
+<p>​ Config(配置中心),</p>
+
+<p>​ Hystrix(熔断器)</p>
+
+<p>注：本文章较长，但是五大组件全都包含</p>
+
+<p>新建一个父模块，导包，包含SpringCloud以及SpringBoot的包</p>
+
+<p>1.Eureka------注册中心<br />
+​ 1.1在SpringCloud官网 找到Eureka(How to includ Eureka)</p>
+
+<p>​ 1.2新建模块Eureka，导包</p>
+
+<p>&lt;dependency&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;<br />
+&lt;/dependency&gt;</p>
+
+<p>​ 1.3application.yml</p>
+
+<p>server:<br />
+&nbsp; port: 1000<br />
+eureka:<br />
+&nbsp; instance:<br />
+&nbsp;&nbsp;&nbsp; hostname: localhost #主机<br />
+&nbsp; client:<br />
+&nbsp;&nbsp;&nbsp; registerWithEureka: false #禁止注册中心向自己注册<br />
+&nbsp;&nbsp;&nbsp; fetchRegistry: false #禁止注册中心拉取注册地址清单<br />
+&nbsp;&nbsp;&nbsp; serviceUrl: #微服务向注册中心注册的地址<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; defaultZone: http://localhost:1000/eureka/</p>
+
+<p>1.4在主配置类上打标签 @EnableEurekaServer 开启Eureka事务</p>
+
+<p>package cn.itsource.springboot;</p>
+
+<p>import org.springframework.boot.autoconfigure.SpringBootApplication;<br />
+import org.springframework.boot.builder.SpringApplicationBuilder;<br />
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;</p>
+
+<p>@SpringBootApplication<br />
+@EnableEurekaServer<br />
+public class EurekaApplication {</p>
+
+<p>&nbsp;&nbsp;&nbsp; public static void main(String[] args) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new SpringApplicationBuilder(EurekaApplication.class).web(true).run(args);<br />
+&nbsp;&nbsp;&nbsp; }</p>
+
+<p>}</p>
+
+<p>2.EurekaServer高可用集群<br />
+​ 2.1为什么使用Eureka高可用集群？</p>
+
+<p>​ 答：当只有一个EurekaServer，如果挂掉了，那么整个微服务都不可用，所以要进行集群</p>
+
+<p>​ 2.2</p>
+
+<p>在&ldquo;我的电脑&rdquo;C:\Windows\System32\drivers\etc这个路径下 添加两个peer1和peer2<br />
+1<br />
+​ 127.0.0.1 peer1<br />
+​ 127.0.0.1 peer2</p>
+
+<p>​ 2.3 application.yml配置如下</p>
+
+<p>spring:<br />
+&nbsp; profiles:<br />
+&nbsp;&nbsp;&nbsp; active: peer1<br />
+---<br />
+server:<br />
+&nbsp; port: 1000<br />
+eureka:<br />
+&nbsp; instance:<br />
+&nbsp;&nbsp;&nbsp; hostname: peer1 #主机<br />
+&nbsp; client:<br />
+&nbsp;&nbsp;&nbsp; registerWithEureka: false #禁止注册中心向自己注册<br />
+&nbsp;&nbsp;&nbsp; fetchRegistry: false #禁止注册中心拉取注册地址清单<br />
+&nbsp;&nbsp;&nbsp; serviceUrl: #微服务向注册中心注册的地址<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; defaultZone: http://peer2:1001/eureka/<br />
+spring:<br />
+&nbsp; profiles: peer1<br />
+---<br />
+server:<br />
+&nbsp; port: 1001<br />
+eureka:<br />
+&nbsp; instance:<br />
+&nbsp;&nbsp;&nbsp; hostname: peer2 #主机<br />
+&nbsp; client:<br />
+&nbsp;&nbsp;&nbsp; registerWithEureka: false #禁止注册中心向自己注册<br />
+&nbsp;&nbsp;&nbsp; fetchRegistry: false #禁止注册中心拉取注册地址清单<br />
+&nbsp;&nbsp;&nbsp; serviceUrl: #微服务向注册中心注册的地址<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; defaultZone: http://peer1:1000/eureka/<br />
+spring:<br />
+&nbsp; profiles: peer2</p>
+
+<p>3.Ribbon<br />
+ribbon是负载均衡器，是基于RestTemplate ,它赋予了RestTemplate 负载均衡的能力</p>
+
+<p>在客户端order中使用Ribbon</p>
+
+<p>3.1导入jar包</p>
+
+<p>&lt;dependency&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;artifactId&gt;spring-cloud-starter-netflix-ribbon&lt;/artifactId&gt;<br />
+&lt;/dependency&gt;</p>
+
+<p>3.2 写一个类，里面写RestTemplate方法</p>
+
+<p>​ RestTemplate简介: pring框架提供的RestTemplate类可用于在应用中调用rest服务，它简化了与http服务的通信方式，统一了RESTful的标准，封装了http链接， 我们只需要传入url及返回值类型即可。相较于之前常用的HttpClient，RestTemplate是一种更优雅的调用RESTful服务的方式。</p>
+
+<p>package cn.itsource.springcloud.config;</p>
+
+<p>import org.springframework.cloud.client.loadbalancer.LoadBalanced;<br />
+import org.springframework.context.annotation.Bean;<br />
+import org.springframework.context.annotation.Configuration;<br />
+import org.springframework.web.client.RestTemplate;</p>
+
+<p>@Configuration<br />
+public class BeanConfig {</p>
+
+<p>&nbsp;&nbsp;&nbsp; //交给Bean管理<br />
+&nbsp;&nbsp;&nbsp; //@LoadBalanced :让RestTemplate 有负载均衡的能力<br />
+&nbsp;&nbsp;&nbsp; @Bean<br />
+&nbsp;&nbsp;&nbsp; @LoadBalanced<br />
+&nbsp;&nbsp;&nbsp; public RestTemplate restTemplate(){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return new RestTemplate();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</p>
+
+<p>3.3主配置类</p>
+
+<p>package cn.itsource.springcloud;</p>
+
+<p>import cn.itsource.springcloud.config.BeanConfig;<br />
+import org.springframework.boot.autoconfigure.SpringBootApplication;<br />
+import org.springframework.boot.builder.SpringApplicationBuilder;<br />
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;<br />
+import org.springframework.context.annotation.Import;<br />
+import org.springframework.web.bind.annotation.RequestMapping;<br />
+import org.springframework.web.bind.annotation.RestController;</p>
+
+<p>@SpringBootApplication<br />
+@RestController<br />
+@Import(BeanConfig.class)<br />
+public class OrderApplication {<br />
+&nbsp; &nbsp;<br />
+&nbsp;&nbsp;&nbsp; public static void main(String[] args) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new SpringApplicationBuilder(OrderApplication.class).web(true).run(args);<br />
+&nbsp;&nbsp;&nbsp; }</p>
+
+<p>}</p>
+
+<p>3.4 Controller层方法</p>
+
+<p>@GetMapping(&quot;/order/user/{id}&quot;)<br />
+&nbsp;&nbsp;&nbsp; public User getUserById(@PathVariable(&quot;id&quot;) Long id){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //String url = &quot;http://localhost:2000/user/&quot;+id;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String url = &quot;http://user-server/user/&quot;+id;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; User user = restTemplate.getForObject(url, User.class);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return user;<br />
+&nbsp;&nbsp;&nbsp; }</p>
+
+<p>3.5 application.yml</p>
+
+<p>eureka:<br />
+&nbsp; client:<br />
+&nbsp;&nbsp;&nbsp; serviceUrl:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; defaultZone: http://peer1:1000/eureka/,http://peer2:1001/eureka/<br />
+&nbsp; instance:<br />
+&nbsp;&nbsp;&nbsp; instance-id: first-one<br />
+&nbsp;&nbsp;&nbsp; prefer-ip-address: true</p>
+
+<p>server:<br />
+&nbsp; port: 2000</p>
+
+<p>spring:<br />
+&nbsp; application:<br />
+&nbsp;&nbsp;&nbsp; name: order</p>
+
+<p>4.Feign<br />
+​ 简介：Feign是基于Ribbon，同样具有负载均衡的能力</p>
+
+<p>4.1引入Feign的jar包</p>
+
+<p>&lt;dependency&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;<br />
+&lt;/dependency&gt;</p>
+
+<p>4.2 配置类打上标签 @EnableFeignClients(&ldquo;cn.itsource.springcloud.feignclient&rdquo;) feignclient是接口类的包名</p>
+
+<p>package cn.itsource.springcloud;</p>
+
+<p>import org.springframework.boot.autoconfigure.SpringBootApplication;<br />
+import org.springframework.boot.builder.SpringApplicationBuilder;<br />
+import org.springframework.cloud.openfeign.EnableFeignClients;</p>
+
+<p>@SpringBootApplication<br />
+@EnableFeignClients(&quot;cn.itsource.springcloud.feignclient&quot;)<br />
+public class OrderApplication {</p>
+
+<p>&nbsp;&nbsp;&nbsp; public static void main(String[] args) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new SpringApplicationBuilder(OrderApplication.class).web(true).run(args);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</p>
+
+<p>4.3 写一个接口类</p>
+
+<p>package cn.itsource.springcloud.feignclient;</p>
+
+<p>import cn.itsource.springcloud.domain.User;<br />
+import cn.itsource.springcloud.fallback.UserFeignClientFallback;<br />
+import org.springframework.cloud.openfeign.FeignClient;<br />
+import org.springframework.web.bind.annotation.GetMapping;<br />
+import org.springframework.web.bind.annotation.PathVariable;</p>
+
+<p>//该客户端接口用来调用用户服务(user-server)<br />
+// http://user-server/userserver/user/11&nbsp; -&gt; ribbon<br />
+@FeignClient(value = &quot;customer&quot;,fallback = UserFeignClientFallback.class)<br />
+public interface UserFeignClient {</p>
+
+<p>&nbsp;&nbsp;&nbsp; //调用根据id获取用户的接口<br />
+&nbsp;&nbsp;&nbsp; @GetMapping(&quot;/userserver/user/{id}&quot;)<br />
+&nbsp;&nbsp;&nbsp; User getUserById(@PathVariable(&quot;id&quot;) Long id);<br />
+}</p>
+
+<p>4.4 再写一个实现类</p>
+
+<p>package cn.itsource.springcloud.fallback;</p>
+
+<p>import cn.itsource.springcloud.domain.User;<br />
+import cn.itsource.springcloud.feignclient.UserFeignClient;<br />
+import org.springframework.stereotype.Component;</p>
+
+<p>@Component<br />
+public class UserFeignClientFallback implements UserFeignClient {</p>
+
+<p>&nbsp;&nbsp;&nbsp; @Override<br />
+&nbsp;&nbsp;&nbsp; public User getUserById(Long id) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //返回托底数据<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return new User(-1L,&quot;null&quot;,&quot;用户服务获取失败&quot;);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</p>
+
+<p>4.5 Controller控制层调用接口类</p>
+
+<p>package cn.itsource.springcloud.web.controller;</p>
+
+<p>import cn.itsource.springcloud.domain.User;<br />
+import cn.itsource.springcloud.feignclient.UserFeignClient;<br />
+import org.springframework.beans.factory.annotation.Autowired;<br />
+import org.springframework.web.bind.annotation.GetMapping;<br />
+import org.springframework.web.bind.annotation.PathVariable;<br />
+import org.springframework.web.bind.annotation.RequestMapping;<br />
+import org.springframework.web.bind.annotation.RestController;</p>
+
+<p>//订单服务,消费者<br />
+@RestController<br />
+@RequestMapping(&quot;/orderserver&quot;)<br />
+public class OrderServerController {</p>
+
+<p>&nbsp;&nbsp;&nbsp; @Autowired<br />
+&nbsp;&nbsp;&nbsp; private UserFeignClient userFeignClient ;</p>
+
+<p>&nbsp;&nbsp;&nbsp; //浏览器调用,根据id获取用户 : 有负载均衡<br />
+&nbsp;&nbsp;&nbsp; @GetMapping(&quot;/user/{id}&quot;)<br />
+&nbsp;&nbsp;&nbsp; public User getUserById(@PathVariable(&quot;id&quot;)Long id){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return userFeignClient.getUserById(id);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</p>
+
+<p>4.6 application.yml</p>
+
+<p>eureka:<br />
+&nbsp; client:<br />
+&nbsp;&nbsp;&nbsp; serviceUrl:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; defaultZone: http://peer1:1000/eureka/,http://peer2:1001/eureka/<br />
+&nbsp; instance:<br />
+&nbsp;&nbsp;&nbsp; instance-id: order-second<br />
+&nbsp;&nbsp;&nbsp; prefer-ip-address: true</p>
+
+<p>server:<br />
+&nbsp; port: 2001</p>
+
+<p>spring:<br />
+&nbsp; application:<br />
+&nbsp;&nbsp;&nbsp; name: order-second</p>
+
+<p>14<br />
+5.Hystrix<br />
+5.1 导包</p>
+
+<p>&lt;dependency&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;<br />
+&lt;/dependency&gt;</p>
+
+<p>5.2 配置类打上注解标签(开启Hystrix)</p>
+
+<p>@EnableCircuitBreaker<br />
+1<br />
+5.3 Controller控制层 (需在公共类上写一个AjaxResult)</p>
+
+<p>package cn.itsource.springcloud.web.controller;</p>
+
+<p><br />
+import cn.itsource.springcloud.domain.User;<br />
+import cn.itsource.springcloud.utils.AjaxResult;<br />
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;<br />
+import org.springframework.beans.factory.annotation.Autowired;<br />
+import org.springframework.web.bind.annotation.GetMapping;<br />
+import org.springframework.web.bind.annotation.PathVariable;<br />
+import org.springframework.web.bind.annotation.RequestMapping;<br />
+import org.springframework.web.bind.annotation.RestController;<br />
+import org.springframework.web.client.RestTemplate;</p>
+
+<p>@RestController<br />
+@RequestMapping(&quot;/orderserver&quot;)<br />
+public class OrderController {</p>
+
+<p>&nbsp;&nbsp;&nbsp; @Autowired<br />
+&nbsp;&nbsp;&nbsp; private RestTemplate restTemplate;</p>
+
+<p>&nbsp;&nbsp;&nbsp; //这是订单服务，调用用户服务<br />
+&nbsp;&nbsp;&nbsp; @HystrixCommand(fallbackMethod = &quot;getUserByIdFallback&quot;)<br />
+&nbsp;&nbsp;&nbsp; @GetMapping(&quot;/user/{id}&quot;)<br />
+&nbsp;&nbsp;&nbsp; public AjaxResult getUserById(@PathVariable(&quot;id&quot;)Long id){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String url = &quot;http://customer/userserver/user/&quot;+id;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //customer是yml配置中application.name名<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //userserver是控制层的mapping<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; User user = restTemplate.getForObject(url, User.class);</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AjaxResult ajaxResult = new AjaxResult();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ajaxResult.getData(user);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return ajaxResult;<br />
+&nbsp;&nbsp;&nbsp; }</p>
+
+<p>&nbsp;&nbsp;&nbsp; //编写降级方法<br />
+&nbsp;&nbsp;&nbsp; public AjaxResult getUserByIdFallback(@PathVariable(&quot;id&quot;)Long id){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AjaxResult ajaxResult = new AjaxResult();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ajaxResult.setSuccess(false);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ajaxResult.setErroMessage(&quot;抱歉，订单服务不可能&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return ajaxResult;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</p>
+
+<p>5.4 application.yml</p>
+
+<p>eureka:<br />
+&nbsp; client:<br />
+&nbsp;&nbsp;&nbsp; serviceUrl:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; defaultZone: http://peer1:1000/eureka/,http://peer2:1001/eureka/<br />
+&nbsp; instance:<br />
+&nbsp;&nbsp;&nbsp; instance-id: first-one<br />
+&nbsp;&nbsp;&nbsp; prefer-ip-address: true</p>
+
+<p>server:<br />
+&nbsp; port: 2000</p>
+
+<p>spring:<br />
+&nbsp; application:<br />
+&nbsp;&nbsp;&nbsp; name: order</p>
+
+<p>6.Zuul网关<br />
+6.1 导入jar包</p>
+
+<p>&lt;dependency&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;artifactId&gt;spring-cloud-starter-netflix-zuul&lt;/artifactId&gt;<br />
+&lt;/dependency&gt;</p>
+
+<p>6.2 主配置类上打注解标签 @EnableZuulProxy//开启zuul网关</p>
+
+<p>package cn.itsource.springcloud;</p>
+
+<p>import org.springframework.boot.autoconfigure.SpringBootApplication;<br />
+import org.springframework.boot.builder.SpringApplicationBuilder;<br />
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;<br />
+import org.springframework.web.bind.annotation.RestController;</p>
+
+<p>@EnableZuulProxy//开启zuul网关<br />
+@SpringBootApplication<br />
+@RestController<br />
+public class ZuulApplication {</p>
+
+<p><br />
+&nbsp;&nbsp;&nbsp; public static void main(String[] args) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new SpringApplicationBuilder(ZuulApplication.class).web(true).run(args);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</p>
+
+<p>6.3 application.yml</p>
+
+<p>eureka:<br />
+&nbsp; client:<br />
+&nbsp;&nbsp;&nbsp; serviceUrl:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; defaultZone: http://peer1:1000/eureka/,http://peer2:1001/eureka/<br />
+&nbsp; instance:<br />
+&nbsp;&nbsp;&nbsp; instance-id: first-one<br />
+&nbsp;&nbsp;&nbsp; prefer-ip-address: true</p>
+
+<p>server:<br />
+&nbsp; port: 4000</p>
+
+<p>spring:<br />
+&nbsp; application:<br />
+&nbsp;&nbsp;&nbsp; name: zuul-server</p>
+
+<p>zuul:<br />
+&nbsp; routes:<br />
+&nbsp;&nbsp;&nbsp; order: &quot;/order/**&quot; #别名---order是订单服务yml中application.name的名字<br />
+&nbsp; prefix: &quot;/pre&quot; #前缀<br />
+&nbsp;<br />
+&nbsp; #浏览器访问格式：http://localhost:4000/pre/order/orderserver/user/10</p>
+
+<p>6.4 写一个过滤器的类，继承ZuulFilter,实现登录检查</p>
+
+<p>package cn.itsource.springcloud.filter;</p>
+
+<p>import com.netflix.zuul.ZuulFilter;<br />
+import com.netflix.zuul.context.RequestContext;<br />
+import com.netflix.zuul.exception.ZuulException;<br />
+import org.apache.commons.lang.StringUtils;</p>
+
+<p>import javax.servlet.http.HttpServletRequest;<br />
+import javax.servlet.http.HttpServletResponse;<br />
+import java.util.HashMap;</p>
+
+<p>public class ZuulByFilter extends ZuulFilter{</p>
+
+<p>&nbsp;&nbsp;&nbsp; //过滤器的类型 PRE_TYPE<br />
+&nbsp;&nbsp;&nbsp; @Override<br />
+&nbsp;&nbsp;&nbsp; public String filterType() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return &quot;pre&quot;;<br />
+&nbsp;&nbsp;&nbsp; }</p>
+
+<p>&nbsp;&nbsp;&nbsp; //过滤器的顺序<br />
+&nbsp;&nbsp;&nbsp; @Override<br />
+&nbsp;&nbsp;&nbsp; public int filterOrder() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 1;<br />
+&nbsp;&nbsp;&nbsp; }</p>
+
+<p>&nbsp;&nbsp;&nbsp; @Override<br />
+&nbsp;&nbsp;&nbsp; public boolean shouldFilter() {</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //获取请求上下文<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RequestContext currentContext = RequestContext.getCurrentContext();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //获取请求对象<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HttpServletRequest request = currentContext.getRequest();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //获取请求的地址<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String requestURI = request.getRequestURI();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //如果包含了login，则返回false<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (requestURI.toUpperCase().contains(&quot;LOGIN&quot;)){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return false;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true;<br />
+&nbsp;&nbsp;&nbsp; }</p>
+
+<p>&nbsp;&nbsp;&nbsp; //执行run方法-----中心方法<br />
+&nbsp;&nbsp;&nbsp; @Override<br />
+&nbsp;&nbsp;&nbsp; public Object run() throws ZuulException {</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //获取上下文对象<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RequestContext currentContext = RequestContext.getCurrentContext();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //获取对象<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HttpServletRequest request = currentContext.getRequest();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //获取相应对象<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HttpServletResponse response = currentContext.getResponse();</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //获取响应的数据格式<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; response.setContentType(&quot;application/json;charset:utf-8&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //获取请求头x-token<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String token = response.getHeader(&quot;x-token&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //如果不存在请求头，则让重新登录<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (StringUtils.isBlank(token)){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HashMap&lt;String,String&gt; map = new HashMap&lt;&gt;();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; map.put(&quot;success&quot;, &quot;false&quot;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; map.put(&quot;errorMessage&quot;,&quot;麻烦请登录&quot; );<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; currentContext.setSendZuulResponse(false);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return null;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</p>
+
+<p>7.Config<br />
+7.1 导入jar包</p>
+
+<p>&lt;dependency&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;artifactId&gt;spring-cloud-config-server&lt;/artifactId&gt;<br />
+&lt;/dependency&gt;</p>
+
+<p>7.2 主配置类打上注解标签</p>
+
+<p>package cn.itsource.springcloud;</p>
+
+<p>import org.springframework.boot.SpringApplication;<br />
+import org.springframework.boot.autoconfigure.SpringBootApplication;<br />
+import org.springframework.cloud.config.server.EnableConfigServer;</p>
+
+<p>//@EnableDiscoveryClient<br />
+//@EnableConfigServer :开启配置中心<br />
+@SpringBootApplication<br />
+@EnableConfigServer<br />
+public class ConfigServerApplication5000 {<br />
+&nbsp;&nbsp;&nbsp; public static void main(String[] args) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SpringApplication.run(ConfigServerApplication5000.class);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</p>
+
+<p>7.3 application.yml (放在码云仓库中)</p>
+
+<p>server:<br />
+&nbsp; port: 5000<br />
+spring:<br />
+&nbsp; application:<br />
+&nbsp;&nbsp;&nbsp; name: config-server<br />
+&nbsp;&nbsp; &nbsp;<br />
+&nbsp; #码云仓库地址<br />
+&nbsp; cloud:<br />
+&nbsp;&nbsp;&nbsp; config:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; server:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; git:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uri: https://gitee.com/xxxxx/zuul-server.git&nbsp; #码云仓库<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; username: xxxxx<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; password: xxxxx</p>
+
+<p>eureka:<br />
+&nbsp; client:<br />
+&nbsp;&nbsp;&nbsp; serviceUrl:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; defaultZone: http://peer1:1000/eureka/,http://peer2:1001/eureka/<br />
+&nbsp; instance:<br />
+&nbsp;&nbsp;&nbsp; prefer-ip-address: true #使用ip注册到注册中心<br />
+&nbsp;&nbsp;&nbsp; instance-id: config-server:5000 #指定服务的id</p>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

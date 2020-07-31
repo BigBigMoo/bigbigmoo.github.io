@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>shell编程1</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891e84c50006";
+	var global_articleId = "4028ba81739fc4a501739fdc936b0010";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596114899943">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596114899945">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596114899950">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596114899953">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596114899959">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596114899961">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596114899965">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> shell编程1</a></h2>
+								<p>
+									2018年01月08日
+								</p>
+							</header>
+						
+							<p>
+<div style="margin: 10px auto; text-indent: 0px;-en-clipboard:true;">
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">如今，不会Linux的程序员都不意思说自己是程序员，而不会shell编程就不能说自己会Linux。说起来似乎shell编程很屌啊，然而不用担心，其实shell编程真的很简单。</span></span></div>
+</div>
+
+<h2 style="font-size: 21px; margin: 10px 0px;"><span><span style="font-size: 21px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-weight: bold;">背景</span></span></h2>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">什么是shell编程</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">高大上的解释，往往让人摸不住头脑。一句话概括就是：shell编程就是对一堆Linux命令的逻辑化处理。</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">为什么要会shell编程</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">举个简单的例子，我们做javaweb开发的，在以前，如果要在本地将程序打包，然后部署到远程服务器（抛开现在的ci， 原始的方法), 我们以前的做法通常会经历如下几个步骤：</span></span></div>
+
+<ul style="margin-left:30px;padding-left:0px;">
+	<li style="list-style-type:disc;">
+	<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">拉取最新代码（git pull）</span></span></div>
+	</li>
+	<li style="list-style-type:disc;">
+	<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">编译打包</span></span></div>
+	</li>
+	<li style="list-style-type:disc;">
+	<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">上传并部署到远程服务器</span></span></div>
+	</li>
+</ul>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">每次打包都要经历这一个阶段，效率低又烦躁。而此时，我们可以编写一个shell脚本，然后每次只需要运行一下这个shell脚本，即可实现打包部署这一系列动作，彻底解放双手，多好</span></span></div>
+
+<h2 style="font-size: 21px; margin: 10px 0px;"><span><span style="font-size: 21px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-weight: bold;">入门</span></span></h2>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">第一个shell程序</span></span></h3>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#第一个shell小程序</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">hello world!</span></span></div>
+</div>
+</div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上，我们的第一个shell小程序就完成了，结果当然是输出我们熟悉的hello world。</span></span></div>
+</blockquote>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">第一行表示我们选择使用bash shell。</span></span></div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">shell中#符号表示注释。shell的第一行比较特殊，一般都会以#!开始来指定使用的shell类型。在linux中，除了bash shell以外，还有很多版本的shell， 例如zsh、dash等等...不过bash shell还是我们使用最多的。</span></span></div>
+</blockquote>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">第二行以#符号开始，表示本行是注释，运行的时候是不会运行本行的。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">第三行中的echo是linux中的输出命令，该行的意思很明显的就是输出hello world！</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">运行第一个shell程序</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">新创建一个文件(hello_world.sh), 然后将以上代码复制到此文件中，然后需要赋予此文件的可执行权限。</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;"><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">chmod</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">+x hello_world.sh</span></span></div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">最后执行：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;"><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">./hello_world.sh</span></span></div>
+</div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">在linux中，后缀名几乎是可以任意的或者没有后缀名，一般将shell保存为xxx.shell是为了看起来更直观。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;">
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">如果直接执行hello_world.sh，这时会默认从$PATH环境变量中去寻找，这时，由于我们为将此文件配置在环境变量中，因此会找不到。所以，我们用了&quot;.&quot;这个符号，表示从当前目录找。</span></span></div>
+
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">除了以上执行方法，我们还可以直接指定shell来运行：</span></span></div>
+</div>
+</blockquote>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;"><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">/bin/sh hello_world.sh</span></span></div>
+</div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">这儿我们指定用了/bin/sh来执行，这时hello_world.sh中指定的/bin/bash将不会生效。</span></span></div>
+</blockquote>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">变量</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">编程岂能没有变量？对吧?</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">shell编程中分为两种变量，第一种是我们自己定义的变量（自定义变量），第二种是Linux已定义的环境变量（环境变量， 例如：$PATH, $HOME 等..., 这类变量我们可以直接使用）。</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#使用环境变量</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$PATH</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#自定义变量hello</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">hello=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;hello world&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$hello</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上演示了自定义变量和系统环境变量的用法，使用很简单，就是使用</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">$</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">符号加上变量名就行了。记住：定义变量不用</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">$</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">符号，使用变量要加</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">$</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">就行了。</span></span></div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">在第5行中，我们在自定义变量时，使用了双引号，在shell编程中， 如果变量出现空格或者引号，那么也必须加引号， 否则就可以省略。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">还有一点需要注意，定义变量的时候，&ldquo;=&rdquo;左右千万不要有空格啊。</span></span></div>
+</blockquote>
+
+<h5 style="font-size: 12px; margin: 10px 0px;"><span><span style="font-size: 12px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">将linux命令执行结果赋值给变量</span></span></h5>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">path=$(</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">pwd</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">)</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">files=`ls -al`</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">current path:</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$path</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">files:</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$files</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上2行和第3行分别演示了两种方式来将Linux命令执行结果保存到变量。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">第2行将pwd执行结果（当前所在目录）赋值给path变量。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">第3行将ls -al命令执行结果（列出当前目录下所有的文件及文件夹）赋值给变量</span></span></div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">注意：第三行的符号不是单引号，是键盘上&ldquo;～&rdquo;这个按键</span></span></div>
+</blockquote>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">好啦，到此，对shell编程已经有初步认识了，也会使用变量了。到此，看起来shell编程是不是很的简单。没错，其实真的就这么一回事。</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

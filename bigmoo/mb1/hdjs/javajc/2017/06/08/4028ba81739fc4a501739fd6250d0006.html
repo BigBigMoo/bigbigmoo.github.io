@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Socket请求和Http请求</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b01738a0202c20027";
+	var global_articleId = "4028ba81739fc4a501739fd6250d0006";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596114478721">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596114478726">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596114478729">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596114478733">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596114478738">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596114478744">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596114478747">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> Socket请求和Http请求</a></h2>
+								<p>
+									2017年06月08日
+								</p>
+							</header>
+						
+							<p>
+<div style="-en-clipboard:true;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">Socket实现服务器与客户端之间的物理连接，并进行数据传输。主要有TCP/UDP两个协议。Socket处于网络协议的传输层。</span></span></div>
+
+<div><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">TCP：传输控制协议，面向连接的的协议，稳定可靠。当客户和服务器彼此交换数据前，必须先在双方之间建立一个TCP连接，之后才能传输数据。</span></span></div>
+
+<div><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">UDP：广播式数据传输，UDP不提供可靠性，它只是把应用程序传给IP层的数据报发送出去，但是并不能保证它们能到达目的地。由于UDP在传输数据报前不用在客户和服务器之间建立一个连接，且没有超时重发等机制，故而传输速度很快。</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">优点：</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">1.传输数据为字节级，传输数据可自定义，数据量小。相应的移动端开发，手机费用低</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">&nbsp;2.传输数据时间短，性能高</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">&nbsp;3.适合C/S之间信息实时交互</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">&nbsp;4.可以加密，数据安全性高</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">缺点：</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">1.需要对传输的数据进行解析，转化为应用级的数据</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">2.对开发人员的开发水平要求高</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">3.相对于Http协议传输，增加了开发量</span></span></div>
+
+<div style="margin:0px;padding:0px;">&nbsp;</div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">Http请求主要有http协议，基于http协议的soap协议，常见的http数据请求方式有get和post，web服务</span></span></div>
+
+<div style="margin:0px;padding:0px;">&nbsp;</div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">优点：</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">1.基于应用级的接口使用方便</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">&nbsp;2.要求的开发水平不高，容错性强</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">缺点：</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">1.传输速度慢，数据包大。</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">2.如实现实时交互，服务器性能压力大</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">3.数据传输安全性差</span></span></div>
+
+<div style="margin:0px;padding:0px;">&nbsp;</div>
+
+<div style="margin:0px;padding:0px;">
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">HTTP协议：简单对象访问协议，对应于应用层&nbsp;&nbsp;，HTTP协议是基于TCP连接的</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">tcp协议：&nbsp;&nbsp;&nbsp; 对应于传输层</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;">
+<div><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">ip协议：&nbsp;&nbsp;&nbsp;&nbsp; 对应于网络层&nbsp;</span></span></div>
+
+<div><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">TCP/IP是传输层协议，主要解决数据如何在网络中传输；而HTTP是应用层协议，主要解决如何包装数据。</span></span></div>
+</div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">Socket是对TCP/IP协议的封装，Socket本身并不是协议，而是一个调用接口（API），通过Socket，我们才能使用TCP/IP协议。</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">&nbsp;</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">http连接：http连接就是所谓的短连接，即客户端向服务器端发送一次请求，</span><span style="margin: 0px; padding: 0px; background-color: rgb(255, 255, 255);"><span style="font-size: 14px; background-color: rgb(255, 255, 255); margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: bold; line-height: 1.8;">服务器端响应后连接即会断掉</span></span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">；</span></span></div>
+
+<div style="padding: 0px; text-indent: 0px; margin: 10px auto;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">socket连接：</span><span style="margin: 0px; padding: 0px;"><span style="font-size: 14px; margin: 0px; padding: 0px; color: rgb(255, 0, 255); font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: bold; line-height: 1.8;">socket连接就是所谓的长连接，理论上客户端和服务器端一旦建立起连接将不会主动断掉</span></span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">；但是由于各种环境因素可能会是连接断开，比如说：服务器端或客户端主机down了，网络故障，或者两者之间长时间没有数据传输，网络防火墙可能会断开该连接以释放网络资源。所以当一个socket连接中没有数据的传输，那么为了维持连接需要发送心跳消息~~具体心跳消息格式是开发者自己定义的</span></span></div>
+</div>
+
+<div style="margin:0px;padding:0px;">&nbsp;</div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">Socket适用场景：网络游戏，银行交互，支付。</span></span></div>
+
+<div style="margin:0px;padding:0px;"><span><span style="font-size: 14px; color: rgb(51, 51, 51); font-family: Verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">http适用场景：公司OA服务，互联网服务。</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

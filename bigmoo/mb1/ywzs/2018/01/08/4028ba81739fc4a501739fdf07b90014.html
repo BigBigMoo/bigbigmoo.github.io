@@ -1,0 +1,706 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>shell编程3</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891e84c50006";
+	var global_articleId = "4028ba81739fc4a501739fdf07b90014";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596115060833">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596115060833">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596115060849">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596115060865">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596115060880">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596115060880">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596115060896">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> shell编程3</a></h2>
+								<p>
+									2018年01月08日
+								</p>
+							</header>
+						
+							<p>
+<div style="margin: 10px auto; text-indent: 0px;-en-clipboard:true;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">通过前两篇文章，我们掌握了shell的一些基本写法和变量的使用，以及基本数据类型的运算。那么，本次就将要学习shell的结构化命令了，也就是我们其它编程语言中的条件选择语句及循环语句。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">不过，在学习shell结构化命令的时候，我们又会发现它与其它编程的语言相比存在不小的区别。下面就开始看看吧：</span></span></div>
+
+<h2 style="font-size: 21px; margin: 10px 0px;"><span><span style="font-size: 21px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-weight: bold;">条件选择</span></span></h2>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">在条件选择语句中，主要包含以下几种写法：</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">if-then语句</span></span></h3>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">command</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">吃瓜群众表示一脸懵比：if语句后面接的是命令，我们其它编程语言中，这儿都是接返回布尔值（true,false）的表达式。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">那么这到底是怎么回事呢？</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">在shell脚本的if其实是根据紧跟后面的那个命令的</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">退出状态码</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">来判断是否执行then后面的语句的。</span></span></div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">关于退出状态码，你只需要记住：正常退出（命令执行正常）的状态码是0， 非正常退出的状态码不是0（有不少）。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上语句的语义为： 如果if后面的命令执行正常（状态码0），那么就执行then后面的语句。否则不执行。 fi代表if语句的结束。</span></span></div>
+</blockquote>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#这儿由于pwd是linux内置的命令，因此执行后会正常退出（状态码0），所以会执行then中的语句</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#如果此处替换为一个不存在的命令（例如: pw），那么就会非正常退出，不会执行then中的语句</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">pwd</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">执行</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">里面的语句</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">if-then还可以简写为</span></span></div>
+</blockquote>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">command</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">;</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">因此，以上代码还可以写成以下：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">pwd</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">;</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">执行</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">里面的语句</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上，如果我要判断处理异常退出（状态码非0）情况，该怎么办？</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">别着急： else 来帮你。</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">if-then-else语句</span></span></h3>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">command</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">else</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">与if-then语句相比，这回多了个else语句，else语句用来判断if后面的命令非正常退出的情况。</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">pwd</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">正常退出</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">else</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">非正常退出</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">甚至，我们还可以变形写出更多的else:</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">command1</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">elif</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">command2</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">command3</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">但是上面就只能根据退出状态码判断，不能写表达式，你还让我怎么写？ 我各个编程语言直接吊打你！</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">不要慌，客官，请接着往下看：</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">test命令</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">test命令用于if-then或者if-then-else语句中，主要用于判断列出的条件是否成立，如果成立，就会退出并返回退出状态码0，否则返回非0。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">这意味着我们可以通过test命令来写表达式命令了。不过，对于已习惯其它编程语言的程序猿们（没学过的除外），不要高兴得太早，前方有坑，至于是什么坑，待会儿就能看到。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">先看看test命令的基本用法吧：</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">直接用：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;"><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">test</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">condition</span></span></div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">结合if-then语句用</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">test</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">condition</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">结合if-then-else语句用</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">test</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">condition</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">else</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">条件成立就执行then语句，否则else语句。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">test命令只能判断一下三类条件：</span></span></div>
+
+<ul style="margin-left:30px;padding-left:0px;">
+	<li style="list-style-type:disc;">
+	<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">数值比较</span></span></div>
+	</li>
+	<li style="list-style-type:disc;">
+	<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">字符串比较</span></span></div>
+	</li>
+	<li style="list-style-type:disc;">
+	<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">文件比较</span></span></div>
+	</li>
+</ul>
+
+<h4 style="font-size: 14px; margin: 10px 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">数值比较</span></span></h4>
+
+<table style="font-size: inherit; border: 1px solid silver; border-collapse: collapse; word-break: break-word; overflow-x: scroll;">
+	<colgroup>
+		<col />
+		<col />
+	</colgroup>
+	<tbody>
+		<tr>
+			<td style="background-color: rgb(250, 250, 250); border: 1px solid silver; border-collapse: collapse; padding: 8px 14px; white-space: nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">比较</span></span></td>
+			<td style="background-color: rgb(250, 250, 250); border: 1px solid silver; border-collapse: collapse; padding: 8px 14px; white-space: nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">描述</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">n1 -eq n2</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断n1是否等于n2</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">n1 -ge n2</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断n1是否大于或等于n2</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">n1 -gt n2</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断n1是否大于n2</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">n1 -le n2</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断n1是否小于或等于n2</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">n1 -lt n2</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断n1是否小于n2</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">n1 -ne n2</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断n1是否不等于n2</span></span></td>
+		</tr>
+	</tbody>
+</table>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">特别提醒： 以上表格不用你去记住，在命令行下面, 执行man test就能看到这些了。后面的对与另外两种比较的同理</span></span></div>
+</blockquote>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num1=100</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num2=200</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">test</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num1</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">-eq</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num2</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num1等于num2</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">else</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num2不等于num2</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;">
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">好好的标准的数学比较符号不能使用，难道非得写这种文本形式？是不是觉得很别扭？</span></span></div>
+
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">不着急，还有替代方案：</span></span></div>
+</div>
+
+<h5 style="font-size: 12px; margin: 10px 0px;"><span><span style="font-size: 12px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">使用双括号</span></span></h5>
+
+<div style="margin: 10px auto; text-indent: 0px;">
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">双括号命令允许你在比较过程中使用高级数学表达式。关键是使用双括号，咱就可以用数学比较符号啦（等于==, 大于&gt;， 小于&lt; 等等都能使用啦）。</span></span></div>
+
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">使用方法：</span></span></div>
+</div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;"><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">(( expression ))</span></span></div>
+</div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">注意：括号里面两边都需要有空格</span></span></div>
+</blockquote>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num1=100</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num2=200</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">(( num1 &gt; num2 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num1 &gt; num2&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">else</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num2 &lt;= num2&quot;</span></span></div>
+</div>
+</div>
+
+<h4 style="font-size: 14px; margin: 10px 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">字符串比较</span></span></h4>
+
+<table style="font-size: inherit; border: 1px solid silver; border-collapse: collapse; word-break: break-word; overflow-x: scroll;">
+	<colgroup>
+		<col />
+		<col />
+	</colgroup>
+	<tbody>
+		<tr>
+			<td style="background-color: rgb(250, 250, 250); border: 1px solid silver; border-collapse: collapse; padding: 8px 14px; white-space: nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">比较</span></span></td>
+			<td style="background-color: rgb(250, 250, 250); border: 1px solid silver; border-collapse: collapse; padding: 8px 14px; white-space: nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">描述</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">str1 = str2</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断str1是否与str2相同</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">str1 !＝ str2</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断str1是否与str2不相同</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">str1 &lt; str2</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断str1是否比str2小(根据ASCII)</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">str1 &gt; str2</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断str1是否比str2大(根据ASCII)</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">-n str1</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断str1的长度是否非0</span></span></td>
+		</tr>
+		<tr>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">-z str1</span></span></td>
+			<td style="border:1px solid silver;border-collapse:collapse;padding:8px 14px;white-space:nowrap;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">判断str1的长度是否为0</span></span></td>
+		</tr>
+	</tbody>
+</table>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">程序猿们，要骂的就尽情释放吧。我反正是骂了。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">test命令和测试表达式使用标准的数学比较符号来表示字符串比较,而用文本代码来表 示数值比较。这与其它语言相比都不一样。</span></span></div>
+</blockquote>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">var1=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">test</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">var2=Test</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">test</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$var1</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">=</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$str2</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">相等</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">else</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">不相等</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">注意，在使用大于（&gt;）或小于（&lt;）符号时，需要转义（\&gt;）(\&lt;)，不然会把这两种符号时别为</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">重定向</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">（后面文章才会讲到）。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">吐槽模式开启：我要用个比较符号，还要转义，很蛋疼的设计！</span></span></div>
+</blockquote>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">不要慌，大招一般都在后面：</span></span></div>
+
+<h5 style="font-size: 12px; margin: 10px 0px;"><span><span style="font-size: 12px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">使用双方括号</span></span></h5>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">双方括号命令提供了针对字符串比较的高级特性。它不仅解决了使用test所带来的一系列毛病，还提供了一些test命令所没有的高级用法。双方括号命令的格式如下:</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;"><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">[[ expression ]]</span></span></div>
+</div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">注意，可能有些shell不支持此种写法。不过bash完美支持。以上写法注意括号内两边都有空格。</span></span></div>
+</blockquote>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">var1=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">test</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">var2=Test</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">[[</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$test</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">&lt;</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$test2</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">]]</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;test1 &lt; test2&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">else</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;test1 &gt;= test2&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">这下终于不用转义了。</span></span></div>
+
+<h4 style="font-size: 14px; margin: 10px 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">文件比较</span></span></h4>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">对于文件的比较，其实跟上面差不多，都是用test命令。由于篇幅有限，我这儿就不多写了。通过man test命令可以看到具体的用法。</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">case语句</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">在使用if-then-else语句中，如果碰到条件很多的情况，如下：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">num=3</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">== 1 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num=1&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">elif</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">== 2 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num=2&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">elif</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">== 3 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num=3&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">elif</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">== 4 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num=4&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;">
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">如果再多点条件，看起来是不是很多？</span></span></div>
+
+<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">此时，其实还有一种替代方案，那就是使用case.</span></span></div>
+</div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">case</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">variable</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">in</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">pattern1 | pattern2) commands1;; pattern3) commands2;;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">*)</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">default</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands;;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">esac</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">将以上代码替换为case:</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">case</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$num</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">in</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">1)</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num=1&quot;</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">;;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">2)</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num=2&quot;</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">;;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">3)</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num=3&quot;</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">;;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">4)</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;num=4&quot;</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">;;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">*)</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;defaul&quot;</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">;;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">esac</span></span></div>
+</div>
+</div>
+
+<h2 style="font-size: 21px; margin: 10px 0px;"><span><span style="font-size: 21px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-weight: bold;">小结</span></span></h2>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">本篇主要讲了条件语句。shell中的条件语句与其他编程语言相比有不小的区别，最大的区别就在于条件语句后接的是命令，而不是布尔值， 是根据命令执行退出的状态码来决定是否进入then语句的。这点需要牢记。</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

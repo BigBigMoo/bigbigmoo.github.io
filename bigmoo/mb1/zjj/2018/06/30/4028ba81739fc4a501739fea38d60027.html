@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Tomcat类加载机制</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891e30c50005";
+	var global_articleId = "4028ba81739fc4a501739fea38d60027";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596115794241">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596115794244">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596115794249">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596115794254">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596115794259">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596115794263">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596115794266">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> Tomcat类加载机制</a></h2>
+								<p>
+									2018年06月30日
+								</p>
+							</header>
+						
+							<p>
+<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;</p>
+
+<div style="margin: 1em 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; text-align: center;"><img height="488" src="/bigmoo/upload/image/2020/07/30/upload_160e97c6_56ee_43be_bbe7_e4966ae7175e_00000004.png" width="900" /></div>
+
+<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;</p>
+
+<h2 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">类加载</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　在JVM中并不是一次性把所有的文件都加载到，而是一步一步的，按照需要来加载。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　比如JVM启动时，会通过不同的类加载器加载不同的类。当用户在自己的代码中，需要某些额外的类时，再通过加载机制加载到JVM中，并且存放一段时间，便于频繁使用。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　因此使用哪种类加载器、在什么位置加载类都是JVM中重要的知识。</span></span></div>
+
+<h2 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">JVM类加载</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　JVM类加载采用 父类委托机制，如下图所示：</span></span></div>
+
+<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;</p>
+
+<div style="margin: 1em 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; text-align: center;"><img height="758" src="/bigmoo/upload/image/2020/07/30/upload_160e97c6_56ee_43be_bbe7_e4966ae7175e_00000006.png" width="1001" /></div>
+
+<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;</p>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　JVM中包括集中类加载器：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　1 BootStrapClassLoader 引导类加载器</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　2 ExtClassLoader 扩展类加载器</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　3 AppClassLoader 应用类加载器</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　4 CustomClassLoader 用户自定义类加载器</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　他们的区别上面也都有说明。需要注意的是，不同的类加载器加载的类是不同的，因此如果用户加载器1加载的某个类，其他用户并不能够使用。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">当JVM运行过程中，用户需要加载某些类时，会按照下面的步骤（父类委托机制）</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　1 用户自己的类加载器，把加载请求传给父加载器，父加载器再传给其父加载器，一直到加载器树的顶层。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　2 最顶层的类加载器首先针对其特定的位置加载，如果加载不到就转交给子类。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　3 如果一直到底层的类加载都没有加载到，那么就会抛出异常ClassNotFoundException。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　因此，按照这个过程可以想到，如果同样在CLASSPATH指定的目录中和自己工作目录中存放相同的class，会优先加载CLASSPATH目录中的文件。</span></span></div>
+
+<h2 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">Tomcat类加载</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　在tomcat中类的加载稍有不同，如下图：</span></span></div>
+
+<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;</p>
+
+<div style="margin: 1em 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; text-align: center;"><img height="749" src="/bigmoo/upload/image/2020/07/30/upload_160e97c6_56ee_43be_bbe7_e4966ae7175e_00000008.png" width="983" /></div>
+
+<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;</p>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　当tomcat启动时，会创建几种类加载器：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">1 Bootstrap 引导类加载器</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">&nbsp;</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　加载JVM启动所需的类，以及标准扩展类（位于jre/lib/ext下）</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">2 System 系统类加载器</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">&nbsp;</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　加载tomcat启动的类，比如bootstrap.jar，通常在catalina.bat或者catalina.sh中指定。位于CATALINA_HOME/bin下。</span></span></div>
+
+<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;</p>
+
+<div style="margin: 1em 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; text-align: center;"><img height="210" src="/bigmoo/upload/image/2020/07/30/upload_160e97c6_56ee_43be_bbe7_e4966ae7175e_00000010.png" width="726" /></div>
+
+<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;</p>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">3 Common 通用类加载器</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">&nbsp;</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　加载tomcat使用以及应用通用的一些类，位于CATALINA_HOME/lib下，比如servlet-api.jar</span></span></div>
+
+<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;</p>
+
+<div style="margin: 1em 0px; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline; text-align: center;"><img height="510" src="/bigmoo/upload/image/2020/07/30/upload_160e97c6_56ee_43be_bbe7_e4966ae7175e_00000012.png" width="787" /></div>
+
+<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;</p>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">　　4 webapp 应用类加载器</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　每个应用在部署后，都会创建一个唯一的类加载器。该类加载器会加载位于 WEB-INF/lib下的jar文件中的class 和 WEB-INF/classes下的class文件。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　</span><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">当应用需要到某个类时，则会按照下面的顺序进行类加载</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">：</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　1 使用bootstrap引导类加载器加载</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　2 使用system系统类加载器加载</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　3 使用应用类加载器在WEB-INF/classes中加载</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　4 使用应用类加载器在WEB-INF/lib中加载</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　5 使用common类加载器在CATALINA_HOME/lib中加载</span></span></div>
+
+<h2 style="margin: 35px 0px 15px; padding: 0px; border: 0px; vertical-align: baseline; text-align: left; font-size: 30px;"><span><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">问题扩展</span></span></h2>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　通过对上面tomcat类加载机制的理解，就不难明白 为什么java文件放在Eclipse中的src文件夹下会优先jar包中的class?</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　这是因为Eclipse中的src文件夹中的文件java以及webContent中的JSP都会在tomcat启动时，被编译成class文件放在 WEB-INF/class 中。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　而Eclipse外部引用的jar包，则相当于放在 WEB-INF/lib 中。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　因此肯定是</span> <span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">java文件或者JSP文件编译出的class优先加载</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　通过这样，我们就可以简单的把java文件放置在src文件夹中，通过对该java文件的修改以及调试，便于学习拥有源码java文件、却没有打包成xxx-source的jar包。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　另外呢，开发者也会因为粗心而犯下面的错误。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　在&nbsp;CATALINA_HOME/lib&nbsp;以及&nbsp;WEB-INF/lib&nbsp;中放置了&nbsp;不同版本的jar包，此时就会导致某些情况下报加载不到类的错误。</span></span></div>
+
+<div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px; font-size: inherit; vertical-align: baseline;"><span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">　　还有如果多个应用使用同一jar包文件，当放置了多份，就可能导致 多个应用间 出现类加载不到的错误。</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

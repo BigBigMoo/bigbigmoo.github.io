@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>微服务通信机制</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b01738a0242b00028";
+	var global_articleId = "4028ba8173a37a8f0173a3e053c50063";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596182254643">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596182254645">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596182254647">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596182254650">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596182254655">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596182254657">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596182254659">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> 微服务通信机制</a></h2>
+								<p>
+									2019年05月03日
+								</p>
+							</header>
+						
+							<p>
+<p style="box-sizing: border-box; outline: 0px; margin: 0px 0px 16px; padding: 0px; font-weight: 400; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-size: 16px; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><strong style="box-sizing: border-box; outline: 0px; font-weight: 700; overflow-wrap: break-word;">微服务通信机制</strong><br style="box-sizing: border-box; outline: 0px; overflow-wrap: break-word;" />
+系统中的各个微服务可被独立部署，各个微服务之间是松耦合的。每个微服务仅关注于完成一件任务并很好地完成该任务。<br style="box-sizing: border-box; outline: 0px; overflow-wrap: break-word;" />
+围绕业务能力组织服务、自动化部署、智能端点、对语言及数据的去集中化控制。</p>
+
+<ul style="box-sizing: border-box; outline: 0px; margin: 0px 0px 24px; padding: 0px; font-weight: 400; list-style: none; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-size: 16px; overflow-wrap: break-word; color: rgb(51, 51, 51); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;">
+	<li style="box-sizing: border-box; outline: 0px; margin: 8px 0px 0px 32px; padding: 0px; font-weight: normal; list-style: disc; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;">将组件定义为可被独立替换和升级的软件单元。</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 8px 0px 0px 32px; padding: 0px; font-weight: normal; list-style: disc; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;">以业务能力为出发点组织服务的策略。</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 8px 0px 0px 32px; padding: 0px; font-weight: normal; list-style: disc; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;">倡导谁开发，谁运营的开发运维一体化方法。</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 8px 0px 0px 32px; padding: 0px; font-weight: normal; list-style: disc; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;">RESTful HTTP协议是微服务架构中最常用的通讯机制。</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 8px 0px 0px 32px; padding: 0px; font-weight: normal; list-style: disc; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;">每个微服务可以考虑选用最佳工具完成(如不同的编程语言)。</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 8px 0px 0px 32px; padding: 0px; font-weight: normal; list-style: disc; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;">允许不同微服务采用不同的数据持久化技术。</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 8px 0px 0px 32px; padding: 0px; font-weight: normal; list-style: disc; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;">微服务非常重视建立架构及业务相关指标的实时监控和日志机制，必须考虑每个服务的失败容错机制。</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 8px 0px 0px 32px; padding: 0px; font-weight: normal; list-style: disc; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word;">注重快速更新，因此系统会随时间不断变化及演进。可替代性模块化设计。</li>
+</ul>
+
+<p style="box-sizing: border-box; outline: 0px; margin: 0px 0px 16px; padding: 0px; font-weight: 400; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-size: 16px; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><strong style="box-sizing: border-box; outline: 0px; font-weight: 700; overflow-wrap: break-word;">微服务通信方式：</strong></p>
+
+<p style="box-sizing: border-box; outline: 0px; margin: 0px 0px 16px; padding: 0px; font-weight: 400; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-size: 16px; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;">&nbsp;&nbsp;&nbsp; 同步：RPC，REST等</p>
+
+<p style="box-sizing: border-box; outline: 0px; margin: 0px 0px 16px; padding: 0px; font-weight: 400; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-size: 16px; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;">&nbsp;&nbsp;&nbsp; 异步：消息队列。要考虑消息可靠传输、高性能，以及编程模型的变化等。</p>
+
+<p style="box-sizing: border-box; outline: 0px; margin: 0px 0px 16px; padding: 0px; font-weight: 400; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-size: 16px; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><strong style="box-sizing: border-box; outline: 0px; font-weight: 700; overflow-wrap: break-word;">消息队列中间件如何选型</strong></p>
+
+<pre class="has" name="code" style="box-sizing: border-box; outline: 0px; margin: 0px 0px 24px; padding: 8px; font-weight: 400; position: relative; font-family: Consolas, Inconsolata, Courier, monospace; white-space: pre-wrap; overflow-wrap: break-word; overflow-x: auto; font-size: 14px; line-height: 22px; color: rgb(0, 0, 0); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;">
+
+&nbsp;</pre>
+
+<ol class="hljs-ln" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; list-style: none; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; border-collapse: collapse; font-size: 16px; overflow: hidden; overflow-wrap: break-word;">
+	<li style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; list-style: none; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word; height: 22px;">
+	<div class="hljs-ln-numbers" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px; width: 24px; border-right: 1px solid rgb(197, 197, 197);">
+	<div class="hljs-ln-line hljs-ln-n" data-line-number="1" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px 8px 0px 0px; font-weight: normal; text-align: right; overflow-wrap: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;">&nbsp;</div>
+	</div>
+
+	<div class="hljs-ln-code" style="box-sizing: border-box; outline: 0px; margin: 0px 0px 0px 8px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px;">
+	<div class="hljs-ln-line" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;"><code class="hljs yaml" onclick="mdcp.copyCode(event)" style="box-sizing: border-box; outline: 0px; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; display: block; overflow-x: auto; padding: 8px; color: rgb(56, 58, 66); background: rgb(250, 250, 250); border-radius: 4px; line-height: 22px; white-space: pre; overflow-wrap: break-word; font-size: 14px;"><span class="hljs-number" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(152, 104, 1); overflow-wrap: break-word; font-size: 14px;">1</span><span class="hljs-string" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(80, 161, 79); overflow-wrap: break-word; font-size: 14px;">.协议：AMQP、STOMP、MQTT、私有协议等。</span></code></div>
+	</div>
+	</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; list-style: none; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word; height: 22px;">
+	<div class="hljs-ln-numbers" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px; width: 24px; border-right: 1px solid rgb(197, 197, 197);">
+	<div class="hljs-ln-line hljs-ln-n" data-line-number="2" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px 8px 0px 0px; font-weight: normal; text-align: right; overflow-wrap: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;">&nbsp;</div>
+	</div>
+
+	<div class="hljs-ln-code" style="box-sizing: border-box; outline: 0px; margin: 0px 0px 0px 8px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px;">
+	<div class="hljs-ln-line" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;"><code class="hljs yaml" onclick="mdcp.copyCode(event)" style="box-sizing: border-box; outline: 0px; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; display: block; overflow-x: auto; padding: 8px; color: rgb(56, 58, 66); background: rgb(250, 250, 250); border-radius: 4px; line-height: 22px; white-space: pre; overflow-wrap: break-word; font-size: 14px;"><span class="hljs-number" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(152, 104, 1); overflow-wrap: break-word; font-size: 14px;">2</span><span class="hljs-string" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(80, 161, 79); overflow-wrap: break-word; font-size: 14px;">.消息是否需要持久化。</span></code></div>
+	</div>
+	</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; list-style: none; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word; height: 22px;">
+	<div class="hljs-ln-numbers" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px; width: 24px; border-right: 1px solid rgb(197, 197, 197);">
+	<div class="hljs-ln-line hljs-ln-n" data-line-number="3" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px 8px 0px 0px; font-weight: normal; text-align: right; overflow-wrap: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;">&nbsp;</div>
+	</div>
+
+	<div class="hljs-ln-code" style="box-sizing: border-box; outline: 0px; margin: 0px 0px 0px 8px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px;">
+	<div class="hljs-ln-line" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;"><code class="hljs yaml" onclick="mdcp.copyCode(event)" style="box-sizing: border-box; outline: 0px; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; display: block; overflow-x: auto; padding: 8px; color: rgb(56, 58, 66); background: rgb(250, 250, 250); border-radius: 4px; line-height: 22px; white-space: pre; overflow-wrap: break-word; font-size: 14px;"><span class="hljs-number" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(152, 104, 1); overflow-wrap: break-word; font-size: 14px;">3</span><span class="hljs-string" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(80, 161, 79); overflow-wrap: break-word; font-size: 14px;">.吞吐量。</span></code></div>
+	</div>
+	</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; list-style: none; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word; height: 22px;">
+	<div class="hljs-ln-numbers" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px; width: 24px; border-right: 1px solid rgb(197, 197, 197);">
+	<div class="hljs-ln-line hljs-ln-n" data-line-number="4" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px 8px 0px 0px; font-weight: normal; text-align: right; overflow-wrap: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;">&nbsp;</div>
+	</div>
+
+	<div class="hljs-ln-code" style="box-sizing: border-box; outline: 0px; margin: 0px 0px 0px 8px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px;">
+	<div class="hljs-ln-line" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;"><code class="hljs yaml" onclick="mdcp.copyCode(event)" style="box-sizing: border-box; outline: 0px; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; display: block; overflow-x: auto; padding: 8px; color: rgb(56, 58, 66); background: rgb(250, 250, 250); border-radius: 4px; line-height: 22px; white-space: pre; overflow-wrap: break-word; font-size: 14px;"><span class="hljs-number" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(152, 104, 1); overflow-wrap: break-word; font-size: 14px;">4</span><span class="hljs-string" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(80, 161, 79); overflow-wrap: break-word; font-size: 14px;">.高可用支持，是否单点。</span></code></div>
+	</div>
+	</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; list-style: none; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word; height: 22px;">
+	<div class="hljs-ln-numbers" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px; width: 24px; border-right: 1px solid rgb(197, 197, 197);">
+	<div class="hljs-ln-line hljs-ln-n" data-line-number="5" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px 8px 0px 0px; font-weight: normal; text-align: right; overflow-wrap: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;">&nbsp;</div>
+	</div>
+
+	<div class="hljs-ln-code" style="box-sizing: border-box; outline: 0px; margin: 0px 0px 0px 8px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px;">
+	<div class="hljs-ln-line" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;"><code class="hljs yaml" onclick="mdcp.copyCode(event)" style="box-sizing: border-box; outline: 0px; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; display: block; overflow-x: auto; padding: 8px; color: rgb(56, 58, 66); background: rgb(250, 250, 250); border-radius: 4px; line-height: 22px; white-space: pre; overflow-wrap: break-word; font-size: 14px;"><span class="hljs-number" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(152, 104, 1); overflow-wrap: break-word; font-size: 14px;">5</span><span class="hljs-string" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(80, 161, 79); overflow-wrap: break-word; font-size: 14px;">.分布式扩展能力。</span></code></div>
+	</div>
+	</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; list-style: none; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word; height: 22px;">
+	<div class="hljs-ln-numbers" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px; width: 24px; border-right: 1px solid rgb(197, 197, 197);">
+	<div class="hljs-ln-line hljs-ln-n" data-line-number="6" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px 8px 0px 0px; font-weight: normal; text-align: right; overflow-wrap: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;">&nbsp;</div>
+	</div>
+
+	<div class="hljs-ln-code" style="box-sizing: border-box; outline: 0px; margin: 0px 0px 0px 8px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px;">
+	<div class="hljs-ln-line" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;"><code class="hljs yaml" onclick="mdcp.copyCode(event)" style="box-sizing: border-box; outline: 0px; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; display: block; overflow-x: auto; padding: 8px; color: rgb(56, 58, 66); background: rgb(250, 250, 250); border-radius: 4px; line-height: 22px; white-space: pre; overflow-wrap: break-word; font-size: 14px;"><span class="hljs-number" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(152, 104, 1); overflow-wrap: break-word; font-size: 14px;">6</span><span class="hljs-string" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(80, 161, 79); overflow-wrap: break-word; font-size: 14px;">.消息堆积能力和重放能力。</span></code></div>
+	</div>
+	</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; list-style: none; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word; height: 22px;">
+	<div class="hljs-ln-numbers" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px; width: 24px; border-right: 1px solid rgb(197, 197, 197);">
+	<div class="hljs-ln-line hljs-ln-n" data-line-number="7" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px 8px 0px 0px; font-weight: normal; text-align: right; overflow-wrap: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;">&nbsp;</div>
+	</div>
+
+	<div class="hljs-ln-code" style="box-sizing: border-box; outline: 0px; margin: 0px 0px 0px 8px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px;">
+	<div class="hljs-ln-line" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;"><code class="hljs yaml" onclick="mdcp.copyCode(event)" style="box-sizing: border-box; outline: 0px; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; display: block; overflow-x: auto; padding: 8px; color: rgb(56, 58, 66); background: rgb(250, 250, 250); border-radius: 4px; line-height: 22px; white-space: pre; overflow-wrap: break-word; font-size: 14px;"><span class="hljs-number" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(152, 104, 1); overflow-wrap: break-word; font-size: 14px;">7</span><span class="hljs-string" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(80, 161, 79); overflow-wrap: break-word; font-size: 14px;">.开发便捷，易于维护。</span></code></div>
+	</div>
+	</li>
+	<li style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; list-style: none; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; overflow-wrap: break-word; height: 22px;">
+	<div class="hljs-ln-numbers" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px; width: 24px; border-right: 1px solid rgb(197, 197, 197);">
+	<div class="hljs-ln-line hljs-ln-n" data-line-number="8" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px 8px 0px 0px; font-weight: normal; text-align: right; overflow-wrap: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;">&nbsp;</div>
+	</div>
+
+	<div class="hljs-ln-code" style="box-sizing: border-box; outline: 0px; margin: 0px 0px 0px 8px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px; float: left; height: 22px;">
+	<div class="hljs-ln-line" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; overflow-wrap: break-word; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; font-size: 14px;"><code class="hljs yaml" onclick="mdcp.copyCode(event)" style="box-sizing: border-box; outline: 0px; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; display: block; overflow-x: auto; padding: 8px; color: rgb(56, 58, 66); background: rgb(250, 250, 250); border-radius: 4px; line-height: 22px; white-space: pre; overflow-wrap: break-word; font-size: 14px;"><span class="hljs-number" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(152, 104, 1); overflow-wrap: break-word; font-size: 14px;">8</span><span class="hljs-string" style="box-sizing: border-box; outline: 0px; margin: 0px; padding: 0px; font-weight: normal; font-family: &quot;Source Code Pro&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Ubuntu Mono&quot;, &quot;Anonymous Pro&quot;, &quot;Droid Sans Mono&quot;, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif; color: rgb(80, 161, 79); overflow-wrap: break-word; font-size: 14px;">.社区成熟度。</span></code></div>
+	</div>
+	</li>
+</ol>
+
+<p style="box-sizing: border-box; outline: 0px; margin: 0px 0px 16px; padding: 0px; font-weight: 400; font-family: &quot;Microsoft YaHei&quot;, &quot;SF Pro Display&quot;, Roboto, Noto, Arial, &quot;PingFang SC&quot;, sans-serif; font-size: 16px; color: rgb(77, 77, 77); line-height: 26px; overflow-x: auto; overflow-wrap: break-word; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;">RabbitMQ是一个实现了AMQP(高级消息队列协议)协议的消息队列中间件。RabbitMQ支持其中的最多一次和最少一次两种。网易蜂巢平台的服务架构，服务间通过RabbitMQ实现通信。</p>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>

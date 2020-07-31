@@ -1,0 +1,634 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>shell编程4</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/main.css" />
+		<noscript><link rel="stylesheet"  href="/bigmoo/mb1/resource/assets/css/noscript.css" /></noscript>
+
+<script type="text/javascript" src="/bigmoo/mb1//js/common/jquery-1.9.1.min.js"></script>
+<script>
+	var global_siteId = "4028ba817385534401738555e7d30000";
+	var global_channelId = "4028ba817388fc8b0173891e84c50006";
+	var global_articleId = "4028ba81739fc4a501739fe01a660016";
+</script>
+<script type="text/javascript" src="/bigmoo/mb1//js/common/common.js"></script>
+
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+<div id="header">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li>
+				<a href="https://bigbigmoo.github.io">主页</a>
+			</li>
+			<li>
+				
+				<a href="#">后端技术</a>
+				<ul>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/javajc/index.html?tm=1596115131093">java基础</a>
+					</li>
+					<li>
+						
+						<a href="/bigmoo/mb1/hdjs/spring/index.html?tm=1596115131096">spring</a>
+					</li>
+					
+					<li>
+						
+						<a href="/bigmoo/mb1/sjkxg/index.html?tm=1596115131098">数据库</a>
+					</li>
+						
+				</ul>	
+					<!--<li>
+						<a href="#">子菜单4 &hellip;</a>
+						<ul>
+							<li>
+								<a href="#">子菜单4.1</a>
+							</li>
+							
+						</ul>
+					</li>-->
+			
+			</li>
+			<li>
+				
+				<a href="/bigmoo/mb1/qdxx/index.html?tm=1596115131101">前端学习</a>
+			</li>
+			
+			<li>
+				<a href="#">综合知识</a>
+				<ul>
+					
+					
+					<li>
+						<a href="/bigmoo/mb1/zjj/index.html?tm=1596115131108">中间件</a>
+					</li>
+					
+					<li>
+				
+						<a href="/bigmoo/mb1/ywzs/index.html?tm=1596115131110">运维知识</a>
+					</li>
+				
+					<li>
+						
+						<a href="/bigmoo/mb1/mstj/index.html?tm=1596115131113">面试题集</a>
+					</li>
+					
+				</ul>	
+			
+			
+			</li>
+			
+		</ul>
+	</nav>
+
+</div>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								<h2><a href="#"> shell编程4</a></h2>
+								<p>
+									2018年01月09日
+								</p>
+							</header>
+						
+							<p>
+<div style="margin: 10px auto; text-indent: 0px;-en-clipboard:true;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">上篇我们学习了shell中条件选择语句的用法。接下来本篇就来学习循环语句。在shell中，循环是通过for, while, until命令来实现的。下面就分别来看看吧。</span></span></div>
+
+<h2 style="font-size: 21px; margin: 10px 0px;"><span><span style="font-size: 21px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-weight: bold;">for</span></span></h2>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">for循环有两种形式：</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">for-in语句</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">基本格式如下：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">for</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">var</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">in</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">list</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">list代表要循环的值，在每次循环的时候，会把当前的值赋值给var（变量名而已，随意定）, 这样在循环体中就可以直接通过$var获取当前值了。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">先来一个例子吧：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">for</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">str</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">in</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">a b c d e</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$str</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上会根据空格将abcde分割，然后依次输出出来。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">如果以上例子不是以空格分割，而是以逗号(,)分割呢？</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">list=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;a,b,c,d,e&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">for</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">str</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">in</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$list</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$str</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">结果输出a,b,c,d,e</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">造成这个结果的原因是：for...in循环默认是循环一组通过空格或制表符（tab键）或换行符（Enter键）分割的值。这个其实是由</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">内部字段分隔符</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">配置的，它是由系统环境变量IFS定义的。当然，既然是由环境变量定义的，那当然也就能修改啊。</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">修改IFS值</span></span></h3>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#定义一个变量oldIFS保存未修改前的IFS的值</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">oldIFS=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$IFS</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#修改IFS值，以逗号为分隔符</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">IFS=$</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&#39;,&#39;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">list=a,b,c,d,e</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">list2=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;a b c d e&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">for</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">var</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">in</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$list</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$var</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">for</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">var2</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">in</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$list2</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$var2</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">#还原IFS的值</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">IFS=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$oldIFS</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上第一个循环会分别输出abcde几个值。而第二个循环会输出a b c d e(即未处理)。因为我们把IFS的值设置为逗号了， 当然，不一定要是逗号，想设置什么，你说了算!</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">C语言风格的for循环</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">bash中c语言风格的for循环遵循如下格式：</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">for (( variable assignment ; condition ; iteration process ))</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">一个例子足以说明:</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">for</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">(( i = 0; i &lt;= 10; i++ ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$i</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">上面例子循环11次，从0到10依次输出。稍微有过编程基础的都对此应该很熟悉。就不做详细阐述了。</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">while循环</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">如果你习惯了其它语言的while循环，那么到这儿你又会发现这个while循环有点变态了。与其它编程语言while的不同在于：在bash中的while语句，看起来似乎是结合了if-then语句(参考上一篇)和for循环语句。其基本格式如下：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">while</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">test</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">command</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">other commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">与if-then语句一样，后面接test命令，如果test后面的命令的退出状态码为0. 那么就进入循环，执行do后面的逻辑。要注意在do后面的逻辑中写条件，避免死循环。</span></span></div>
+
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<blockquote style="background:none;border:2px solid rgb(239, 239, 239);padding:5px 10px;margin-top:10px;margin-bottom:10px;">
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">既然是接test命令，那么一切都可以参考if-then的test</span></span></div>
+</blockquote>
+</blockquote>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">示例一：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=0</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">while</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">test</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">-le 10</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;"># 如果没有这句，那么flag的值一直为0，就会无限循环执行</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">+ 1]</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上判断flag是否大于或者等于10， 如果满足条件，那么输出当前flag的值，然后再将flag的值加1。最终输出的结果为0到10的结果。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">结合上一篇文章test的写法，我们还可以将以上示例变形为如下：</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">示例二：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=0</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">while</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">[</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">-le 10 ]</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">+ 1]</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">示例三：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=0</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">while</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">&lt;= 10 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">+ 1]</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">until循环语句</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">until语句基本格式如下：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">until</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">test</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">other commands</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">在掌握while循环语句之后， until语句就很简单了。until语句就是与while语句恰好相反， while语句是在test命令退出状态码为0的时候执行循环， 而until语句是在test命令退出状态码不为0的时候执行。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">示例：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=0</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">until ((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">&gt; 10 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=$[</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">+ 1 ]</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上输出0到10的值。until后面的条件与上面while例子完全相反。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">好啦，到此，我们学完了shell的循环语句啦。不过上面我们写的循环语句都是根据条件执行完毕，如果我们在执行的过程中想退出，该怎么办？接下来就继续看看怎么控制循环语句。</span></span></div>
+
+<h2 style="font-size: 21px; margin: 10px 0px;"><span><span style="font-size: 21px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; font-weight: bold;">控制循环</span></span></h2>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">与其它编程语言一样，shell是通过break和continue命令来控制循环的。下面就分别来看看二者的基本用法：</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">break</span></span></h3>
+
+<ol style="padding-left:40px;">
+	<li style="list-style-type:decimal;">
+	<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">break用于跳出当前循环</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">。</span></span></div>
+	</li>
+</ol>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">示例一：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">for</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">(( flag=0; flag &lt;= 10; flag++ ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">== 5 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">break</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上当flag的值为5的时候，退出循环。输出结果为0-4的值。</span></span></div>
+
+<ol style="padding-left:40px;">
+	<li style="list-style-type:decimal;">
+	<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">break用于跳出内层循环</span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">。</span></span></div>
+	</li>
+</ol>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">示例二:</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=0</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">while</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">&lt; 10 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">for</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">(( innerFlag=0; innerFlag &lt; 5; innerFlag++ ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$innerFlag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">== 2 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">break</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;innerFlag=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$innerFlag</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;outerFlag=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上代码在执行内部循环for的时候，当innerFlag值为2的时候就会跳出到外层的while循环, 由于外层循环一直flag都为0， 所以while会成为一个死循环，不停的输出:</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">...</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">innerFlag=0</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">innerFlag=1</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">outerFlag=0</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">...</span></span></div>
+
+<ol style="padding-left:40px;">
+	<li style="list-style-type:decimal;">
+	<div><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8; font-weight: bold;">break用于跳出外层循环</span></span></div>
+	</li>
+</ol>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">break 可后接数字，用于表示退出当前循环的外层的第几层循环。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">示例三：</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(43, 145, 175);">#!/bin/bash</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=0</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">while</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">&lt; 10 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">for</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">(( innerFlag=0; innerFlag &lt; 5; innerFlag++ ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$innerFlag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">== 2 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;"># 2表示外面一层循环</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">break</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">2</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;innerFlag=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$innerFlag</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;outerFlag=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">与上面例子相比，本例就只是在break后面跟了个数字2，表示退出外面的第一层循环。最终输出：</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">innerFlag=0</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">innerFlag=1</span></span></div>
+
+<h3 style="background: url(&quot;https://www.cnblogs.com/skins/StylePink/images/bg_list.gif&quot;) left top no-repeat; padding-left: 20px; margin: 10px 0px; font-size: 16px;"><span><span style="font-size: 16px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(102, 102, 102); font-weight: bold;">continue</span></span></h3>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">continue表示终止当前的一次循环，进入下一次循环，注意,continue后面的语句不会执行。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">continue的语法与break一样，因此，就只做一个示例演示啦。</span></span></div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">示例:</span></span></div>
+
+<div style="white-space:pre-wrap;overflow-wrap:break-word;margin-top:10px;margin-bottom:10px;">
+<div style="vertical-align: middle; height: auto; margin: auto; overflow-x: auto; background: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-radius: 3px; padding: 5px; font-size: 12px;">
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=0</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">while</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">&lt;= 10 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">== 5 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">+1]</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">continue</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;outerFlag=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">for</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">(( innerFlag=11; innerFlag &lt; 20; innerFlag++ ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">do</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">if</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">((</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$innerFlag</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">== 16 ))</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">then</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">flag=$[</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$flag</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">+1]</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">continue</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 0);">2</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">fi</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">echo</span> <span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;innerFlag=</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: green;">$innerFlag</span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(163, 21, 21);">&quot;</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+
+<div><span><span style="font-size: 12px; font-family: &quot;Courier New&quot;, sans-serif; line-height: 1.5; color: rgb(0, 0, 255);">done</span></span></div>
+</div>
+</div>
+
+<div style="margin: 10px auto; text-indent: 0px;"><span><span style="font-size: 14px; font-family: verdana, Arial, Helvetica, sans-serif; line-height: 1.8;">以上例子： 当for循环中innerFlag的值为16的时候会跳到外层while循环，当外层循环的flag的值为5的时候，会直接跳过本次循环，然后进入下一次循环，因此在输出的结果中，不会出现outerFlag=5的情况。</span></span></div>
+							</p>
+							
+						</article>
+
+					</div>
+
+				</div>
+
+			<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		
+		<div class="row">
+			<div class="col-12">
+
+				<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>傻人有傻福，但是傻逼没有。</h3>
+					</header>
+					<p>不要浮躁，每天做好自己，努力扎根，努力成长，不要轻言放弃，总有一天，你会发现原来自己是个土豆。</p>
+					<!--<ul class="icons">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a>
+						</li>
+					</ul>-->
+				</section>
+
+				<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li>
+						<li>Design:
+							<a href="https://bigbigmoo.github.io">bigbigmoo.github.io</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+		</div>
+
+			<!-- Scripts -->
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrolly.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/jquery.browser.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/breakpoints.min.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/util.js"></script>
+			<script src="/bigmoo/mb1/resource/assets/js/main.js"></script>
+
+	</body>
+</html>
